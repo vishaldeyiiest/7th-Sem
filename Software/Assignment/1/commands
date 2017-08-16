@@ -1,0 +1,18 @@
+run <exec>
+break <line>
+info <locals/inferiors>
+print(p) <var>
+info args
+set
+n
+c
+info breakpoints
+ignore <breakpoint> N
+enable/disable breakpoints <no>
+break if <condition>
+commands <breakpointno>
+bt / bt full -n
+generate-core-file
+core <core file>
+attach pid
+x/10i 

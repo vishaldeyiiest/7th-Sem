@@ -1,0 +1,15 @@
+Starting program: /home/vishal/Study/7thSem/Software Engineering/1/buggy_code/thread 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[New Thread 0x7ffff6f4e700 (LWP 6050)]
+[New Thread 0x7ffff674d700 (LWP 6051)]
+[New Thread 0x7ffff5f4c700 (LWP 6052)]
+[New Thread 0x7ffff574b700 (LWP 6053)]
+[New Thread 0x7ffff4f4a700 (LWP 6054)]
+[Thread 0x7ffff6f4e700 (LWP 6050) exited]
+[Thread 0x7ffff674d700 (LWP 6051) exited]
+[Thread 0x7ffff5f4c700 (LWP 6052) exited]
+[Thread 0x7ffff574b700 (LWP 6053) exited]
+[Thread 0x7ffff4f4a700 (LWP 6054) exited]
+[Inferior 1 (process 6046) exited normally]
+Quit

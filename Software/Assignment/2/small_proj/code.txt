@@ -1,0 +1,7 @@
+void main()
+{
+	if(a >= 990)
+		a = b + c
+	else
+		c = c*10
+}

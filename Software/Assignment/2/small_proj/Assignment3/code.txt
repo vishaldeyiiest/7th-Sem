@@ -1,0 +1,7 @@
+void main()
+{
+	for(int i = 10; i <= 20; i++)
+		12c234 = c*100;
+	/* hdjshdjsj 
+	//
+}

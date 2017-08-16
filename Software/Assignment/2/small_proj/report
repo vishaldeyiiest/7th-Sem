@@ -1,0 +1,13 @@
+ctags -
+cscope - 
+
+install cscope: apt-get install cscope
+
+cscope plugins from sourceforge
+
+Building cscope database is important: have to build again after modifying code
+How to customise building it?
+
+
+CCTree : to see class relationship 
+codequery: GUI tool using cscope

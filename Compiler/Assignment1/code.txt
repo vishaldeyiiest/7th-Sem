@@ -1,0 +1,8 @@
+void main()
+{
+	if(ab >= 990)
+		9a40ss |= -90 + b45cc + c;
+	else
+		cd = caa24-10;
+	a++;
+}

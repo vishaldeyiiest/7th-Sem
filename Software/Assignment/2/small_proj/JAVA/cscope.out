@@ -1,0 +1,29743 @@
+cscope 15 $HOME/Study/7thSem/Software/Assignment/2/small_proj/JAVA -c               0000138735
+	@src/Assignment1/grid.java
+
+6 
+package
+ 
+	gJavaApplication1
+;
+
+8 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gButton
+;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+11 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+12 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionEvent
+;
+
+13 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionListener
+;
+
+14 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseEvent
+;
+
+15 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseListener
+;
+
+16 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseMotionListener
+;
+
+17 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+20 
+public
+ 
+class
+ 
+grid
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+,
+	gMouseListener
+,
+	gMouseMotionListener
+{
+
+22 
+private
+ int 
+	gdiff
+=10;
+
+23 
+public
+ static int 
+	gresX
+=800;
+
+24 
+public
+ static int 
+	gresY
+=600;
+
+25 
+public
+ static int 
+	goffset
+=35;
+
+26 
+Button
+ 
+	gobtn
+;
+
+27 
+Button
+ 
+	gibtn
+;
+
+28 
+Button
+ 
+	gclear
+;
+
+29 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+=
+new
+ 
+ArrayList
+<>();
+
+30 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+=
+new
+ 
+ArrayList
+<>();
+
+32 @
+Override
+
+
+33 
+public
+ void 
+init
+()
+
+35 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+36 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+37 
+	gibtn
+=
+new
+ 
+Button
+();
+
+38 
+	gibtn
+.
+setLabel
+("Zoom In");
+
+39 
+	gclear
+=
+new
+ 
+Button
+();
+
+40 
+	gclear
+.
+setLabel
+("Clear");
+
+41 
+	gobtn
+=
+new
+ 
+Button
+();
+
+42 
+	gobtn
+.
+setLabel
+("Zoom out");
+
+43 
+	gibtn
+.
+addActionListener
+(
+this
+);
+
+44 
+	gobtn
+.
+addActionListener
+(
+this
+);
+
+45 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+46 
+	gclear
+.
+addActionListener
+(
+this
+);
+
+47 
+add
+(
+ibtn
+);
+
+48 
+add
+(
+obtn
+);
+
+49 
+add
+(
+clear
+);
+
+52 @
+Override
+
+
+53 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+55 
+	gresX
+=
+getWidth
+();
+
+56 
+	gresY
+=
+getHeight
+();
+
+58 for(int 
+	gi
+=0;i<
+	gx
+.
+size
+();i++)
+
+60 
+drawPoint
+(
+g
+,
+x
+.
+get
+(
+i
+),
+y
+.get(i));
+
+63 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+66 for(int 
+	gi
+=0;i<
+	gresX
+;i=
+i
++
+diff
+)
+
+67 
+g
+.
+drawLine
+(
+i
+, 
+offset
+, i, 
+resY
+);
+
+69 for(int 
+	gi
+=
+offset
+;i<
+	gresY
+;i+=
+diff
+)
+
+70 
+g
+.
+drawLine
+(0, 
+i
+, 
+resX
+, i);
+
+72 
+	gg
+.
+drawLine
+(
+resX
+-1,
+resY
+-1,resX-1,
+offset
+);
+
+73 
+	gg
+.
+drawLine
+(
+resX
+-1, 
+resY
+-1, 0, resY-1);
+
+75 
+	gg
+.
+setColor
+(
+Color
+.
+RED
+);
+
+79 @
+Override
+
+
+80 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+82 if(
+	gae
+.
+getSource
+()==
+ibtn
+)
+
+84 
+diff
+++;
+
+85 
+repaint
+();
+
+87 else if(
+	gae
+.
+getSource
+()==
+obtn
+)
+
+89 
+diff
+--;
+
+90 
+repaint
+();
+
+92 else if(
+	gae
+.
+getSource
+()==
+clear
+)
+
+94 
+x
+.
+clear
+();
+
+95 
+	gy
+.
+clear
+();
+
+96 
+repaint
+();
+
+102 void 
+drawPoint
+(
+Graphics
+ 
+g
+,int 
+xpos
+,int 
+ypos
+)
+
+104 
+	gg
+.
+setColor
+(
+Color
+.
+ORANGE
+);
+
+105 
+	gg
+.
+fillRect
+(((int)
+xpos
+/
+diff
+)*diff, ((int)(
+ypos
+-
+offset
+)/diff)*diff+offset, diff, diff);
+
+108 @
+Override
+
+
+109 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+115 @
+Override
+
+
+116 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+118 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+119 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+120 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+121 
+repaint
+();
+
+124 @
+Override
+
+
+125 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+129 @
+Override
+
+
+130 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+135 @
+Override
+
+
+136 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+140 @
+Override
+
+
+141 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+145 @
+Override
+
+
+146 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/Assignment1/grid1.java
+
+17 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+18 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+19 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+20 
+import
+ static 
+	gjava
+.
+	glang
+.
+	gSystem
+.
+	gexit
+;
+
+21 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+23 
+public
+ 
+class
+ 
+grid1
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+,
+	gMouseListener
+,
+	gMouseMotionListener
+{
+
+25 
+private
+ int 
+	gdiff
+=5;
+
+26 
+public
+ static int 
+	gresX
+=800;
+
+27 
+public
+ static int 
+	gresY
+=600;
+
+28 
+public
+ static int 
+	goffset
+=35;
+
+29 
+Button
+ 
+	gbtn1
+;
+
+30 
+Button
+ 
+	gbtn2
+;
+
+32 
+Button
+ 
+	gbtn4
+;
+
+33 
+private
+ int 
+	gclick
+=0;
+
+46 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+=
+new
+ 
+ArrayList
+<>();
+
+47 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+=
+new
+ 
+ArrayList
+<>();
+
+49 @
+Override
+
+
+50 
+public
+ void 
+init
+()
+
+52 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+53 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+54 
+	gbtn1
+=
+new
+ 
+Button
+();
+
+55 
+	gbtn1
+.
+setLabel
+("Zoom In");
+
+58  
+	gbtn2
+=
+new
+ 
+Button
+();
+
+59 
+	gbtn2
+.
+setLabel
+("Zoom out");
+
+60 
+	gbtn4
+=
+new
+ 
+Button
+("reset");
+
+61 
+	gbtn1
+.
+addActionListener
+(
+this
+);
+
+62 
+	gbtn2
+.
+addActionListener
+(
+this
+);
+
+63 
+	gbtn4
+.
+addActionListener
+(
+this
+);
+
+64 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+66 
+add
+(
+btn1
+);
+
+67 
+add
+(
+btn2
+);
+
+69 
+add
+(
+btn4
+);
+
+82 @
+Override
+
+
+83 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+85 
+	gresX
+=
+getWidth
+();
+
+86 
+	gresY
+=
+getHeight
+();
+
+93  if(
+	gclick
+==2){
+
+94 
+drawPoint
+(
+g
+,
+x
+.
+get
+(0),
+y
+.get(0),x.get(1),y.get(1));
+
+96 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+99 for(int 
+	gi
+=0;i<
+	gresX
+;i=
+i
++
+diff
+)
+
+100 
+g
+.
+drawLine
+(
+i
+, 
+offset
+, i, 
+resY
+);
+
+102 for(int 
+	gi
+=
+offset
+;i<
+	gresY
+;i+=
+diff
+)
+
+103 
+g
+.
+drawLine
+(0, 
+i
+, 
+resX
+, i);
+
+105 
+	gg
+.
+drawLine
+(
+resX
+-1,
+resY
+-1,resX-1,
+offset
+);
+
+106 
+	gg
+.
+drawLine
+(
+resX
+-1, 
+resY
+-1, 0, resY-1);
+
+108 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+112 @
+Override
+
+
+113 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+115 if(
+	gae
+.
+getSource
+()==
+btn1
+)
+
+117 
+diff
+++;
+
+119 
+repaint
+();
+
+121 else if(
+	gae
+.
+getSource
+()==
+btn2
+)
+
+124 
+diff
+--;
+
+125 
+repaint
+();
+
+127 else if(
+	gae
+.
+getSource
+()==
+btn4
+)
+
+131 
+diff
+=5;
+
+132 
+repaint
+();
+
+141 void 
+drawPoint
+(
+Graphics
+ 
+g
+,int 
+x0
+,int 
+y0
+,int 
+x1
+,int 
+y1
+)
+
+143 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+144 int 
+	gdx
+, 
+	gdy
+;
+
+145 int 
+	gxmod
+, 
+	gymod
+, 
+	gx_mod
+, 
+	gy_mod
+;
+
+146 
+	gxmod
+ = 
+ymod
+ = 0;
+
+147 float 
+	gx
+,
+	gy
+;
+
+148 
+	gx
+ = 
+x0
+;
+
+149 
+	gy
+ = 
+y0
+;
+
+150 
+	gdx
+ = 
+x1
+-
+x0
+;
+
+151 
+	gdy
+ = 
+y1
+-
+y0
+;
+
+152 int 
+	gsteps
+;
+
+153 if(
+	gdx
+ > 
+	gdy
+)
+
+154 
+	gsteps
+ = 
+Math
+.
+abs
+(
+dx
+);
+
+156 
+	gsteps
+ = 
+Math
+.
+abs
+(
+dy
+);
+
+157 float 
+	gx_inc
+, 
+	gy_inc
+;
+
+158 
+	gx_inc
+ = (float)
+dx
+/
+steps
+;
+
+159 
+	gy_inc
+ = (float)
+dy
+/
+steps
+;
+
+160 for(int 
+	gv
+ = 0; v < 
+	gsteps
+; v++){
+
+161 
+	gx
+ += 
+x_inc
+;
+
+162 
+	gy
+ += 
+y_inc
+;
+
+164 
+	gx_mod
+=((int)
+Math
+.
+ceil
+(
+x
+)/
+diff
+)*diff;
+
+165 
+	gy_mod
+=(((int) 
+Math
+.
+ceil
+(
+y
+)-
+offset
+)/
+diff
+)*diff+offset;
+
+174  
+	gtry
+{
+
+175 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+177 
+catch
+(
+Exception
+ 
+e
+){
+
+178 
+	gSystem
+.
+	gout
+.
+println
+("ERROR : "+
+e
+);
+
+179 
+exit
+(0);
+
+185 @
+Override
+
+
+186 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+190 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+191 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+192 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+193 
+	gclick
+++;
+
+194 if(
+	gclick
+==2)
+
+195 
+repaint
+();
+
+198 @
+Override
+
+
+199 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+204 @
+Override
+
+
+205 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+209 @
+Override
+
+
+210 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+215 @
+Override
+
+
+216 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+220 @
+Override
+
+
+221 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+225 @
+Override
+
+
+226 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/Assignment2/dda.java
+
+1 
+package
+ 
+	gAssignment2
+;
+
+17 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+18 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+19 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+20 
+import
+ static 
+	gjava
+.
+	glang
+.
+	gSystem
+.
+	gexit
+;
+
+21 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+23 
+public
+ 
+class
+ 
+dda
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+, 
+	gMouseMotionListener
+ {
+
+25 
+private
+ int 
+	gdiff
+ = 5;
+
+26 
+public
+ static int 
+	gresX
+ = 800;
+
+27 
+public
+ static int 
+	gresY
+ = 600;
+
+28 
+public
+ static int 
+	goffset
+ = 35;
+
+29 
+Button
+ 
+	gbtn1
+;
+
+30 
+Button
+ 
+	gbtn2
+;
+
+31 
+Button
+ 
+	gb1
+;
+
+32 
+Button
+ 
+	gb2
+;
+
+33 
+Button
+ 
+	gb3
+;
+
+34 
+Button
+ 
+	gbtn4
+;
+
+35 
+private
+ int 
+	gclick
+ = 0;
+
+48 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+49 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+50 int 
+	gflag
+ = 0;
+
+52 @
+Override
+
+
+53 
+public
+ void 
+init
+() {
+
+54 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+55 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+56 
+	gbtn1
+ = 
+new
+ 
+Button
+();
+
+57 
+	gbtn1
+.
+setLabel
+("Zoom In");
+
+58 
+	gbtn2
+ = 
+new
+ 
+Button
+();
+
+59 
+	gbtn2
+.
+setLabel
+("Zoom out");
+
+60 
+	gbtn4
+ = 
+new
+ 
+Button
+("reset");
+
+61 
+	gb1
+ = 
+new
+ 
+Button
+("dda");
+
+62 
+	gb2
+ = 
+new
+ 
+Button
+("Bresenhaum");
+
+63 
+	gb3
+ = 
+new
+ 
+Button
+("MidPoint");
+
+64 
+	gbtn1
+.
+addActionListener
+(
+this
+);
+
+65 
+	gbtn2
+.
+addActionListener
+(
+this
+);
+
+66 
+	gbtn4
+.
+addActionListener
+(
+this
+);
+
+67 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+68 
+add
+(
+btn1
+);
+
+69 
+add
+(
+btn2
+);
+
+70 
+add
+(
+btn4
+);
+
+71 
+add
+(
+b1
+);
+
+72 
+add
+(
+b2
+);
+
+73 
+add
+(
+b3
+);
+
+74 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+75 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+76 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+78 
+Graphics
+ 
+	gg1
+;
+
+80 @
+Override
+
+
+81 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+82 
+	gresX
+ = 
+getWidth
+();
+
+83 
+	gresY
+ = 
+getHeight
+();
+
+91 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+94 for (int 
+	gi
+ = 0; i < 
+	gresX
+; i = 
+i
+ + 
+diff
+) {
+
+95 
+g
+.
+drawLine
+(
+i
+, 
+offset
+, i, 
+resY
+);
+
+98 for (int 
+	gi
+ = 
+offset
+; i < 
+	gresY
+; i += 
+diff
+) {
+
+99 
+g
+.
+drawLine
+(0, 
+i
+, 
+resX
+, i);
+
+102 
+	gg
+.
+drawLine
+(
+resX
+ - 1, 
+resY
+ - 1, resX - 1, 
+offset
+);
+
+103 
+	gg
+.
+drawLine
+(
+resX
+ - 1, 
+resY
+ - 1, 0, resY - 1);
+
+106 if (
+	gflag
+ == 1) {
+
+107 
+drawdda
+(
+g
+, 
+x
+.
+get
+(0), 
+y
+.get(0), x.get(1), y.get(1));
+
+111 if (
+	gflag
+ == 2) {
+
+112 
+drawdda
+(
+g
+, 
+x
+.
+get
+(0), 
+y
+.get(0), x.get(1), y.get(1));
+
+113 
+drawBresenhaum
+(
+g
+, 
+x
+.
+get
+(0) + 70, 
+y
+.get(0), x.get(1) + 70, y.get(1));
+
+115 if (
+	gflag
+ == 3) {
+
+116 
+drawdda
+(
+g
+, 
+x
+.
+get
+(0), 
+y
+.get(0), x.get(1), y.get(1));
+
+117 
+drawBresenhaum
+(
+g
+, 
+x
+.
+get
+(0) + 70, 
+y
+.get(0), x.get(1) + 70, y.get(1));
+
+118 
+draw_midpoint
+(
+g
+, 
+x
+.
+get
+(0) + 150, 
+y
+.get(0), x.get(1) + 150, y.get(1));
+
+123 @
+Override
+
+
+124 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+126 if (
+	gae
+.
+getSource
+() == 
+btn1
+) {
+
+127 
+diff
+++;
+
+128 
+repaint
+();
+
+129 } else if (
+	gae
+.
+getSource
+() == 
+btn2
+) {
+
+130 
+diff
+--;
+
+131 
+repaint
+();
+
+132 } else if (
+	gae
+.
+getSource
+() == 
+btn4
+) {
+
+133 
+x
+.
+clear
+();
+
+134 
+	gy
+.
+clear
+();
+
+135 
+	gdiff
+ = 5;
+
+136 
+	gflag
+ = 0;
+
+137 
+repaint
+();
+
+138 } else if (
+	gae
+.
+getSource
+() == 
+b1
+) {
+
+139 
+flag
+ = 1;
+
+140 
+repaint
+();
+
+141 } else if (
+	gae
+.
+getSource
+() == 
+b2
+) {
+
+142 
+flag
+ = 2;
+
+143 
+repaint
+();
+
+144 } else if (
+	gae
+.
+getSource
+() == 
+b3
+) {
+
+145 
+flag
+ = 3;
+
+146 
+repaint
+();
+
+150 void 
+drawdda
+(
+Graphics
+ 
+g
+, int 
+X0
+, int 
+Y0
+, int 
+X1
+, int 
+Y1
+) {
+
+152 
+	gg
+.
+setColor
+(
+Color
+.
+RED
+);
+
+153 int 
+	gdx
+, 
+	gdy
+;
+
+154 int 
+	gx_mod
+, 
+	gy_mod
+;
+
+155 double 
+	gx1
+, 
+	gy1
+;
+
+156 
+	gx1
+ = 
+X0
+;
+
+157 
+	gy1
+ = 
+Y0
+;
+
+158 
+	gdx
+ = 
+X1
+ - 
+X0
+;
+
+159 
+	gdy
+ = 
+Y1
+ - 
+Y0
+;
+
+160 int 
+	gsteps
+;
+
+161 if (
+	gdx
+ > 
+	gdy
+) {
+
+162 
+	gsteps
+ = 
+Math
+.
+abs
+(
+dx
+);
+
+164 
+	gsteps
+ = 
+Math
+.
+abs
+(
+dy
+);
+
+166 float 
+	gx_inc
+, 
+	gy_inc
+;
+
+167 
+	gx_inc
+ = (float) 
+dx
+ / 
+steps
+;
+
+168 
+	gy_inc
+ = (float) 
+dy
+ / 
+steps
+;
+
+169 for (int 
+	gv
+ = 0; v <= 
+steps
+; v++) {
+
+170 
+	gx1
+ += 
+x_inc
+;
+
+171 
+	gy1
+ += 
+y_inc
+;
+
+173 
+	gx_mod
+ = ((int) 
+Math
+.
+ceil
+(
+x1
+) / 
+diff
+) * diff;
+
+174 
+	gy_mod
+ = (((int) 
+Math
+.
+ceil
+(
+y1
+) - 
+offset
+) / 
+diff
+) * diff + offset;
+
+176 
+	gtry
+ {
+
+177 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+178 } 
+catch
+ (
+Exception
+ 
+e
+) {
+
+179 
+	gSystem
+.
+	gout
+.
+println
+("ERROR : " + 
+e
+);
+
+180 
+exit
+(0);
+
+186 
+public
+ void 
+drawBresenhaum
+(
+Graphics
+ 
+g
+, int 
+X0
+, int 
+Y0
+, int 
+X1
+, int 
+Y1
+) {
+
+188 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+189 int 
+	gdx
+ = 
+X1
+ - 
+X0
+;
+
+190 int 
+	gdy
+ = 
+Y1
+ - 
+Y0
+;
+
+191 int 
+	gp
+ = 2 * 
+dy
+ - 
+dx
+;
+
+192 int 
+	gsteps
+;
+
+193 if (
+	gdx
+ > 
+	gdy
+) {
+
+194 
+	gsteps
+ = 
+dx
+;
+
+196 
+	gsteps
+ = 
+dy
+;
+
+198 int 
+	gx1
+, 
+	gy1
+;
+
+199 
+	gx1
+ = 
+X0
+;
+
+200 
+	gy1
+ = 
+Y0
+;
+
+202 for (int 
+	gk
+ = 0; k <= 
+steps
+; k++) {
+
+203 if (
+	gp
+ < 0) {
+
+204 
+	gp
+ = 
+p
+ + 2 * 
+dy
+;
+
+206 
+	gy1
+++;
+
+207 
+	gp
+ = 
+p
+ + 2 * 
+dy
+ - 2 * 
+dx
+;
+
+209 if (
+	gdx
+ < 0) {
+
+210 
+	gx1
+--;
+
+211 } else if (
+	gdx
+ > 0) {
+
+212 
+	gx1
+++;
+
+214 
+	gg
+.
+fillRect
+(
+x1
+ / 
+diff
+ * diff, ((
+y1
+ - 
+offset
+) / diff) * diff + offset, diff, diff);
+
+220 
+public
+ double 
+intersection
+(
+Point
+ 
+a
+, Point 
+b
+, Point 
+c
+, Point 
+d
+) {
+
+221 double 
+	gx1
+ = 
+a
+.
+getX
+();
+
+222 double 
+	gy1
+ = 
+a
+.
+getY
+();
+
+223 double 
+	gx2
+ = 
+b
+.
+getX
+();
+
+224 double 
+	gy2
+ = 
+b
+.
+getY
+();
+
+225 double 
+	gx3
+ = 
+c
+.
+getX
+();
+
+226 double 
+	gy3
+ = 
+c
+.
+getY
+();
+
+227 double 
+	gx4
+ = 
+d
+.
+getX
+();
+
+228 double 
+	gy4
+ = 
+d
+.
+getY
+();
+
+229 double 
+	gd1
+ = (
+x1
+ - 
+x2
+) * (
+y3
+ - 
+y4
+) - (
+y1
+ - 
+y2
+) * (
+x3
+ - 
+x4
+);
+
+230 if (
+	gd1
+ == 0) {
+
+234 double 
+	gxi
+ = ((
+x3
+ - 
+x4
+) * (
+x1
+ * 
+y2
+ - 
+y1
+ * 
+x2
+) - (x1 - x2) * (x3 * 
+y4
+ - 
+y3
+ * x4)) / 
+d1
+;
+
+235 double 
+	gyi
+ = ((
+y3
+ - 
+y4
+) * (
+x1
+ * 
+y2
+ - 
+y1
+ * 
+x2
+) - (y1 - y2) * (
+x3
+ * y4 - y3 * 
+x4
+)) / 
+d1
+;
+
+236 return 
+	gyi
+;
+
+239 
+public
+ void 
+draw_midpoint
+(
+Graphics
+ 
+g
+, int 
+X0
+, int 
+Y0
+, int 
+X1
+, int 
+Y1
+) {
+
+240 
+	gg
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+241 int 
+	gdx
+ = 
+X1
+ - 
+X0
+;
+
+242 int 
+	gdy
+ = 
+Y1
+ - 
+Y0
+;
+
+244 int 
+	gsteps
+;
+
+245 if (
+	gdx
+ > 
+	gdy
+) {
+
+246 
+	gsteps
+ = 
+dx
+;
+
+248 
+	gsteps
+ = 
+dy
+;
+
+251 int 
+	gx1
+ = 
+X0
+, 
+	gy1
+ = 
+Y0
+;
+
+252 for (int 
+	gk
+ = 0; k <= 
+steps
+; k++) {
+
+254 double 
+	gmy
+ = 
+y1
+ + 0.5;
+
+255 
+Point
+ 
+	ga
+, 
+	gb
+;
+
+256 if (
+	gdx
+ < 0) {
+
+257 
+	ga
+ = 
+new
+ 
+Point
+(
+x1
+ - 1, 
+y1
+ + 1);
+
+258 
+	gb
+ = 
+new
+ 
+Point
+(
+x1
+ - 1, 
+y1
+);
+
+259 
+	gx1
+--;
+
+261 
+	ga
+ = 
+new
+ 
+Point
+(
+x1
+ + 1, 
+y1
+ + 1);
+
+262 
+	gb
+ = 
+new
+ 
+Point
+(
+x1
+ + 1, 
+y1
+);
+
+263 
+	gx1
+++;
+
+265 
+Point
+ 
+	gc
+ = 
+new
+ Point(
+X0
+, 
+Y0
+);
+
+266 
+Point
+ 
+	gd
+ = 
+new
+ Point(
+X1
+, 
+Y1
+);
+
+267 double 
+	gq
+ = 
+intersection
+(
+a
+, 
+b
+, 
+c
+, 
+d
+);
+
+268 if (
+	gq
+ >= 
+my
+) {
+
+269 
+y1
+++;
+
+272 
+	gg
+.
+fillRect
+(
+x1
+ / 
+diff
+ * diff, ((
+y1
+ - 
+offset
+) / diff) * diff + offset, diff, diff);
+
+276 @
+Override
+
+
+277 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+281 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+282 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+283 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+284 
+	gclick
+++;
+
+285 
+repaint
+();
+
+288 @
+Override
+
+
+289 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+294 @
+Override
+
+
+295 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+299 @
+Override
+
+
+300 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+305 @
+Override
+
+
+306 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+310 @
+Override
+
+
+311 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+315 @
+Override
+
+
+316 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/DrawLineExample.java
+
+1 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+2 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+4 
+public
+ class 
+	cDrawLineExample
+ 
+extends
+ 
+	mApplet
+{
+
+6 
+public
+ void 
+	$init
+()
+
+8 
+	`setSize
+(400, 300);
+
+10 
+public
+ void 
+	$paint
+(
+Graphics
+ 
+g
+){
+
+22 int 
+X0
+ = 10, 
+X1
+ = 50, 
+Y0
+ = 10, 
+Y1
+ = 50;
+
+23 int 
+dx
+ = 
+X1
+-
+X0
+;
+
+24 int 
+dy
+ = 
+Y1
+-
+Y0
+;
+
+25 int 
+steps
+;
+
+26 if(
+dx
+ > 
+dy
+)
+
+27 
+steps
+ = 
+Math
+.
+	`abs
+(
+dx
+);
+
+29 
+steps
+ = 
+Math
+.
+	`abs
+(
+dy
+);
+
+30 int 
+xinc
+ = 
+dx
+/
+steps
+;
+
+31 int 
+yinc
+ = 
+dy
+/
+steps
+;
+
+32 int 
+x
+ = 
+X0
+, 
+y
+ = 
+Y0
+;
+
+33 for(int 
+k
+ = 0; k < 
+steps
+; k++)
+
+35 
+g
+.
+	`drawOval
+(
+x
+, 
+y
+, 1, 1);
+
+36 
+x
+ = x + 
+xinc
+;
+
+37 
+y
+ = y + 
+yinc
+;
+
+39 
+	}
+}
+
+	@src/JavaApplication5.java
+
+6 
+package
+ 
+	gjavaapplication5
+;
+
+8 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gButton
+;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+11 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+12 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionEvent
+;
+
+13 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionListener
+;
+
+14 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseEvent
+;
+
+15 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseListener
+;
+
+16 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseMotionListener
+;
+
+17 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+23 
+public
+ 
+class
+ 
+JavaApplication5
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+,
+	gMouseListener
+,
+	gMouseMotionListener
+{
+
+25 
+private
+ int 
+	gdiff
+=10;
+
+26 
+public
+ static int 
+	gresX
+=800;
+
+27 
+public
+ static int 
+	gresY
+=600;
+
+28 
+public
+ static int 
+	goffset
+=35;
+
+29 
+Button
+ 
+	gobtn
+;
+
+30 
+Button
+ 
+	gibtn
+;
+
+31 
+Button
+ 
+	gclear
+;
+
+32 
+private
+ int 
+	gcircle_radius
+=100;
+
+33 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+=
+new
+ 
+ArrayList
+<>();
+
+34 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+=
+new
+ 
+ArrayList
+<>();
+
+36 @
+Override
+
+
+37 
+public
+ void 
+init
+()
+
+39 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+40 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+41 
+	gibtn
+=
+new
+ 
+Button
+();
+
+42 
+	gibtn
+.
+setLabel
+("Zoom In");
+
+43 
+	gclear
+=
+new
+ 
+Button
+();
+
+44 
+	gclear
+.
+setLabel
+("Clear");
+
+45 
+	gobtn
+=
+new
+ 
+Button
+();
+
+46 
+	gobtn
+.
+setLabel
+("Zoom out");
+
+47 
+	gibtn
+.
+addActionListener
+(
+this
+);
+
+48 
+	gobtn
+.
+addActionListener
+(
+this
+);
+
+49 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+50 
+	gclear
+.
+addActionListener
+(
+this
+);
+
+51 
+add
+(
+ibtn
+);
+
+52 
+add
+(
+obtn
+);
+
+53 
+add
+(
+clear
+);
+
+56 @
+Override
+
+
+57 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+59 
+	gresX
+=
+getWidth
+();
+
+60 
+	gresY
+=
+getHeight
+();
+
+62 for(int 
+	gi
+=0;i<
+	gx
+.
+size
+();i++)
+
+64 
+drawPoint
+(
+g
+,
+x
+.
+get
+(
+i
+),
+y
+.get(i));
+
+67 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+70 for(int 
+	gi
+=0;i<
+	gresX
+;i=
+i
++
+diff
+)
+
+71 
+g
+.
+drawLine
+(
+i
+, 
+offset
+, i, 
+resY
+);
+
+73 for(int 
+	gi
+=
+offset
+;i<
+	gresY
+;i+=
+diff
+)
+
+74 
+g
+.
+drawLine
+(0, 
+i
+, 
+resX
+, i);
+
+76 
+	gg
+.
+drawLine
+(
+resX
+-1,
+resY
+-1,resX-1,
+offset
+);
+
+77 
+	gg
+.
+drawLine
+(
+resX
+-1, 
+resY
+-1, 0, resY-1);
+
+79 
+	gg
+.
+setColor
+(
+Color
+.
+RED
+);
+
+83 @
+Override
+
+
+84 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+86 if(
+	gae
+.
+getSource
+()==
+ibtn
+)
+
+88 
+diff
+++;
+
+89 
+	gcircle_radius
++=14;
+
+90 
+repaint
+();
+
+92 else if(
+	gae
+.
+getSource
+()==
+obtn
+)
+
+94 
+circle_radius
+-=14;
+
+95 
+	gdiff
+--;
+
+96 
+repaint
+();
+
+98 else if(
+	gae
+.
+getSource
+()==
+clear
+)
+
+100 
+x
+.
+clear
+();
+
+101 
+	gy
+.
+clear
+();
+
+102 
+repaint
+();
+
+107 void 
+drawPoint
+(
+Graphics
+ 
+g
+,int 
+xpos
+,int 
+ypos
+)
+
+109 
+	gg
+.
+setColor
+(
+Color
+.
+RED
+);
+
+110 
+	gg
+.
+fillRect
+(((int)
+xpos
+/
+diff
+)*diff, ((int)(
+ypos
+-
+offset
+)/diff)*diff+offset, diff, diff);
+
+113 @
+Override
+
+
+114 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+120 @
+Override
+
+
+121 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+123 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+124 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+125 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+126 
+repaint
+();
+
+129 @
+Override
+
+
+130 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+134 @
+Override
+
+
+135 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+140 @
+Override
+
+
+141 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+145 @
+Override
+
+
+146 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+150 @
+Override
+
+
+151 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/Line_draw.java
+
+17 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+18 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gButton
+;
+
+19 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+20 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+21 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionEvent
+;
+
+22 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionListener
+;
+
+23 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseEvent
+;
+
+24 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseListener
+;
+
+25 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseMotionListener
+;
+
+26 
+import
+ static 
+	gjava
+.
+	glang
+.
+	gSystem
+.
+	gexit
+;
+
+27 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+33 
+public
+ 
+class
+ 
+Line_draw
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+,
+	gMouseListener
+,
+	gMouseMotionListener
+{
+
+35 
+private
+ int 
+	gdiff
+=2;
+
+36 
+public
+ static int 
+	gresX
+=800;
+
+37 
+public
+ static int 
+	gresY
+=600;
+
+38 
+public
+ static int 
+	goffset
+=35;
+
+39 
+Button
+ 
+	gbtn1
+;
+
+40 
+Button
+ 
+	gbtn2
+;
+
+41 
+Button
+ 
+	gclear
+;
+
+42 
+Button
+ 
+	gbtn4
+;
+
+43 
+private
+ int 
+	gclick
+=0;
+
+45 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+=
+new
+ 
+ArrayList
+<>();
+
+46 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+=
+new
+ 
+ArrayList
+<>();
+
+48 @
+Override
+
+
+49 
+public
+ void 
+init
+()
+
+51 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+52 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+53 
+	gbtn1
+=
+new
+ 
+Button
+();
+
+54 
+	gbtn1
+.
+setLabel
+("Zoom In");
+
+55 
+	gclear
+=
+new
+ 
+Button
+();
+
+56 
+	gclear
+.
+setLabel
+("Clear");
+
+57 
+	gbtn2
+=
+new
+ 
+Button
+();
+
+58 
+	gbtn2
+.
+setLabel
+("Zoom out");
+
+59 
+	gbtn4
+=
+new
+ 
+Button
+("reset");
+
+60 
+	gbtn1
+.
+addActionListener
+(
+this
+);
+
+61 
+	gbtn2
+.
+addActionListener
+(
+this
+);
+
+62 
+	gbtn4
+.
+addActionListener
+(
+this
+);
+
+63 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+64 
+	gclear
+.
+addActionListener
+(
+this
+);
+
+65 
+add
+(
+btn1
+);
+
+66 
+add
+(
+btn2
+);
+
+67 
+add
+(
+clear
+);
+
+68 
+add
+(
+btn4
+);
+
+71 @
+Override
+
+
+72 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+74 
+	gresX
+=
+getWidth
+();
+
+75 
+	gresY
+=
+getHeight
+();
+
+76 if(
+	gclick
+==2){
+
+82 
+drawPoint
+(
+g
+,
+x
+.
+get
+(0),
+y
+.get(0),x.get(1),y.get(1));
+
+84 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+87 for(int 
+	gi
+=0;i<
+	gresX
+;i=
+i
++
+diff
+)
+
+88 
+g
+.
+drawLine
+(
+i
+, 
+offset
+, i, 
+resY
+);
+
+90 for(int 
+	gi
+=
+offset
+;i<
+	gresY
+;i+=
+diff
+)
+
+91 
+g
+.
+drawLine
+(0, 
+i
+, 
+resX
+, i);
+
+93 
+	gg
+.
+drawLine
+(
+resX
+-1,
+resY
+-1,resX-1,
+offset
+);
+
+94 
+	gg
+.
+drawLine
+(
+resX
+-1, 
+resY
+-1, 0, resY-1);
+
+96 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+100 @
+Override
+
+
+101 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+103 if(
+	gae
+.
+getSource
+()==
+btn1
+)
+
+105 
+diff
+++;
+
+107 
+repaint
+();
+
+109 else if(
+	gae
+.
+getSource
+()==
+btn2
+)
+
+112 
+diff
+-=0.5;
+
+113 
+repaint
+();
+
+115 else if(
+	gae
+.
+getSource
+()==
+clear
+)
+
+117 
+x
+.
+clear
+();
+
+118 
+	gy
+.
+clear
+();
+
+119 
+	gclick
+=0;
+
+120 
+repaint
+();
+
+121 }else if(
+	gae
+.
+getSource
+()==
+btn4
+)
+
+125 
+diff
+=2;
+
+126 
+repaint
+();
+
+131 void 
+drawPoint
+(
+Graphics
+ 
+g
+,int 
+x0
+,int 
+y0
+,int 
+x1
+,int 
+y1
+)
+
+133 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+134 int 
+	gdx
+,
+	gdy
+;
+
+135 int 
+	gtemp_x
+,
+	gtemp_y
+,
+	gxmod
+,
+	gymod
+,
+	gf_x
+,
+	gf_y
+,
+	gx_mod
+,
+	gy_mod
+;
+
+136 
+	gtemp_x
+=
+temp_y
+=
+xmod
+=
+ymod
+=0;
+
+137 float 
+	gx
+,
+	gy
+;
+
+138 
+	gx
+=(float)
+x0
+;
+
+139 
+	gy
+=(float)
+y0
+;
+
+140 
+	gdx
+=
+x1
+-
+x0
+;
+
+141 
+	gdy
+=
+y1
+-
+y0
+;
+
+142 int 
+	gsteps
+;
+
+143 if(
+	gdx
+>
+	gdy
+)
+
+144 
+	gsteps
+=
+Math
+.
+abs
+(
+dx
+);
+
+146 
+	gsteps
+=
+Math
+.
+abs
+(
+dy
+);
+
+147 float 
+	gx_inc
+,
+	gy_inc
+;
+
+148 
+	gx_inc
+=(float)
+dx
+/
+steps
+;
+
+149 
+	gy_inc
+=(float)
+dy
+/
+steps
+;
+
+150 for(int 
+	gv
+=0;v<
+	gsteps
+;v++){
+
+151 
+	gx
++=
+x_inc
+;
+
+152 
+	gy
++=
+y_inc
+;
+
+153 
+	gf_x
+=(int)
+Math
+.
+ceil
+(
+x
+);
+
+154 
+	gf_y
+=(int) 
+Math
+.
+ceil
+(
+y
+);
+
+155 
+	gx_mod
+=(
+f_x
+/
+diff
+)*diff;
+
+156 
+	gy_mod
+=((
+f_y
+-
+offset
+)/
+diff
+)*diff+offset;
+
+157 if(
+	gx_mod
+==
+xmod
+)
+
+158 
+x_mod
+++;
+
+159 if(
+	gx_mod
+!=
+xmod
+)
+
+160 
+xmod
+=
+x_mod
+;
+
+161 if(
+	gy_mod
+==
+ymod
+)
+
+162 
+y_mod
+++;
+
+163 if(
+	gy_mod
+!=
+ymod
+)
+
+164 
+ymod
+=
+y_mod
+;
+
+168 
+	gtry
+{
+
+169 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+171 
+catch
+(
+Exception
+ 
+e
+){
+
+172 
+	gSystem
+.
+	gout
+.
+println
+("ERROR : "+
+e
+);
+
+173 
+exit
+(0);
+
+176 
+	gSystem
+.
+	gout
+.
+println
+("points: "+
+steps
+);
+
+181 @
+Override
+
+
+182 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+186 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+187 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+188 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+189 
+	gclick
+++;
+
+190 if(
+	gclick
+==2)
+
+191 
+repaint
+();
+
+194 @
+Override
+
+
+195 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+200 @
+Override
+
+
+201 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+205 @
+Override
+
+
+206 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+211 @
+Override
+
+
+212 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+216 @
+Override
+
+
+217 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+221 @
+Override
+
+
+222 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/Robot/Rectangle.java
+
+6 
+package
+ 
+	gRobot
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+15 
+public
+ class 
+	cRectangle
+
+
+18 
+private
+ int 
+	mx
+[] = 
+new
+ int[8];
+
+19 
+private
+ int 
+	my
+[] = 
+new
+ int[8];
+
+20 
+Graphics
+ 
+	mg1
+;
+
+21 int 
+	mp
+[][] = 
+new
+ int[4][2];
+
+22 
+public
+ 
+	$Rectangle
+(
+Graphics
+ 
+g
+, int 
+q
+[][])
+
+24 for(int 
+i
+ = 0; i < 4; i++)
+
+25 for(int 
+j
+ = 0; j < 2; j++)
+
+26 
+p
+[
+i
+][
+j
+] = 
+q
+[i][j];
+
+27 
+g1
+ = 
+g
+;
+
+30 
+public
+ void 
+	$setVisible
+()
+
+32 for(int 
+i
+ = 0; i < 4; i++)
+
+34 
+x
+[
+i
+] = 
+p
+[i][0];
+
+35 
+y
+[
+i
+] = 
+p
+[i][1];
+
+37 
+g1
+.
+	`fillPolygon
+(
+x
+, 
+y
+, 4);
+
+38 
+	}
+}
+
+41 
+public
+ void 
+	$scale
+(double 
+sx
+, double 
+sy
+)
+
+43 
+g1
+.
+	`setColor
+(
+Color
+.
+MAGENTA
+);
+
+44 int 
+q
+[][] = 
+new
+ int[4][2];
+
+45 for(int 
+i
+ = 0; i < 4; i++)
+
+47 
+q
+[
+i
+][0] = (int)(
+sx
+*
+p
+[i][0]);
+
+48 
+q
+[
+i
+][1] = (int)(
+sy
+*
+p
+[i][1]);
+
+50 for(int 
+i
+ = 0; i < 3; i++)
+
+51 
+g1
+.
+	`drawLine
+(
+q
+[
+i
+][0], q[i][1], q[i+1][0], q[i+1][1]);
+
+52 
+g1
+.
+	`drawLine
+(
+q
+[0][0], q[0][1], q[3][0], q[3][1]);
+
+53 
+	}
+}
+
+55 
+public
+ void 
+	$rotate
+(int 
+x1
+, int 
+y1
+, int 
+angle
+)
+
+57 int 
+q
+[][] = 
+new
+ int[4][2];
+
+58 
+g1
+.
+	`drawRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+59 
+g1
+.
+	`fillRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+60 for(int 
+i
+ = 0; i < 4; i++)
+
+62 int 
+a
+ = 
+p
+[
+i
+][0]-
+x1
+, 
+b
+ = p[i][1]-
+y1
+;
+
+63 double 
+r
+ = 
+Math
+.
+	`toRadians
+(
+angle
+);
+
+64 
+x
+[
+i
+] = 
+q
+[i][0] = (int) (
+a
+ * 
+Math
+.
+	`cos
+(
+r
+) + 
+b
+ * Math.
+	`sin
+(r)) + 
+x1
+;
+
+65 
+y
+[
+i
+] = 
+q
+[i][1] = (int) (-
+a
+ * 
+Math
+.
+	`sin
+(
+r
+) + 
+b
+ * Math.
+	`cos
+(r)) + 
+y1
+;
+
+67 
+g1
+.
+	`fillPolygon
+(
+x
+, 
+y
+, 4);
+
+68 
+	}
+}
+
+	@src/Robot/Robot.java
+
+6 
+package
+ 
+	gRobot
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+9 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+17 
+public
+ class 
+	cRobot
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	mActionListener
+ {
+
+19 
+public
+ static int 
+	mresX
+ = 800;
+
+20 
+public
+ static int 
+	mresY
+ = 600;
+
+21 int 
+	mhx
+ = 150, 
+	mhy
+ = 50;
+
+22 int 
+	mf
+ = 0, 
+	mre
+ = 0, 
+	mhand
+ = 0, 
+	mleg
+ = 0;
+
+23 
+Button
+ 
+	mb1
+ = 
+new
+ Button("Move");
+
+24 
+Button
+ 
+	mb2
+ = 
+new
+ Button("Move Head");
+
+25 
+Button
+ 
+	mb3
+ = 
+new
+ Button("Move hand");
+
+26 
+Button
+ 
+	mb5
+ = 
+new
+ Button("Move leg");
+
+27 
+Button
+ 
+	mb4
+ = 
+new
+ Button("Stop");
+
+29 int 
+	mangle
+ = 0, 
+	manglel
+ = 0, 
+	mangleh
+ = 0;
+
+30 @
+Override
+
+
+31 
+public
+ void 
+	$init
+() {
+
+32 
+this
+.
+	`setSize
+(
+resX
+, 
+resY
+);
+
+33 
+this
+.
+	`setBackground
+(
+Color
+.
+WHITE
+);
+
+34 
+b1
+.
+	`addActionListener
+(
+this
+);
+
+35 
+	`add
+(
+b1
+);
+
+36 
+b2
+.
+	`addActionListener
+(
+this
+);
+
+37 
+	`add
+(
+b2
+);
+
+38 
+b3
+.
+	`addActionListener
+(
+this
+);
+
+39 
+	`add
+(
+b3
+);
+
+40 
+b4
+.
+	`addActionListener
+(
+this
+);
+
+41 
+	`add
+(
+b4
+);
+
+42 
+b5
+.
+	`addActionListener
+(
+this
+);
+
+43 
+	`add
+(
+b5
+);
+
+46 @
+Override
+
+
+47 
+public
+ void 
+	$paint
+(
+Graphics
+ 
+g
+)
+
+49 
+Point
+ 
+head
+ = 
+new
+ 
+	`Point
+(
+hx
+, 
+hy
+);
+
+50 int 
+headw
+ = 50, 
+headl
+ = 50;
+
+51 
+Point
+ 
+eyel
+ = 
+new
+ 
+	`Point
+(
+hx
+ + 7, 
+hy
+ + 10);
+
+52 
+Point
+ 
+eyer
+ = 
+new
+ 
+	`Point
+(
+hx
+ + 33, 
+hy
+ + 10);
+
+53 
+Point
+ 
+mouth
+ = 
+new
+ 
+	`Point
+(
+hx
+ + 16, 
+hy
+ + 35);
+
+54 int 
+mouthl
+ = 6, 
+mouthw
+ = 18;
+
+55 
+Point
+ 
+neck
+ = 
+new
+ 
+	`Point
+(
+hx
+ + 
+headw
+ / 4, 
+hy
+ + 
+headl
+);
+
+56 int 
+neckw
+ = 25, 
+neckl
+ = 10;
+
+57 
+Point
+ 
+body
+ = 
+new
+ 
+	`Point
+(
+hx
+ - 20, 
+hy
+ + 
+headl
+ + 
+neckl
+);
+
+58 int 
+bodyl
+ = 140, 
+bodyw
+ = 90;
+
+59 
+Point
+ 
+lbody
+ = 
+new
+ 
+	`Point
+(
+hx
+ - 20, 
+hy
+ + 
+headl
+ + 
+neckl
+ + 
+bodyl
+);
+
+60 int 
+lbodyl
+ = 80, 
+lbodyw
+ = 
+bodyw
+;
+
+61 
+Point
+ 
+legl
+ = 
+new
+ 
+	`Point
+(
+hx
+ - 20, 
+hy
+ + 
+headl
+ + 
+neckl
+ + 
+bodyl
+ + 
+lbodyl
+);
+
+62 int 
+legll
+ = 80, 
+leglw
+ = 25;
+
+63 
+Point
+ 
+legr
+ = 
+new
+ 
+	`Point
+(
+hx
+ + 
+leglw
+ + 20, 
+hy
+ + 
+headl
+ + 
+neckl
+ + 
+bodyl
+ + 
+lbodyl
+);
+
+66 int 
+p
+[][] = 
+new
+ int[4][2];
+
+67 int 
+h
+[][] = 
+new
+ int[13][2];
+
+68 
+h
+[0][0] = 
+hx
+;
+
+69 
+h
+[0][1] = 
+hy
+;
+
+70 
+h
+[1][0] = 
+hx
+ + 
+headw
+;
+
+71 
+h
+[1][1] = 
+hy
+;
+
+72 
+h
+[2][0] = 
+hx
+ + 
+headw
+;
+
+73 
+h
+[2][1] = 
+hy
+ + 
+headl
+;
+
+74 
+h
+[3][0] = 
+hx
+;
+
+75 
+h
+[3][1] = 
+hy
+ + 
+headl
+;
+
+76 
+h
+[4][0] = 
+eyel
+.
+x
+;
+
+77 
+h
+[4][1] = 
+eyel
+.
+y
+;
+
+78 
+h
+[5][0] = 
+eyer
+.
+x
+;
+
+79 
+h
+[5][1] = 
+eyer
+.
+y
+;
+
+80 
+h
+[6][0] = 
+mouth
+.
+x
+;
+
+81 
+h
+[6][1] = 
+mouth
+.
+y
+;
+
+82 
+h
+[7][0] = 
+mouth
+.
+x
+ + 
+mouthw
+;
+
+83 
+h
+[7][1] = 
+mouth
+.
+y
+;
+
+84 
+h
+[8][0] = 
+mouth
+.
+x
+ + 
+mouthw
+;
+
+85 
+h
+[8][1] = 
+mouth
+.
+y
+ + 
+mouthl
+;
+
+86 
+h
+[9][0] = 
+mouth
+.
+x
+;
+
+87 
+h
+[9][1] = 
+mouth
+.
+y
+ + 
+mouthl
+;
+
+88 
+h
+[10][0] = 
+hx
+ + 25;
+
+89 
+h
+[10][1] = 
+hy
+ + 15;
+
+90 
+h
+[11][0] = 
+hx
+ + 20;
+
+91 
+h
+[11][1] = 
+hy
+ + 30;
+
+92 
+h
+[12][0] = 
+hx
+ + 30;
+
+93 
+h
+[12][1] = 
+hy
+ + 30;
+
+94 
+face
+ 
+headr
+ = 
+new
+ 
+	`face
+(
+g
+, 
+h
+);
+
+95 if (
+f
+ == 0) {
+
+96 
+headr
+.
+	`setVisible
+();
+
+99 
+headr
+.
+	`rotate
+(
+neck
+.
+x
+ + 
+neckw
+ / 2, neck.
+y
+ + 
+neckl
+ / 2, 
+angleh
+);
+
+103 
+g
+.
+	`setColor
+(
+Color
+.
+CYAN
+);
+
+104 
+p
+[0][0] = 
+body
+.
+x
+;
+
+105 
+p
+[0][1] = 
+body
+.
+y
+;
+
+106 
+p
+[1][0] = 
+body
+.
+x
+ + 
+bodyw
+;
+
+107 
+p
+[1][1] = 
+body
+.
+y
+;
+
+108 
+p
+[2][0] = 
+body
+.
+x
+ + 
+bodyw
+;
+
+109 
+p
+[2][1] = 
+body
+.
+y
+ + 
+bodyl
+;
+
+110 
+p
+[3][0] = 
+body
+.
+x
+;
+
+111 
+p
+[3][1] = 
+body
+.
+y
+ + 
+bodyl
+;
+
+112 
+Rectangle
+ 
+bodyr
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+113 
+bodyr
+.
+	`setVisible
+();
+
+114 
+g
+.
+	`setColor
+(
+Color
+.
+YELLOW
+);
+
+115 
+p
+[0][0] = 
+neck
+.
+x
+;
+
+116 
+p
+[0][1] = 
+neck
+.
+y
+;
+
+117 
+p
+[1][0] = 
+neck
+.
+x
+ + 
+neckw
+;
+
+118 
+p
+[1][1] = 
+neck
+.
+y
+;
+
+119 
+p
+[2][0] = 
+neck
+.
+x
+ + 
+neckw
+;
+
+120 
+p
+[2][1] = 
+neck
+.
+y
+ + 
+neckl
+;
+
+121 
+p
+[3][0] = 
+neck
+.
+x
+;
+
+122 
+p
+[3][1] = 
+neck
+.
+y
+ + 
+neckl
+;
+
+123 
+Rectangle
+ 
+neckr
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+124 
+neckr
+.
+	`setVisible
+();
+
+125 int 
+d
+[][] = 
+new
+ int[8][2];
+
+126 
+d
+[0][0] = 
+lbody
+.
+x
+;
+
+127 
+d
+[0][1] = 
+lbody
+.
+y
+;
+
+128 
+d
+[1][0] = 
+lbody
+.
+x
+ + 
+lbodyw
+;
+
+129 
+d
+[1][1] = 
+lbody
+.
+y
+;
+
+130 
+d
+[2][0] = 
+lbody
+.
+x
+ + 
+lbodyw
+;
+
+131 
+d
+[2][1] = 
+lbody
+.
+y
+ + 
+lbodyl
+;
+
+132 
+d
+[3][0] = 
+lbody
+.
+x
+ + 
+lbodyw
+ - 25;
+
+133 
+d
+[3][1] = 
+lbody
+.
+y
+ + 
+lbodyl
+;
+
+134 
+d
+[4][0] = 
+lbody
+.
+x
+ + 
+lbodyw
+ - 25;
+
+135 
+d
+[4][1] = 
+lbody
+.
+y
+ + 40;
+
+136 
+d
+[5][0] = 
+lbody
+.
+x
+ + 25;
+
+137 
+d
+[5][1] = 
+lbody
+.
+y
+ + 40;
+
+138 
+d
+[6][0] = 
+lbody
+.
+x
+ + 25;
+
+139 
+d
+[6][1] = 
+lbody
+.
+y
+ + 
+lbodyl
+;
+
+140 
+d
+[7][0] = 
+lbody
+.
+x
+;
+
+141 
+d
+[7][1] = 
+lbody
+.
+y
+ + 
+lbodyl
+;
+
+142 
+lbody
+ 
+lb
+ = 
+new
+ 
+	`lbody
+(
+g
+, 
+d
+);
+
+143 
+lb
+.
+	`setVisible
+();
+
+147 
+g
+.
+	`setColor
+(
+Color
+.
+yellow
+);
+
+148 
+p
+[0][0] = 
+body
+.
+x
+;
+
+149 
+p
+[0][1] = 
+body
+.
+y
+;
+
+150 
+p
+[1][0] = 
+body
+.
+x
+ - 50;
+
+151 
+p
+[1][1] = 
+body
+.
+y
+ + 40;
+
+152 
+p
+[2][0] = 
+body
+.
+x
+ - 50;
+
+153 
+p
+[2][1] = 
+body
+.
+y
+ + 65;
+
+154 
+p
+[3][0] = 
+body
+.
+x
+;
+
+155 
+p
+[3][1] = 
+body
+.
+y
+ + 25;
+
+156 
+Rectangle
+ 
+hl
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+157 if (
+hand
+ != 1)
+
+158 
+hl
+.
+	`setVisible
+();
+
+160 
+hl
+.
+	`rotate
+(
+body
+.
+x
+, body.
+y
+ + 12, -
+angle
+);
+
+161 
+p
+[0][0] = 
+body
+.
+x
+ + 
+bodyw
+;
+
+162 
+p
+[0][1] = 
+body
+.
+y
+;
+
+163 
+p
+[1][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 50;
+
+164 
+p
+[1][1] = 
+body
+.
+y
+ + 40;
+
+165 
+p
+[2][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 50;
+
+166 
+p
+[2][1] = 
+body
+.
+y
+ + 65;
+
+167 
+p
+[3][0] = 
+body
+.
+x
+ + 
+bodyw
+;
+
+168 
+p
+[3][1] = 
+body
+.
+y
+ + 25;
+
+169 
+Rectangle
+ 
+hr
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+170 if (
+hand
+ != 1)
+
+171 
+hr
+.
+	`setVisible
+();
+
+173 
+hr
+.
+	`rotate
+(
+body
+.
+x
+ + 
+bodyw
+, body.
+y
+ + 12, 
+angle
+);
+
+179 
+g
+.
+	`setColor
+(
+Color
+.
+yellow
+);
+
+180 
+p
+[0][0] = 
+body
+.
+x
+ - 50;
+
+181 
+p
+[0][1] = 
+body
+.
+y
+ + 40;
+
+182 
+p
+[1][0] = 
+body
+.
+x
+ - 90;
+
+183 
+p
+[1][1] = 
+body
+.
+y
+ + 10;
+
+184 
+p
+[2][0] = 
+body
+.
+x
+ - 90;
+
+185 
+p
+[2][1] = 
+body
+.
+y
+ + 10 + 25;
+
+186 
+p
+[3][0] = 
+body
+.
+x
+ - 50;
+
+187 
+p
+[3][1] = 
+body
+.
+y
+ + 65;
+
+188 
+Rectangle
+ 
+al
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+189 if (
+hand
+ != 1)
+
+190 
+al
+.
+	`setVisible
+();
+
+192 
+al
+.
+	`rotate
+(
+body
+.
+x
+, body.
+y
+ + 12, -
+angle
+);
+
+194 
+p
+[0][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 50;
+
+195 
+p
+[0][1] = 
+body
+.
+y
+ + 40;
+
+196 
+p
+[1][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 90;
+
+197 
+p
+[1][1] = 
+body
+.
+y
+ + 10;
+
+198 
+p
+[2][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 90;
+
+199 
+p
+[2][1] = 
+body
+.
+y
+ + 10 + 25;
+
+200 
+p
+[3][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 50;
+
+201 
+p
+[3][1] = 
+body
+.
+y
+ + 65;
+
+202 
+Rectangle
+ 
+ar
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+203 if (
+hand
+ != 1)
+
+204 
+ar
+.
+	`setVisible
+();
+
+206 
+ar
+.
+	`rotate
+(
+body
+.
+x
+ + 
+bodyw
+, body.
+y
+ + 12, 
+angle
+);
+
+210 
+g
+.
+	`setColor
+(
+Color
+.
+ORANGE
+);
+
+211 int 
+c
+[][] = 
+new
+ int[7][2];
+
+212 
+c
+[0][0] = 
+body
+.
+x
+ - 90;
+
+213 
+c
+[0][1] = 
+body
+.
+y
+ + 10;
+
+214 
+c
+[1][0] = 
+body
+.
+x
+ - 100;
+
+215 
+c
+[1][1] = 
+body
+.
+y
+;
+
+216 
+c
+[2][0] = 
+body
+.
+x
+ - 105;
+
+217 
+c
+[2][1] = 
+body
+.
+y
+;
+
+218 
+c
+[3][0] = 
+body
+.
+x
+ - 100;
+
+219 
+c
+[3][1] = 
+body
+.
+y
+ + 10;
+
+220 
+c
+[4][0] = 
+body
+.
+x
+ - 110;
+
+221 
+c
+[4][1] = 
+body
+.
+y
+ + 10;
+
+222 
+c
+[5][0] = 
+body
+.
+x
+ - 110;
+
+223 
+c
+[5][1] = 
+body
+.
+y
+ + 35;
+
+224 
+c
+[6][0] = 
+body
+.
+x
+ - 90;
+
+225 
+c
+[6][1] = 
+body
+.
+y
+ + 35;
+
+226 
+palm
+ 
+pl
+ = 
+new
+ 
+	`palm
+(
+g
+, 
+c
+);
+
+227 if (
+hand
+ != 1)
+
+228 
+pl
+.
+	`setVisible
+();
+
+230 
+pl
+.
+	`rotate
+(
+body
+.
+x
+, body.
+y
+ + 12, -
+angle
+);
+
+232 
+c
+[0][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 90;
+
+233 
+c
+[0][1] = 
+body
+.
+y
+ + 10;
+
+234 
+c
+[1][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 100;
+
+235 
+c
+[1][1] = 
+body
+.
+y
+;
+
+236 
+c
+[2][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 105;
+
+237 
+c
+[2][1] = 
+body
+.
+y
+;
+
+238 
+c
+[3][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 100;
+
+239 
+c
+[3][1] = 
+body
+.
+y
+ + 10;
+
+240 
+c
+[4][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 110;
+
+241 
+c
+[4][1] = 
+body
+.
+y
+ + 10;
+
+242 
+c
+[5][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 110;
+
+243 
+c
+[5][1] = 
+body
+.
+y
+ + 35;
+
+244 
+c
+[6][0] = 
+body
+.
+x
+ + 
+bodyw
+ + 90;
+
+245 
+c
+[6][1] = 
+body
+.
+y
+ + 35;
+
+246 
+palm
+ 
+pr
+ = 
+new
+ 
+	`palm
+(
+g
+, 
+c
+);
+
+248 if (
+hand
+ == 1)
+
+249 
+pr
+.
+	`rotate
+(
+body
+.
+x
+ + 
+bodyw
+, body.
+y
+ + 12, 
+angle
+);
+
+251 
+pr
+.
+	`setVisible
+();
+
+253 
+g
+.
+	`setColor
+(
+Color
+.
+yellow
+);
+
+254 
+p
+[0][0] = 
+legl
+.
+x
+;
+
+255 
+p
+[0][1] = 
+legl
+.
+y
+;
+
+256 
+p
+[1][0] = 
+legl
+.
+x
+ + 
+leglw
+;
+
+257 
+p
+[1][1] = 
+legl
+.
+y
+;
+
+258 
+p
+[2][0] = 
+legl
+.
+x
+ + 
+leglw
+;
+
+259 
+p
+[2][1] = 
+legl
+.
+y
+ + 
+legll
+;
+
+260 
+p
+[3][0] = 
+legl
+.
+x
+;
+
+261 
+p
+[3][1] = 
+legl
+.
+y
+ + 
+legll
+;
+
+262 
+Rectangle
+ 
+leglr
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+263 if(
+leg
+ == 1)
+
+264 
+leglr
+.
+	`rotate
+(
+legl
+.
+x
++
+leglw
+/2, legl.
+y
+, -
+anglel
+);
+
+266 
+leglr
+.
+	`setVisible
+();
+
+267 
+p
+[0][0] = 
+legr
+.
+x
+;
+
+268 
+p
+[0][1] = 
+legr
+.
+y
+;
+
+269 
+p
+[1][0] = 
+legr
+.
+x
+ + 
+leglw
+;
+
+270 
+p
+[1][1] = 
+legr
+.
+y
+;
+
+271 
+p
+[2][0] = 
+legr
+.
+x
+ + 
+leglw
+;
+
+272 
+p
+[2][1] = 
+legr
+.
+y
+ + 
+legll
+;
+
+273 
+p
+[3][0] = 
+legr
+.
+x
+;
+
+274 
+p
+[3][1] = 
+legr
+.
+y
+ + 
+legll
+;
+
+275 
+Rectangle
+ 
+legrr
+ = 
+new
+ 
+	`Rectangle
+(
+g
+, 
+p
+);
+
+276 if(
+leg
+ == 1)
+
+277 
+legrr
+.
+	`rotate
+(
+legr
+.
+x
++
+leglw
+/2, legr.
+y
+, 
+anglel
+);
+
+279 
+legrr
+.
+	`setVisible
+();
+
+280 
+c
+[0][0] = 
+legl
+.
+x
+;
+
+281 
+c
+[0][1] = 
+legl
+.
+y
+ + 
+legll
+;
+
+282 
+c
+[1][0] = 
+legl
+.
+x
+ + 
+leglw
+;
+
+283 
+c
+[1][1] = 
+legl
+.
+y
+ + 
+legll
+;
+
+284 
+c
+[2][0] = 
+legl
+.
+x
+ + 
+leglw
+;
+
+285 
+c
+[2][1] = 
+legl
+.
+y
+ + 
+legll
+ + 10;
+
+286 
+c
+[3][0] = 
+legl
+.
+x
+ + 
+leglw
+ + 15;
+
+287 
+c
+[3][1] = 
+legl
+.
+y
+ + 
+legll
+ + 10;
+
+288 
+c
+[4][0] = 
+legl
+.
+x
+ + 
+leglw
+ + 15;
+
+289 
+c
+[4][1] = 
+legl
+.
+y
+ + 
+legll
+ + 10 + 10;
+
+290 
+c
+[5][0] = 
+legl
+.
+x
+;
+
+291 
+c
+[5][1] = 
+legl
+.
+y
+ + 
+legll
+ + 10 + 10;
+
+292 
+shoe
+ 
+l
+ = 
+new
+ 
+	`shoe
+(
+g
+, 
+c
+);
+
+293 if(
+leg
+ == 1)
+
+294 
+l
+.
+	`rotate
+(
+legl
+.
+x
++
+leglw
+/2, legl.
+y
+, -
+anglel
+);
+
+296 
+l
+.
+	`setVisible
+();
+
+297 
+c
+[0][0] = 
+legr
+.
+x
+;
+
+298 
+c
+[0][1] = 
+legr
+.
+y
+ + 
+legll
+;
+
+299 
+c
+[1][0] = 
+legr
+.
+x
+ + 
+leglw
+;
+
+300 
+c
+[1][1] = 
+legr
+.
+y
+ + 
+legll
+;
+
+301 
+c
+[2][0] = 
+legr
+.
+x
+ + 
+leglw
+;
+
+302 
+c
+[2][1] = 
+legr
+.
+y
+ + 
+legll
+ + 10;
+
+303 
+c
+[3][0] = 
+legr
+.
+x
+ + 
+leglw
+ + 15;
+
+304 
+c
+[3][1] = 
+legr
+.
+y
+ + 
+legll
+ + 10;
+
+305 
+c
+[4][0] = 
+legr
+.
+x
+ + 
+leglw
+ + 15;
+
+306 
+c
+[4][1] = 
+legr
+.
+y
+ + 
+legll
+ + 10 + 10;
+
+307 
+c
+[5][0] = 
+legr
+.
+x
+;
+
+308 
+c
+[5][1] = 
+legr
+.
+y
+ + 
+legll
+ + 10 + 10;
+
+309 
+shoe
+ 
+r
+ = 
+new
+ 
+	`shoe
+(
+g
+, 
+c
+);
+
+310 if(
+leg
+ == 1)
+
+311 
+r
+.
+	`rotate
+(
+legr
+.
+x
++
+leglw
+/2, legr.
+y
+, 
+anglel
+);
+
+313 
+r
+.
+	`setVisible
+();
+
+314 if (
+re
+ == 1 || 
+hand
+ == 1 || 
+leg
+ == 1 || 
+f
+ == 1)
+
+315 
+	`draw
+();
+
+316 
+	}
+}
+
+318 
+public
+ void 
+	$draw
+()
+
+320 
+try
+
+
+322 if(
+re
+ == 1)
+
+323 
+hx
+ = hx + 10;
+
+324 if(
+hand
+ == 1)
+
+325 
+angle
+ += 10;
+
+326 if(
+leg
+ == 1)
+
+327 
+anglel
+ += 5;
+
+328 if(
+f
+ == 1)
+
+329 
+angleh
+ += 5;
+
+330 if(
+angle
+ > 60)
+
+331 
+angle
+ = 20;
+
+332 if(
+anglel
+ > 40)
+
+333 
+anglel
+ = 0;
+
+334 if(
+angleh
+ > 40)
+
+335 
+angleh
+ = -angleh;
+
+337 
+Thread
+.
+	`sleep
+(300);
+
+338 } 
+	`catch
+ (
+Exception
+ 
+e
+) {
+
+340 
+	`repaint
+();
+
+341 
+	}
+}
+
+343 @
+Override
+
+
+344 
+public
+ void 
+	$actionPerformed
+(
+ActionEvent
+ 
+e
+)
+
+346 if (
+e
+.
+	`getSource
+() == 
+b1
+) {
+
+347 
+re
+ = 1;
+
+348 
+hand
+ = 1;
+
+349 
+leg
+ = 1;
+
+350 
+	`repaint
+();
+
+352 if (
+e
+.
+	`getSource
+() == 
+b2
+) {
+
+353 
+f
+ = 1;
+
+354 
+	`repaint
+();
+
+356 if (
+e
+.
+	`getSource
+() == 
+b3
+) {
+
+357 
+hand
+ = 1;
+
+358 
+	`repaint
+();
+
+360 if (
+e
+.
+	`getSource
+() == 
+b5
+)
+
+362 
+leg
+ = 1;
+
+363 
+	`repaint
+();
+
+365 if (
+e
+.
+	`getSource
+() == 
+b4
+) {
+
+366 
+re
+ = 0; 
+f
+ = 0;
+
+367 
+hand
+ = 0;
+
+368 
+leg
+ = 0;
+
+369 
+angle
+ = 0; 
+anglel
+ = 0;
+
+370 
+hx
+ = 150; 
+hy
+ = 50;
+
+371 
+	`repaint
+();
+
+374 
+	}
+}
+
+	@src/Robot/face.java
+
+6 
+package
+ 
+	gRobot
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+15 
+public
+ class 
+	cface
+
+
+17 
+private
+ int 
+	mp
+[][] = 
+new
+ int[13][2];
+
+18 
+private
+ int 
+	mt
+[][] = 
+new
+ int[13][2];
+
+19 
+private
+ int 
+	mx
+[] = 
+new
+ int[13];
+
+20 
+private
+ int 
+	my
+[] = 
+new
+ int[13];
+
+21 
+Graphics
+ 
+	mg1
+;
+
+22 
+public
+ 
+	$face
+(
+Graphics
+ 
+g
+, int 
+q
+[][])
+
+24 for(int 
+i
+ = 0; i < 13; i++)
+
+25 for(int 
+j
+ = 0; j < 2; j++)
+
+26 
+p
+[
+i
+][
+j
+] = 
+t
+[i][j] = 
+q
+[i][j];
+
+27 
+g1
+ = 
+g
+;
+
+29 
+public
+ void 
+	$setVisible
+()
+
+31 for(int 
+i
+ = 0; i < 13; i++)
+
+33 
+x
+[
+i
+] = 
+p
+[i][0];
+
+34 
+y
+[
+i
+] = 
+p
+[i][1];
+
+36 
+g1
+.
+	`setColor
+(
+Color
+.
+orange
+);
+
+37 
+g1
+.
+	`drawPolygon
+(
+x
+, 
+y
+, 4);
+
+41  
+g1
+.
+	`setColor
+(
+Color
+.
+BLACK
+);
+
+42 
+g1
+.
+	`drawOval
+(
+p
+[4][0], p[4][1], 10, 10);
+
+43 
+g1
+.
+	`drawOval
+(
+p
+[5][0], p[5][1], 10, 10);
+
+44 int 
+a
+[] = 
+new
+ int[4];
+
+45 int 
+b
+[] = 
+new
+ int[4];
+
+46 for(int 
+i
+ = 6; i < 10; i++)
+
+48 
+a
+[
+i
+-6] = 
+p
+[i][0];
+
+49 
+b
+[
+i
+-6] = 
+p
+[i][1];
+
+51 
+g1
+.
+	`setColor
+(
+Color
+.
+red
+);
+
+52 
+g1
+.
+	`drawPolygon
+(
+a
+, 
+b
+, 4);
+
+53 for(int 
+i
+ = 10; i < 13; i++)
+
+55 
+a
+[
+i
+-10] = 
+p
+[i][0];
+
+56 
+b
+[
+i
+-10] = 
+p
+[i][1];
+
+58 
+g1
+.
+	`setColor
+(
+Color
+.
+orange
+);
+
+59 
+g1
+.
+	`fillPolygon
+(
+a
+, 
+b
+, 3);
+
+60 
+	}
+}
+
+62 
+public
+ void 
+	$rotate
+(int 
+x1
+, int 
+y1
+, int 
+angle
+)
+
+64 int 
+q
+[][] = 
+new
+ int[13][2];
+
+65 
+g1
+.
+	`drawRect
+(
+x1
+, 
+y1
+, 2, 2);
+
+66 
+g1
+.
+	`fillRect
+(
+x1
+, 
+y1
+, 2, 2);
+
+67 for(int 
+i
+ = 0; i < 13; i++)
+
+69 int 
+a
+ = 
+t
+[
+i
+][0]-
+x1
+, 
+b
+ = t[i][1]-
+y1
+;
+
+70 double 
+r
+ = 
+Math
+.
+	`toRadians
+(
+angle
+);
+
+71 
+x
+[
+i
+] = 
+p
+[i][0] = 
+q
+[i][0] = (int) (
+a
+ * 
+Math
+.
+	`cos
+(
+r
+) + 
+b
+ * Math.
+	`sin
+(r)) + 
+x1
+;
+
+72 
+y
+[
+i
+] = 
+p
+[i][1] = 
+q
+[i][1] = (int) (-
+a
+ * 
+Math
+.
+	`sin
+(
+r
+) + 
+b
+ * Math.
+	`cos
+(r)) + 
+y1
+;
+
+75 int 
+a
+[] = 
+new
+ int[4];
+
+76 int 
+b
+[] = 
+new
+ int[4];
+
+77 for(int 
+i
+ = 0; i < 4; i++)
+
+79 
+a
+[
+i
+] = 
+q
+[i][0];
+
+80 
+b
+[
+i
+] = 
+q
+[i][1];
+
+82 
+g1
+.
+	`setColor
+(
+Color
+.
+orange
+);
+
+83 
+g1
+.
+	`drawPolygon
+(
+a
+, 
+b
+, 4);
+
+84 
+g1
+.
+	`drawOval
+(
+q
+[4][0], q[4][1], 10, 10);
+
+85 
+g1
+.
+	`drawOval
+(
+q
+[5][0], q[5][1], 10, 10);
+
+87 for(int 
+i
+ = 6; i < 10; i++)
+
+89 
+a
+[
+i
+-6] = 
+q
+[i][0];
+
+90 
+b
+[
+i
+-6] = 
+q
+[i][1];
+
+92 
+g1
+.
+	`setColor
+(
+Color
+.
+red
+);
+
+93 
+g1
+.
+	`drawPolygon
+(
+a
+, 
+b
+, 4);
+
+96 for(int 
+i
+ = 10; i < 13; i++)
+
+98 
+a
+[
+i
+-10] = 
+q
+[i][0];
+
+99 
+b
+[
+i
+-10] = 
+q
+[i][1];
+
+101 
+g1
+.
+	`setColor
+(
+Color
+.
+orange
+);
+
+102 
+g1
+.
+	`fillPolygon
+(
+a
+, 
+b
+, 3);
+
+104 
+	}
+}
+
+	@src/Robot/lbody.java
+
+6 
+package
+ 
+	gRobot
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+15 
+public
+ class 
+	clbody
+
+
+17 
+private
+ int 
+	mp
+[][] = 
+new
+ int[8][2];
+
+18 
+private
+ int 
+	mx
+[] = 
+new
+ int[8];
+
+19 
+private
+ int 
+	my
+[] = 
+new
+ int[8];
+
+20 
+Graphics
+ 
+	mg1
+;
+
+21 
+public
+ 
+	$lbody
+(
+Graphics
+ 
+g
+, int 
+q
+[][])
+
+23 for(int 
+i
+ = 0; i < 8; i++)
+
+24 for(int 
+j
+ = 0; j < 2; j++)
+
+25 
+p
+[
+i
+][
+j
+] = 
+q
+[i][j];
+
+26 
+g1
+ = 
+g
+;
+
+28 
+public
+ void 
+	$setVisible
+()
+
+30 for(int 
+i
+ = 0; i < 8; i++)
+
+32 
+x
+[
+i
+] = 
+p
+[i][0];
+
+33 
+y
+[
+i
+] = 
+p
+[i][1];
+
+35 
+g1
+.
+	`setColor
+(
+Color
+.
+RED
+);
+
+36 
+g1
+.
+	`fillPolygon
+(
+x
+, 
+y
+, 8);
+
+37 
+	}
+}
+
+	@src/Robot/palm.java
+
+6 
+package
+ 
+	gRobot
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+13 
+public
+ class 
+	cpalm
+
+
+15 
+private
+ int 
+	mp
+[][] = 
+new
+ int[7][2];
+
+16 
+private
+ int 
+	mx
+[] = 
+new
+ int[7];
+
+17 
+private
+ int 
+	my
+[] = 
+new
+ int[7];
+
+18 
+Graphics
+ 
+	mg1
+;
+
+19 
+public
+ 
+	$palm
+(
+Graphics
+ 
+g
+, int 
+q
+[][])
+
+21 for(int 
+i
+ = 0; i < 7; i++)
+
+22 for(int 
+j
+ = 0; j < 2; j++)
+
+23 
+p
+[
+i
+][
+j
+] = 
+q
+[i][j];
+
+24 
+g1
+ = 
+g
+;
+
+26 
+public
+ void 
+	$setVisible
+()
+
+28 for(int 
+i
+ = 0; i < 7; i++)
+
+30 
+x
+[
+i
+] = 
+p
+[i][0];
+
+31 
+y
+[
+i
+] = 
+p
+[i][1];
+
+33 
+g1
+.
+	`fillPolygon
+(
+x
+, 
+y
+, 7);
+
+34 
+	}
+}
+
+35 
+public
+ void 
+	$rotate
+(int 
+x1
+, int 
+y1
+, int 
+angle
+)
+
+37 int 
+q
+[][] = 
+new
+ int[7][2];
+
+38 
+g1
+.
+	`drawRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+39 
+g1
+.
+	`fillRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+40 for(int 
+i
+ = 0; i < 7; i++)
+
+42 int 
+a
+ = 
+p
+[
+i
+][0]-
+x1
+, 
+b
+ = p[i][1]-
+y1
+;
+
+43 double 
+r
+ = 
+Math
+.
+	`toRadians
+(
+angle
+);
+
+44 
+x
+[
+i
+] = 
+q
+[i][0] = (int) (
+a
+ * 
+Math
+.
+	`cos
+(
+r
+) + 
+b
+ * Math.
+	`sin
+(r)) + 
+x1
+;
+
+45 
+y
+[
+i
+] = 
+q
+[i][1] = (int) (-
+a
+ * 
+Math
+.
+	`sin
+(
+r
+) + 
+b
+ * Math.
+	`cos
+(r)) + 
+y1
+;
+
+47 
+g1
+.
+	`fillPolygon
+(
+x
+, 
+y
+, 7);
+
+49 
+	}
+}
+
+	@src/Robot/shoe.java
+
+6 
+package
+ 
+	gRobot
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+15 
+public
+ class 
+	cshoe
+
+
+17 
+private
+ int 
+	mp
+[][] = 
+new
+ int[6][2];
+
+18 
+private
+ int 
+	mx
+[] = 
+new
+ int[6];
+
+19 
+private
+ int 
+	my
+[] = 
+new
+ int[6];
+
+20 
+private
+ 
+Graphics
+ 
+	mg1
+;
+
+21 
+public
+ 
+	$shoe
+(
+Graphics
+ 
+g
+, int 
+q
+[][])
+
+23 
+g1
+ = 
+g
+;
+
+24 for(int 
+i
+ = 0; i < 6; i++)
+
+25 for(int 
+j
+ = 0; j < 2; j++)
+
+26 
+p
+[
+i
+][
+j
+] = 
+q
+[i][j];
+
+29 
+public
+ void 
+	$setVisible
+()
+
+31 for(int 
+i
+ = 0; i < 6; i++)
+
+33 
+x
+[
+i
+] = 
+p
+[i][0];
+
+34 
+y
+[
+i
+] = 
+p
+[i][1];
+
+36 
+g1
+.
+	`setColor
+(
+Color
+.
+BLUE
+);
+
+37 
+g1
+.
+	`fillPolygon
+(
+x
+, 
+y
+, 6);
+
+38 
+	}
+}
+
+39 
+public
+ void 
+	$rotate
+(int 
+x1
+, int 
+y1
+, int 
+angle
+)
+
+41 
+g1
+.
+	`setColor
+(
+Color
+.
+BLUE
+);
+
+42 int 
+q
+[][] = 
+new
+ int[6][2];
+
+43 
+g1
+.
+	`drawRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+44 
+g1
+.
+	`fillRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+45 for(int 
+i
+ = 0; i < 6; i++)
+
+47 int 
+a
+ = 
+p
+[
+i
+][0]-
+x1
+, 
+b
+ = p[i][1]-
+y1
+;
+
+48 double 
+r
+ = 
+Math
+.
+	`toRadians
+(
+angle
+);
+
+49 
+x
+[
+i
+] = 
+q
+[i][0] = (int) (
+a
+ * 
+Math
+.
+	`cos
+(
+r
+) + 
+b
+ * Math.
+	`sin
+(r)) + 
+x1
+;
+
+50 
+y
+[
+i
+] = 
+q
+[i][1] = (int) (-
+a
+ * 
+Math
+.
+	`sin
+(
+r
+) + 
+b
+ * Math.
+	`cos
+(r)) + 
+y1
+;
+
+52 
+g1
+.
+	`fillPolygon
+(
+x
+, 
+y
+, 6);
+
+53 
+	}
+}
+
+	@src/SimplePaint3/SimplePaint03.java
+
+1 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+2 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+3 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+4 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+5 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gList
+;
+
+6 
+import
+ 
+	gjavax
+.
+	gswing
+.*;
+
+7 
+import
+ 
+	gjavax
+.
+	gswing
+.
+	gUIManager
+;
+
+9 
+public
+ class 
+	cSimplePaint03
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	mActionListener
+
+
+11 @
+Override
+
+
+12 
+public
+ void 
+	$init
+()
+
+14 
+Button
+ 
+b1
+ = 
+new
+ 
+	`Button
+(" Zoom + ");
+
+15 
+Button
+ 
+b2
+ = 
+new
+ 
+	`Button
+(" Zoom - ");
+
+16 
+	`add
+(
+b1
+);
+
+17 
+	`add
+(
+b2
+);
+
+18 
+b1
+.
+	`addActionListener
+(
+this
+);
+
+19 
+b2
+.
+	`addActionListener
+(
+this
+);
+
+22 
+public
+ static void 
+	$main
+(
+String
+[] 
+args
+) {
+
+24 
+new
+ 
+	`SimplePaint03
+();
+
+25 
+	}
+}
+
+27 
+public
+ 
+	$SimplePaint03
+() {
+
+29 
+EventQueue
+.
+	`invokeLater
+(
+new
+ 
+	`Runnable
+() {
+
+30 @
+Override
+
+
+31 
+public
+ void 
+	`run
+() {
+
+32 
+try
+ {
+
+33 
+UIManager
+.
+	`setLookAndFeel
+(UIManager.
+	`getSystemLookAndFeelClassName
+());
+
+34 } 
+	`catch
+ (
+Exception
+ 
+ex
+) {
+
+37 
+JFrame
+ 
+frame
+ = 
+new
+ 
+	`JFrame
+("Test");
+
+38 
+frame
+.
+	`setDefaultCloseOperation
+(
+JFrame
+.
+EXIT_ON_CLOSE
+);
+
+39 
+frame
+.
+	`add
+(
+new
+ 
+	`PaintPane
+());
+
+40 
+frame
+.
+	`pack
+();
+
+41 
+frame
+.
+	`setLocationRelativeTo
+(
+null
+);
+
+42 
+frame
+.
+	`setVisible
+(
+true
+);
+
+46 
+JButton
+ 
+b1
+ = 
+new
+ 
+	`JButton
+(" Zoom + ");
+
+47 
+JButton
+ 
+b2
+ = 
+new
+ 
+	`JButton
+(" Zoom - ");
+
+48 
+	`add
+(
+b1
+);
+
+49 
+	`add
+(
+b2
+);
+
+50 
+b1
+.
+	`addActionListener
+(
+this
+);
+
+51 
+b2
+.
+	`addActionListener
+(
+this
+);
+
+52 
+	}
+}
+
+54 @
+Override
+
+
+55 
+public
+ void 
+	$actionPerformed
+(
+ActionEvent
+ 
+e
+) {
+
+56 
+throw
+ 
+new
+ 
+	`UnsupportedOperationException
+("Not supported yet.");
+
+57 
+	}
+}
+
+59 
+public
+ class 
+	cPaintPane
+ 
+extends
+ 
+	gJPanel
+ {
+
+61 
+private
+ 
+	gList
+<
+	gShape
+> 
+	ggrid
+;
+
+62 
+private
+ 
+	gList
+<
+	gShape
+> 
+	gfill
+;
+
+64 
+public
+ 
+PaintPane
+() {
+
+65 
+	ggrid
+ = 
+new
+ 
+ArrayList
+<>(5);
+
+66 
+	gfill
+ = 
+new
+ 
+ArrayList
+<>(5);
+
+67 
+addMouseListener
+(
+new
+ 
+MouseAdapter
+() {
+
+68 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+e
+) {
+
+69 for (
+Shape
+ 
+shape
+ : 
+grid
+) {
+
+70 if (
+shape
+.
+contains
+(
+e
+.
+getPoint
+())) {
+
+71 if (
+fill
+.
+contains
+(
+shape
+)) {
+
+72 
+fill
+.
+remove
+(
+shape
+);
+
+74 
+fill
+.
+add
+(
+shape
+);
+
+78 
+repaint
+();
+
+82 int 
+	gcolWidth
+ = 200 / 50;
+
+83 int 
+	growHeight
+ = 200 / 50;
+
+85 for (int 
+	grow
+ = 0; row < 50; row++) {
+
+86 for (int 
+	gcol
+ = 0; col < 50; col++) {
+
+87 
+	ggrid
+.
+add
+(
+new
+ 
+Rectangle
+(
+colWidth
+ * 
+col
+, 
+rowHeight
+ * 
+row
+, colWidth, rowHeight));
+
+93 @
+Override
+
+
+94 
+public
+ 
+Dimension
+ 
+getPreferredSize
+() {
+
+95 return 
+new
+ 
+Dimension
+(400, 400);
+
+98 @
+Override
+
+
+99 
+protected
+ void 
+paintComponent
+(
+Graphics
+ 
+g
+) {
+
+100 
+	gsuper
+.
+paintComponent
+(
+g
+);
+
+101 
+Graphics2D
+ 
+	gg2d
+ = (Graphics2D) 
+g
+;
+
+102 
+	gg2d
+.
+setColor
+(
+Color
+.
+RED
+);
+
+103 for (
+Shape
+ 
+	gcell
+ : 
+fill
+) {
+
+104 
+g2d
+.
+fill
+(
+cell
+);
+
+106 
+	gg2d
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+107 for (
+Shape
+ 
+	gcell
+ : 
+grid
+) {
+
+108 
+g2d
+.
+draw
+(
+cell
+);
+
+	@src/TestGrid01.java
+
+1 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+2 
+import
+ 
+	gjavax
+.
+	gswing
+.*;
+
+3 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+4 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gList
+;
+
+5 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+7 
+public
+ class 
+	cTestGrid01
+ {
+
+9 
+public
+ static void 
+	$main
+(
+String
+[] 
+args
+) {
+
+10 
+new
+ 
+	`TestGrid01
+();
+
+13 
+public
+ 
+	$TestGrid01
+() {
+
+14 
+EventQueue
+.
+	`invokeLater
+(
+new
+ 
+	`Runnable
+() {
+
+15 @
+Override
+
+
+16 
+public
+ void 
+	`run
+() {
+
+17 
+try
+ {
+
+18 
+UIManager
+.
+	`setLookAndFeel
+(UIManager.
+	`getSystemLookAndFeelClassName
+());
+
+19 } 
+	`catch
+ (
+ClassNotFoundException
+ | 
+InstantiationException
+ | 
+IllegalAccessException
+ | 
+UnsupportedLookAndFeelException
+ 
+ex
+) {
+
+22 
+JFrame
+ 
+frame
+ = 
+new
+ 
+	`JFrame
+("Testing");
+
+23 
+frame
+.
+	`setDefaultCloseOperation
+(
+JFrame
+.
+EXIT_ON_CLOSE
+);
+
+24 
+frame
+.
+	`setLayout
+(
+new
+ 
+	`BorderLayout
+());
+
+25 
+frame
+.
+	`add
+(
+new
+ 
+	`TestPane
+());
+
+26 
+frame
+.
+	`pack
+();
+
+27 
+frame
+.
+	`setLocationRelativeTo
+(
+null
+);
+
+28 
+frame
+.
+	`setVisible
+(
+true
+);
+
+31 
+	}
+}
+
+33 
+public
+ class 
+	cTestPane
+ 
+extends
+ 
+	gJPanel
+ {
+
+35 
+private
+ int 
+	gcolumnCount
+ = 5;
+
+36 
+private
+ int 
+	growCount
+ = 5;
+
+37 
+private
+ 
+	gList
+<
+	gRectangle
+> 
+	gcells
+;
+
+38 
+private
+ 
+Point
+ 
+	gselectedCell
+;
+
+40 
+public
+ 
+TestPane
+() {
+
+41 
+	gcells
+ = 
+new
+ 
+ArrayList
+<>(
+columnCount
+ * 
+rowCount
+);
+
+42 
+MouseAdapter
+ 
+	gmouseHandler
+;
+
+43 
+	gmouseHandler
+ = 
+new
+ 
+MouseAdapter
+() {
+
+44 
+private
+ int 
+xOffset
+;
+
+45 
+private
+ int 
+	gyOffset
+;
+
+46 @
+Override
+
+
+47 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+e
+) {
+
+48 
+Point
+ 
+	gpoint
+ = 
+e
+.
+getPoint
+();
+
+50 int 
+	gwidth
+ = 
+getWidth
+();
+
+51 int 
+	gheight
+ = 
+getHeight
+();
+
+53 int 
+	gcellWidth
+ = 
+width
+ / 
+columnCount
+;
+
+54 int 
+	gcellHeight
+ = 
+height
+ / 
+rowCount
+;
+
+56 
+	gselectedCell
+ = 
+null
+;
+
+57 if (
+	ge
+.
+getX
+() >= 
+xOffset
+ && 
+e
+.
+getY
+() >= 
+yOffset
+) {
+
+59 int 
+column
+ = (
+e
+.
+getX
+() - 
+xOffset
+) / 
+cellWidth
+;
+
+60 int 
+	grow
+ = (
+e
+.
+getY
+() - 
+yOffset
+) / 
+cellHeight
+;
+
+62 if (
+	gcolumn
+ >= 0 && 
+row
+ >= 0 && 
+column
+ < 
+columnCount
+ && row < 
+rowCount
+) {
+
+64 
+selectedCell
+ = 
+new
+ 
+Point
+(
+column
+, 
+row
+);
+
+69 
+repaint
+();
+
+73 
+addMouseMotionListener
+(
+mouseHandler
+);
+
+76 @
+Override
+
+
+77 
+public
+ 
+Dimension
+ 
+getPreferredSize
+() {
+
+78 return 
+new
+ 
+Dimension
+(200, 200);
+
+81 @
+Override
+
+
+82 
+public
+ void 
+invalidate
+() {
+
+83 
+	gcells
+.
+clear
+();
+
+84 
+	gselectedCell
+ = 
+null
+;
+
+85 
+	gsuper
+.
+invalidate
+();
+
+88 @
+Override
+
+
+89 
+protected
+ void 
+paintComponent
+(
+Graphics
+ 
+g
+) {
+
+90 
+	gsuper
+.
+paintComponent
+(
+g
+);
+
+91 
+Graphics2D
+ 
+	gg2d
+ = (Graphics2D) 
+g
+.
+create
+();
+
+93 int 
+	gwidth
+ = 
+getWidth
+();
+
+94 int 
+	gheight
+ = 
+getHeight
+();
+
+96 int 
+	gcellWidth
+ = 
+width
+ / 
+columnCount
+;
+
+97 int 
+	gcellHeight
+ = 
+height
+ / 
+rowCount
+;
+
+99 int 
+	gxOffset
+ = (
+width
+ - (
+columnCount
+ * 
+cellWidth
+)) / 2;
+
+100 int 
+	gyOffset
+ = (
+height
+ - (
+rowCount
+ * 
+cellHeight
+)) / 2;
+
+102 if (
+	gcells
+.
+isEmpty
+()) {
+
+103 for (int 
+	grow
+ = 0; row < 
+	growCount
+; row++) {
+
+104 for (int 
+	gcol
+ = 0; col < 
+	gcolumnCount
+; col++) {
+
+105 
+Rectangle
+ 
+	gcell
+ = 
+new
+ Rectangle(
+
+106 
+xOffset
+ + (
+col
+ * 
+cellWidth
+),
+
+107 
+yOffset
+ + (
+row
+ * 
+cellHeight
+),
+
+108 
+cellWidth
+,
+
+109 
+cellHeight
+);
+
+110 
+	gcells
+.
+add
+(
+cell
+);
+
+115 if (
+	gselectedCell
+ != 
+null
+) {
+
+117 int 
+index
+ = 
+selectedCell
+.
+x
+ + (selectedCell.
+y
+ * 
+columnCount
+);
+
+118 
+Rectangle
+ 
+	gcell
+ = 
+cells
+.
+get
+(
+index
+);
+
+119 
+	gg2d
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+120 
+	gg2d
+.
+fill
+(
+cell
+);
+
+124 
+	gg2d
+.
+setColor
+(
+Color
+.
+GRAY
+);
+
+125 for (
+Rectangle
+ 
+	gcell
+ : 
+cells
+) {
+
+126 
+g2d
+.
+draw
+(
+cell
+);
+
+129 
+	gg2d
+.
+dispose
+();
+
+	@src/TestGrid02.java
+
+1 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+2 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+3 
+import
+ 
+	gjavax
+.
+	gswing
+.
+	gJFrame
+;
+
+4 
+import
+ 
+	gjavax
+.
+	gswing
+.
+	gJPanel
+;
+
+5 
+import
+ 
+	gjavax
+.
+	gswing
+.
+	gUIManager
+;
+
+6 
+import
+ 
+	gjavax
+.
+	gswing
+.
+	gUnsupportedLookAndFeelException
+;
+
+7 
+import
+ 
+	gjavax
+.
+	gswing
+.
+	gborder
+.
+	gBorder
+;
+
+8 
+import
+ 
+	gjavax
+.
+	gswing
+.
+	gborder
+.
+	gMatteBorder
+;
+
+10 
+public
+ class 
+	cTestGrid02
+ {
+
+12 
+public
+ static void 
+	$main
+(
+String
+[] 
+args
+) {
+
+13 
+new
+ 
+	`TestGrid02
+();
+
+16 
+public
+ 
+	$TestGrid02
+() {
+
+17 
+EventQueue
+.
+	`invokeLater
+(
+new
+ 
+	`Runnable
+() {
+
+18 @
+Override
+
+
+19 
+public
+ void 
+	`run
+() {
+
+20 
+try
+ {
+
+21 
+UIManager
+.
+	`setLookAndFeel
+(UIManager.
+	`getSystemLookAndFeelClassName
+());
+
+22 } 
+	`catch
+ (
+ClassNotFoundException
+ | 
+InstantiationException
+ | 
+IllegalAccessException
+ | 
+UnsupportedLookAndFeelException
+ 
+ex
+) {
+
+25 
+JFrame
+ 
+frame
+ = 
+new
+ 
+	`JFrame
+("Testing");
+
+26 
+frame
+.
+	`setDefaultCloseOperation
+(
+JFrame
+.
+EXIT_ON_CLOSE
+);
+
+27 
+frame
+.
+	`setLayout
+(
+new
+ 
+	`BorderLayout
+());
+
+28 
+frame
+.
+	`add
+(
+new
+ 
+	`TestPane
+());
+
+29 
+frame
+.
+	`pack
+();
+
+30 
+frame
+.
+	`setLocationRelativeTo
+(
+null
+);
+
+31 
+frame
+.
+	`setVisible
+(
+true
+);
+
+34 
+	}
+}
+
+36 
+public
+ class 
+	cTestPane
+ 
+extends
+ 
+	gJPanel
+ {
+
+38 
+public
+ 
+TestPane
+() {
+
+39 
+setLayout
+(
+new
+ 
+GridBagLayout
+());
+
+41 
+GridBagConstraints
+ 
+	ggbc
+ = 
+new
+ GridBagConstraints();
+
+42 for (int 
+	grow
+ = 0; row < 5; row++) {
+
+43 for (int 
+	gcol
+ = 0; col < 5; col++) {
+
+44 
+	ggbc
+.
+	ggridx
+ = 
+col
+;
+
+45 
+	ggbc
+.
+	ggridy
+ = 
+row
+;
+
+47 
+CellPane
+ 
+	gcellPane
+ = 
+new
+ CellPane();
+
+48 
+Border
+ 
+	gborder
+ = 
+null
+;
+
+49 if (
+	grow
+ < 4) {
+
+50 if (
+	gcol
+ < 4) {
+
+51 
+	gborder
+ = 
+new
+ 
+MatteBorder
+(1, 1, 0, 0, 
+Color
+.
+GRAY
+);
+
+53 
+	gborder
+ = 
+new
+ 
+MatteBorder
+(1, 1, 0, 1, 
+Color
+.
+GRAY
+);
+
+56 if (
+	gcol
+ < 4) {
+
+57 
+	gborder
+ = 
+new
+ 
+MatteBorder
+(1, 1, 1, 0, 
+Color
+.
+GRAY
+);
+
+59 
+	gborder
+ = 
+new
+ 
+MatteBorder
+(1, 1, 1, 1, 
+Color
+.
+GRAY
+);
+
+62 
+	gcellPane
+.
+setBorder
+(
+border
+);
+
+63 
+add
+(
+cellPane
+, 
+gbc
+);
+
+69 
+public
+ class 
+	cCellPane
+ 
+extends
+ 
+	gJPanel
+ {
+
+71 
+private
+ 
+Color
+ 
+	gdefaultBackground
+;
+
+73 
+public
+ 
+CellPane
+() {
+
+74 
+addMouseListener
+(
+new
+ 
+MouseAdapter
+() {
+
+75 @
+Override
+
+
+76 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+e
+) {
+
+77 
+defaultBackground
+ = 
+getBackground
+();
+
+78 
+setBackground
+(
+Color
+.
+BLUE
+);
+
+81 @
+Override
+
+
+82 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+e
+) {
+
+88 @
+Override
+
+
+89 
+public
+ 
+Dimension
+ 
+getPreferredSize
+() {
+
+90 return 
+new
+ 
+Dimension
+(50, 50);
+
+	@src/a.java
+
+17 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+18 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gButton
+;
+
+19 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+20 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+21 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionEvent
+;
+
+22 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionListener
+;
+
+23 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseEvent
+;
+
+24 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseListener
+;
+
+25 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseMotionListener
+;
+
+26 
+import
+ static 
+	gjava
+.
+	glang
+.
+	gSystem
+.
+	gexit
+;
+
+27 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+32 
+public
+ 
+class
+ 
+a
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+,
+	gMouseListener
+,
+	gMouseMotionListener
+{
+
+34 
+private
+ int 
+	gdiff
+=2;
+
+35 
+public
+ static int 
+	gresX
+=800;
+
+36 
+public
+ static int 
+	gresY
+=600;
+
+37 
+public
+ static int 
+	goffset
+=35;
+
+38 
+public
+ int 
+	gr
+=400;
+
+39 
+Button
+ 
+	gbtn1
+;
+
+40 
+Button
+ 
+	gbtn2
+;
+
+41 
+Button
+ 
+	gclear
+;
+
+42 
+Button
+ 
+	gbtn4
+;
+
+43 
+private
+ int 
+	gclick
+=0;
+
+45 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+=
+new
+ 
+ArrayList
+<>();
+
+46 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+=
+new
+ 
+ArrayList
+<>();
+
+47 
+	gArrayList
+<
+	gInteger
+> 
+	gz_x
+=
+new
+ 
+ArrayList
+<>();
+
+48 
+	gArrayList
+<
+	gInteger
+> 
+	gz_y
+=
+new
+ 
+ArrayList
+<>();
+
+49 @
+Override
+
+
+50 
+public
+ void 
+init
+()
+
+52 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+53 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+54 
+	gbtn1
+=
+new
+ 
+Button
+();
+
+55 
+	gbtn1
+.
+setLabel
+("Zoom In");
+
+56 
+	gclear
+=
+new
+ 
+Button
+();
+
+57 
+	gclear
+.
+setLabel
+("Clear");
+
+58 
+	gbtn2
+=
+new
+ 
+Button
+();
+
+59 
+	gbtn2
+.
+setLabel
+("Zoom out");
+
+60 
+	gbtn4
+=
+new
+ 
+Button
+("reset");
+
+61 
+	gbtn1
+.
+addActionListener
+(
+this
+);
+
+62 
+	gbtn2
+.
+addActionListener
+(
+this
+);
+
+63 
+	gbtn4
+.
+addActionListener
+(
+this
+);
+
+64 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+65 
+	gclear
+.
+addActionListener
+(
+this
+);
+
+66 
+add
+(
+btn1
+);
+
+67 
+add
+(
+btn2
+);
+
+68 
+add
+(
+clear
+);
+
+69 
+add
+(
+btn4
+);
+
+72 @
+Override
+
+
+73 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+75 
+	gresX
+=
+getWidth
+();
+
+76 
+	gresY
+=
+getHeight
+();
+
+77 if(
+	gclick
+==1){
+
+81 
+drawCircle
+(
+g
+,
+x
+.
+get
+(0),
+y
+.get(0),
+r
+);
+
+82 
+drawCircle_
+(
+g
+,
+x
+.
+get
+(0)+1,
+y
+.get(0)+1,(
+r
+/2));
+
+83 for(int 
+	gi
+=0;i<
+	gz_x
+.
+size
+();i+=15){
+
+84 
+drawCircle
+(
+g
+,
+z_x
+.
+get
+(
+i
+),
+z_y
+.get(i),15);
+
+96 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+97 for(int 
+	gi
+=0;i<
+	gresX
+;i=
+i
++
+diff
+)
+
+98 
+g
+.
+drawLine
+(
+i
+, 
+offset
+, i, 
+resY
+);
+
+100 for(int 
+	gi
+=
+offset
+;i<
+	gresY
+;i+=
+diff
+)
+
+101 
+g
+.
+drawLine
+(0, 
+i
+, 
+resX
+, i);
+
+103 
+	gg
+.
+drawLine
+(
+resX
+-1,
+resY
+-1,resX-1,
+offset
+);
+
+104 
+	gg
+.
+drawLine
+(
+resX
+-1, 
+resY
+-1, 0, resY-1);
+
+106 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+109 @
+Override
+
+
+110 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+111 if(
+	gae
+.
+getSource
+()==
+btn1
+)
+
+113 
+diff
+++;
+
+115 
+	gz_x
+.
+clear
+();
+
+116 
+	gz_y
+.
+clear
+();
+
+117 
+repaint
+();
+
+119 else if(
+	gae
+.
+getSource
+()==
+btn2
+)
+
+121 
+diff
+-=0.5;
+
+123 if(
+	gdiff
+==0)
+
+124 
+exit
+(0);
+
+125 
+repaint
+();
+
+127 else if(
+	gae
+.
+getSource
+()==
+clear
+)
+
+129 
+x
+.
+clear
+();
+
+130 
+	gy
+.
+clear
+();
+
+131 
+	gz_x
+.
+clear
+();
+
+132 
+	gz_y
+.
+clear
+();
+
+133 
+	gclick
+=0;
+
+134 
+repaint
+();
+
+135 }else if(
+	gae
+.
+getSource
+()==
+btn4
+)
+
+137 
+diff
+=2;
+
+138 
+	gr
+=100;
+
+139 
+repaint
+();
+
+144 void 
+drawPoint
+(
+Graphics
+ 
+g
+,int 
+x0
+,int 
+y0
+,int 
+x1
+,int 
+y1
+)
+
+147 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+148 int 
+	gdx
+,
+	gdy
+;
+
+149 int 
+	gtemp_x
+,
+	gtemp_y
+,
+	gxmod
+,
+	gymod
+,
+	gf_x
+,
+	gf_y
+,
+	gx_mod
+,
+	gy_mod
+;
+
+150 
+	gtemp_x
+=
+temp_y
+=
+xmod
+=
+ymod
+=0;
+
+151 float 
+	gx
+,
+	gy
+;
+
+152 
+	gx
+=(float)
+x0
+;
+
+153 
+	gy
+=(float)
+y0
+;
+
+154 
+	gdx
+=
+x1
+-
+x0
+;
+
+155 
+	gdy
+=
+y1
+-
+y0
+;
+
+156 int 
+	gsteps
+;
+
+157 if(
+	gdx
+>
+	gdy
+)
+
+158 
+	gsteps
+=
+Math
+.
+abs
+(
+dx
+);
+
+160 
+	gsteps
+=
+Math
+.
+abs
+(
+dy
+);
+
+161 float 
+	gx_inc
+,
+	gy_inc
+;
+
+162 
+	gx_inc
+=(float)
+dx
+/
+steps
+;
+
+163 
+	gy_inc
+=(float)
+dy
+/
+steps
+;
+
+164 for(int 
+	gv
+=0;v<
+	gsteps
+;v++){
+
+165 
+	gx
++=
+x_inc
+;
+
+166 
+	gy
++=
+y_inc
+;
+
+167 
+	gf_x
+=(int)
+Math
+.
+ceil
+(
+x
+);
+
+168 
+	gf_y
+=(int) 
+Math
+.
+ceil
+(
+y
+);
+
+169 
+	gx_mod
+=(
+f_x
+/
+diff
+)*diff;
+
+170 
+	gy_mod
+=((
+f_y
+-
+offset
+)/
+diff
+)*diff+offset;
+
+171 
+	gtry
+{
+
+172 if(
+	gMath
+.
+abs
+(
+y0
+-
+y1
+)>10){
+
+174 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+175 
+	gymod
+=
+y_mod
+;
+
+179 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+182 
+catch
+(
+Exception
+ 
+e
+){
+
+183 
+	gSystem
+.
+	gout
+.
+println
+("ERROR : "+
+e
+);
+
+184 
+exit
+(0);
+
+190 
+	gg
+.
+setColor
+(
+Color
+.
+GREEN
+);
+
+191 int 
+	gp0
+,
+	gp0_mod
+;
+
+192 int 
+	gdx_
+=
+dx
+;
+
+193 int 
+	gdy_
+=
+dy
+;
+
+194 
+	gp0
+=2*
+dy_
+-
+dx_
+;
+
+195 int 
+	gx_
+,
+	gy_
+;
+
+196 
+	gx_
+=
+x0
++10;
+
+197 
+	gy_
+=
+y0
++20;
+
+198 int 
+	gx_mod1
+,
+	gy_mod1
+;
+
+199 for(int 
+	gi
+=0;i<
+	gdx_
+;i++){
+
+200 if(
+	gp0
+<0){
+
+201 
+	gx_mod1
+=((
+x_
++1)/
+diff
+)*diff;
+
+202 
+	gy_mod1
+=(((
+y_
+)-
+offset
+)/
+diff
+)*diff+offset;
+
+203 
+	gg
+.
+fillRect
+(
+x_mod1
+, 
+y_mod1
+, 
+diff
+, diff);
+
+204 
+	gp0
++=2*
+dy_
+;
+
+205 
+	gx_
+=
+x_
++1;
+
+208 
+	gx_mod1
+=((
+x_
++1)/
+diff
+)*diff;
+
+209 
+	gy_mod1
+=(((
+y_
++1)-
+offset
+)/
+diff
+)*diff+offset;
+
+210 
+	gg
+.
+fillRect
+(
+x_mod1
+, 
+y_mod1
+, 
+diff
+, diff);
+
+211 
+	gp0
++=2*(
+dy_
+-
+dx_
+);
+
+212 
+	gx_
+=
+x_
++1;
+
+213 
+	gy_
+=
+y_
++1;
+
+219 int 
+	gdx1
+=
+dx
+;
+
+220 int 
+	gdy1
+=
+dy
+;
+
+221 if(
+	gdx1
+==0)
+
+222 
+dx1
+=1;
+
+223 if(
+	gdy1
+==0)
+
+224 
+dy1
+=1;
+
+225 double 
+	gslope
+=(double)
+dy1
+/
+dx1
+;
+
+226 int 
+	gb
+=(int)(
+y1
+-
+slope
+*
+x1
+);
+
+227 
+	gSystem
+.
+	gout
+.
+println
+("equation : "+"y = "+
+slope
++"x+("+
+b
++")");
+
+228 
+	gg
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+229 double 
+	gp1
+,
+	gp0_mod1
+;
+
+230 int 
+	gx5
+,
+	gy5
+;
+
+231 
+	gx5
+=
+x0
+;
+
+232 
+	gy5
+=
+y0
+;
+
+233 
+	gp1
+=
+F
+(
+x5
++1,
+y5
++0.5,
+slope
+,
+b
+);
+
+234 int 
+	gx_mod2
+,
+	gy_mod2
+;
+
+235 for(int 
+	gi
+=0;i<
+	gdx1
+;i++){
+
+236 if(
+	gp1
+<0){
+
+237 
+	gx_mod2
+=((
+x5
++1)/
+diff
+)*diff;
+
+238 
+	gy_mod2
+=(((
+y5
+)-
+offset
+)/
+diff
+)*diff+offset;
+
+239 
+	gg
+.
+fillRect
+(
+x_mod2
+, 
+y_mod2
+, 
+diff
+, diff);
+
+240 
+	gx5
+=
+x5
++1;
+
+241 
+	gp1
+=
+F
+(
+x5
++1,
+y5
++0.5,
+slope
+,
+b
+);
+
+244 
+	gx_mod2
+=((
+x5
++1)/
+diff
+)*diff;
+
+245 
+	gy_mod2
+=(((
+y5
++1)-
+offset
+)/
+diff
+)*diff+offset;
+
+246 
+	gg
+.
+fillRect
+(
+x_mod2
+, 
+y_mod2
+, 
+diff
+, diff);
+
+247 
+	gx5
+=
+x5
++1;
+
+248 
+	gy5
+=
+y5
++1;
+
+249 
+	gp1
+=
+F
+(
+x5
++1,
+y5
++0.5,
+slope
+,
+b
+);
+
+253 void 
+drawCircle
+(
+Graphics
+ 
+g
+,int 
+x0
+,int 
+y0
+,int 
+r
+){
+
+255 if(
+	gr
+<10){
+
+256 
+	gg
+.
+setColor
+(
+Color
+.
+GREEN
+);
+
+259 
+	gg
+.
+setColor
+(
+Color
+.
+blue
+);
+
+260 int 
+	gx
+=0;
+
+261 int 
+	gy
+=
+r
+;
+
+262 int 
+	gd
+=1-
+r
+;
+
+265 int 
+	gx_mod
+,
+	gy_mod
+;
+
+266 while(
+	gx
+<=
+y
+){
+
+267 
+x_mod
+=
+x0
++
+x
+;
+
+268 
+	gy_mod
+=
+y0
++
+y
+;
+
+269 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+270 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+271 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+272 
+	gx_mod
+=
+x0
++
+x
+;
+
+273 
+	gy_mod
+=
+y0
+-
+y
+;
+
+274 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+275 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+276 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+277 
+	gx_mod
+=
+x0
+-
+x
+;
+
+278 
+	gy_mod
+=
+y0
++
+y
+;
+
+279 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+280 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+281 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+282 
+	gx_mod
+=
+x0
+-
+x
+;
+
+283 
+	gy_mod
+=
+y0
+-
+y
+;
+
+284 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+285 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+286 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+289 
+	gx_mod
+=
+x0
++
+y
+;
+
+290 
+	gy_mod
+=
+y0
++
+x
+;
+
+291 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+292 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+293 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+294 
+	gx_mod
+=
+x0
++
+y
+;
+
+295 
+	gy_mod
+=
+y0
+-
+x
+;
+
+296 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+297 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+298 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+299 
+	gx_mod
+=
+x0
+-
+y
+;
+
+300 
+	gy_mod
+=
+y0
++
+x
+;
+
+301 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+302 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+303 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+304 
+	gx_mod
+=
+x0
+-
+y
+;
+
+305 
+	gy_mod
+=
+y0
+-
+x
+;
+
+306 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+307 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+308 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+309 if(
+	gd
+>0){
+
+310 
+	gd
++=2*
+x
++3-(2*
+y
+-2);
+
+311 
+	gy
+=
+y
+-1;
+
+315 
+	gd
++=2*
+x
++3;
+
+318 
+	gx
+++;
+
+321 void 
+drawCircle_
+(
+Graphics
+ 
+g
+,int 
+x0
+,int 
+y0
+,int 
+r
+){
+
+322 int 
+	gx
+=0;
+
+323 int 
+	gy
+=
+r
+;
+
+324 int 
+	gd
+=1-
+r
+;
+
+327 int 
+	gx_mod
+,
+	gy_mod
+;
+
+328 while(
+	gx
+<=
+y
+){
+
+329 
+x_mod
+=
+x0
++
+x
+;
+
+330 
+	gy_mod
+=
+y0
++
+y
+;
+
+331 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+332 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+334 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+335 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+336 
+	gx_mod
+=
+x0
++
+x
+;
+
+337 
+	gy_mod
+=
+y0
+-
+y
+;
+
+338 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+339 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+341 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+342 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+343 
+	gx_mod
+=
+x0
+-
+x
+;
+
+344 
+	gy_mod
+=
+y0
++
+y
+;
+
+345 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+346 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+348 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+349 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+350 
+	gx_mod
+=
+x0
+-
+x
+;
+
+351 
+	gy_mod
+=
+y0
+-
+y
+;
+
+352 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+353 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+355 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+356 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+359 
+	gx_mod
+=
+x0
++
+y
+;
+
+360 
+	gy_mod
+=
+y0
++
+x
+;
+
+361 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+362 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+364 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+365 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+366 
+	gx_mod
+=
+x0
++
+y
+;
+
+367 
+	gy_mod
+=
+y0
+-
+x
+;
+
+368 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+369 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+371 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+372 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+373 
+	gx_mod
+=
+x0
+-
+y
+;
+
+374 
+	gy_mod
+=
+y0
++
+x
+;
+
+375 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+376 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+378 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+379 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+380 
+	gx_mod
+=
+x0
+-
+y
+;
+
+381 
+	gy_mod
+=
+y0
+-
+x
+;
+
+382 
+	gx_mod
+=(
+x_mod
+/
+diff
+)*diff;
+
+383 
+	gy_mod
+=((
+y_mod
+-
+offset
+)/
+diff
+)*diff+offset;
+
+385 
+	gz_x
+.
+add
+(
+x_mod
+);
+
+386 
+	gz_y
+.
+add
+(
+y_mod
+);
+
+387 if(
+	gd
+>0){
+
+388 
+	gd
++=2*
+x
++3-(2*
+y
+-2);
+
+389 
+	gy
+=
+y
+-1;
+
+393 
+	gd
++=2*
+x
++3;
+
+396 
+	gx
+++;
+
+405 @
+Override
+
+
+406 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+408 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+409 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+410 
+	gclick
+++;
+
+411 if(
+	gclick
+==1)
+
+412 
+repaint
+();
+
+415 @
+Override
+
+
+416 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+421 @
+Override
+
+
+422 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+426 @
+Override
+
+
+427 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+432 @
+Override
+
+
+433 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+437 @
+Override
+
+
+438 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+442 @
+Override
+
+
+443 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+447 
+private
+ double 
+F
+(int 
+x_
+, double 
+y_
+, double 
+slope
+, int 
+b
+) {
+
+449 double 
+	gval
+;
+
+450 
+	gval
+= (
+slope
+*
+x_
++
+b
+-
+y_
+);
+
+451 return 
+	gval
+;
+
+454 
+private
+ int 
+G
+(int 
+x0
+, int 
+y0
+, int 
+r
+) {
+
+456 int 
+	gres
+;
+
+457 
+	gres
+=
+x0
+*x0+
+y0
+*y0+
+r
+*r;
+
+458 return 
+	gres
+;
+
+	@src/bonus/circle.java
+
+6 
+package
+ 
+	gbonus
+;
+
+8 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionEvent
+;
+
+11 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionListener
+;
+
+12 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseEvent
+;
+
+13 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseListener
+;
+
+14 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+15 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gCollections
+;
+
+16 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gComparator
+;
+
+22 
+class
+ 
+MyPoint
+ 
+implements
+ 
+	gComparable
+ <
+	gMyPoint
+> {
+
+23 int 
+	gx
+, 
+	gy
+;
+
+24 
+public
+ 
+MyPoint
+(int 
+x
+, int 
+y
+) {
+
+25 
+	gthis
+.
+	gx
+ = 
+x
+;
+
+26 
+	gthis
+.
+	gy
+ = 
+y
+;
+
+29 
+public
+ int 
+compareTo
+(
+MyPoint
+ 
+pt
+) {
+
+30 int 
+	gcmp
+ = 
+Integer
+.
+compare
+(
+x
+, 
+pt
+.x);
+
+31 if (
+	gcmp
+ == 0) {
+
+32 return 
+Integer
+.
+compare
+(
+y
+, 
+pt
+.y);
+
+34 return 
+	gcmp
+;
+
+39 
+public
+ 
+class
+ 
+circle
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+ {
+
+41 
+private
+ int 
+	gdiff
+ = 2;
+
+42 
+public
+ static int 
+	gresX
+ = 800;
+
+43 
+public
+ static int 
+	gresY
+ = 600;
+
+44 
+public
+ static int 
+	goffsetx
+ = 0;
+
+45 
+public
+ static int 
+	goffsety
+ = 40;
+
+46 int 
+	gcol
+ = 0;
+
+47 
+Button
+ 
+	gb1
+;
+
+48 
+Button
+ 
+	gb2
+;
+
+49 
+Button
+ 
+	gb3
+;
+
+50 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+51 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+61  
+Button
+ 
+	gb
+ = 
+new
+ Button("DRAW");
+
+62 int 
+	gf
+ = 0;
+
+63 int 
+	gsmall
+ = 0;
+
+64 @
+Override
+
+
+65 
+public
+ void 
+init
+() {
+
+66 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+67 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+68 
+	gb1
+ = 
+new
+ 
+Button
+();
+
+69 
+	gb1
+.
+setLabel
+("Zoom In");
+
+70 
+	gb2
+ = 
+new
+ 
+Button
+();
+
+71 
+	gb2
+.
+setLabel
+("Reset");
+
+72 
+	gb3
+ = 
+new
+ 
+Button
+();
+
+73 
+	gb3
+.
+setLabel
+("Zoom out");
+
+74 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+75 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+76 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+77 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+78 
+add
+(
+b1
+);
+
+79 
+add
+(
+b2
+);
+
+80 
+add
+(
+b3
+);
+
+88 
+add
+(
+b
+);
+
+89 
+	gb
+.
+addActionListener
+(
+this
+);
+
+92 int 
+	gz1
+ = 0, 
+	gz2
+ = 0, 
+	gtemp
+;
+
+93 
+public
+ void 
+draw_circle
+(
+Graphics
+ 
+g
+, int 
+X
+, int 
+Y
+, int 
+r
+)
+
+99 if(
+	gsmall
+ == 1)
+
+101 if(
+z1
+ == 1)
+
+102 
+r
+ = 
+temp
+ + 1;
+
+103 if(
+	gz2
+ == 1)
+
+104 
+r
+ = 
+temp
+ - 1;
+
+108 if(
+	gz1
+ == 1)
+
+109 
+r
+ = 
+temp
+ + 10;
+
+110 if(
+	gz2
+ == 1)
+
+111 
+r
+ = 
+temp
+ - 10;
+
+113 int 
+	gx1
+ = 0;
+
+114 int 
+	gp
+ = 5 / 4 - 
+r
+, 
+	gy1
+ = r;
+
+116 while (
+	gx1
+ < 
+	gy1
+)
+
+119 
+drawPoint
+(
+g
+, 
+x1
+ + 
+X
+, 
+y1
+ + 
+Y
+);
+
+120 
+drawPoint
+(
+g
+, 
+x1
+ + 
+X
+, -
+y1
+ + 
+Y
+);
+
+121 
+drawPoint
+(
+g
+, -
+x1
+ + 
+X
+, +
+y1
+ + 
+Y
+);
+
+122 
+drawPoint
+(
+g
+, -
+x1
+ + 
+X
+, -
+y1
+ + 
+Y
+);
+
+123 
+drawPoint
+(
+g
+, 
+y1
+ + 
+X
+, 
+x1
+ + 
+Y
+);
+
+124 
+drawPoint
+(
+g
+, 
+y1
+ + 
+X
+, -
+x1
+ + 
+Y
+);
+
+125 
+drawPoint
+(
+g
+, -
+y1
+ + 
+X
+, 
+x1
+ + 
+Y
+);
+
+126 
+drawPoint
+(
+g
+, -
+y1
+ + 
+X
+, -
+x1
+ + 
+Y
+);
+
+129 if (
+	gp
+ < 0)
+
+130 
+	gp
+ = 
+p
+ + 2 * 
+x1
+ + 3;
+
+132 
+	gp
+ = 
+p
+ + 2 * 
+x1
+ + 1 - 2 * (
+y1
+ - 1);
+
+133 
+	gy1
+--;
+
+135 
+	gx1
+++;
+
+137 
+	gtemp
+ = 
+r
+;
+
+140 
+public
+ void 
+draw_midpoint
+(
+Graphics
+ 
+g
+, int 
+X0
+, int 
+Y0
+, int 
+X1
+, int 
+Y1
+) {
+
+142 int 
+	gdx
+ = 
+X1
+ - 
+X0
+;
+
+143 int 
+	gdy
+ = 
+Y1
+ - 
+Y0
+;
+
+145 int 
+	gsteps
+;
+
+146 if (
+	gdx
+ > 
+	gdy
+) {
+
+147 
+	gsteps
+ = 
+dx
+;
+
+149 
+	gsteps
+ = 
+dy
+;
+
+152 int 
+	gx1
+ = 
+X0
+, 
+	gy1
+ = 
+Y0
+;
+
+153 for (int 
+	gk
+ = 0; k <= 
+steps
+; k++) {
+
+155 double 
+	gmy
+ = 
+y1
+ + 0.5;
+
+156 
+Point
+ 
+	ga
+, 
+	gb
+;
+
+157 if (
+	gdx
+ < 0) {
+
+158 
+	ga
+ = 
+new
+ 
+Point
+(
+x1
+ - 1, 
+y1
+ + 1);
+
+159 
+	gb
+ = 
+new
+ 
+Point
+(
+x1
+ - 1, 
+y1
+);
+
+160 
+	gx1
+--;
+
+162 
+	ga
+ = 
+new
+ 
+Point
+(
+x1
+ + 1, 
+y1
+ + 1);
+
+163 
+	gb
+ = 
+new
+ 
+Point
+(
+x1
+ + 1, 
+y1
+);
+
+164 
+	gx1
+++;
+
+166 
+Point
+ 
+	gc
+ = 
+new
+ Point(
+X0
+, 
+Y0
+);
+
+167 
+Point
+ 
+	gd
+ = 
+new
+ Point(
+X1
+, 
+Y1
+);
+
+168 double 
+	gq
+ = 
+intersection
+(
+a
+, 
+b
+, 
+c
+, 
+d
+);
+
+169 if (
+	gq
+ >= 
+my
+) {
+
+170 
+y1
+++;
+
+173 
+	gg
+.
+fillRect
+(
+x1
+ / 
+diff
+ * diff, ((
+y1
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+176 
+public
+ double 
+intersection
+(
+Point
+ 
+a
+, Point 
+b
+, Point 
+c
+, Point 
+d
+) {
+
+177 double 
+	gx1
+ = 
+a
+.
+getX
+();
+
+178 double 
+	gy1
+ = 
+a
+.
+getY
+();
+
+179 double 
+	gx2
+ = 
+b
+.
+getX
+();
+
+180 double 
+	gy2
+ = 
+b
+.
+getY
+();
+
+181 double 
+	gx3
+ = 
+c
+.
+getX
+();
+
+182 double 
+	gy3
+ = 
+c
+.
+getY
+();
+
+183 double 
+	gx4
+ = 
+d
+.
+getX
+();
+
+184 double 
+	gy4
+ = 
+d
+.
+getY
+();
+
+185 double 
+	gd1
+ = (
+x1
+ - 
+x2
+) * (
+y3
+ - 
+y4
+) - (
+y1
+ - 
+y2
+) * (
+x3
+ - 
+x4
+);
+
+186 if (
+	gd1
+ == 0) {
+
+190 double 
+	gxi
+ = ((
+x3
+ - 
+x4
+) * (
+x1
+ * 
+y2
+ - 
+y1
+ * 
+x2
+) - (x1 - x2) * (x3 * 
+y4
+ - 
+y3
+ * x4)) / 
+d1
+;
+
+191 double 
+	gyi
+ = ((
+y3
+ - 
+y4
+) * (
+x1
+ * 
+y2
+ - 
+y1
+ * 
+x2
+) - (y1 - y2) * (
+x3
+ * y4 - y3 * 
+x4
+)) / 
+d1
+;
+
+192 return 
+	gyi
+;
+
+194 @
+Override
+
+
+195 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+197 
+	gresX
+ = 
+getWidth
+();
+
+198 
+	gresY
+ = 
+getHeight
+();
+
+200 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+202 for (int 
+	gi
+ = 
+offsetx
+; i < 
+	gresX
+ - 
+	goffsetx
+; i = 
+i
+ + 
+diff
+) {
+
+203 
+g
+.
+drawLine
+(
+i
+, 
+offsety
+, i, 
+resY
+ - offsety);
+
+206 for (int 
+	gi
+ = 
+offsety
+; i < 
+	gresY
+ - 
+	goffsety
+; i += 
+diff
+) {
+
+207 
+g
+.
+drawLine
+(
+offsetx
+, 
+i
+, 
+resX
+ - offsetx, i);
+
+210 
+	gg
+.
+drawLine
+(
+resX
+ - 
+offsetx
+, 
+resY
+ - 
+offsety
+, resX - offsetx, offsety);
+
+211 
+	gg
+.
+drawLine
+(
+resX
+ - 1 - 
+offsetx
+, 
+resY
+ - 
+offsety
+, offsetx, resY - offsety);
+
+212 int 
+	gX
+ = 300, 
+	gY
+ = 300, 
+	gr
+ = 250;
+
+213 if (
+	gcol
+ == 1)
+
+215 
+g
+.
+setColor
+(
+Color
+.
+RED
+);
+
+216 
+draw_circle
+(
+g
+, 
+X
+, 
+Y
+, 
+r
+);
+
+217 
+	gf
+ = 1;
+
+218 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+219 
+draw_circle
+(
+g
+, 
+X
+, 
+Y
+, 
+r
+/2);
+
+220 
+	gf
+ = 0;
+
+221 
+	gg
+.
+setColor
+(
+Color
+.
+ORANGE
+);
+
+223 int 
+	gtempx
+ = 
+X
+, 
+	gtempy
+ = 
+Y
+/2, 
+	gx1
+, 
+	gy1
+;
+
+224 
+	gx
+.
+add
+(
+tempx
+);
+	gy
+.add(
+tempy
+);
+
+225 for(int 
+	ga
+ = 0; a < 8; a++)
+
+227 double 
+	go
+ = 
+Math
+.
+toRadians
+(45);
+
+228 
+	gx1
+ = (int)(
+tempx
+*
+Math
+.
+cos
+(
+o
+))+(int)(
+tempy
+*Math.
+sin
+(o));
+
+229 
+	gy1
+ = (int)(
+X
+-
+tempx
+*
+Math
+.
+sin
+(
+o
+))+(int)(
+tempy
+*Math.
+cos
+(o));
+
+230 
+	gtempx
+ = 
+x1
+;
+
+231 
+	gtempy
+ = 
+y1
+;
+
+232 
+	gx
+.
+add
+(
+tempx
+);
+
+233 
+	gy
+.
+add
+(
+tempy
+);
+
+236 for(int 
+	gi
+ = 0; i < 
+	gx
+.
+size
+();i++)
+
+238 
+	gSystem
+.
+	gout
+.
+println
+(
+x
+.
+get
+(
+i
+)+" "+
+y
+.get(i));
+
+239 
+	gsmall
+ = 1;
+
+240 
+draw_circle
+(
+g
+, 
+x
+.
+get
+(
+i
+), 
+y
+.get(i), 10);
+
+242 
+	gArrayList
+<
+	gMyPoint
+> 
+	ga
+ = 
+new
+ 
+ArrayList
+<
+MyPoint
+>();
+
+243 for(int 
+	gi
+ = 0; i < 
+	gx
+.
+size
+();i++)
+
+244 
+	ga
+.
+add
+(
+new
+ 
+MyPoint
+(
+x
+.
+get
+(
+i
+),
+y
+.get(i)));
+
+245 
+	gCollections
+.
+sort
+(
+a
+);
+
+246 
+	gSystem
+.
+	gout
+.
+println
+();
+
+247 for(int 
+	gi
+ = 0; i < 
+	ga
+.
+size
+()-1;i = 
+i
+++)
+
+249 
+draw_midpoint
+(
+g
+, 
+a
+.
+get
+(
+i
+).
+x
+, a.get(i).
+y
+, a.get(i+1).x, a.get(i+1).y);
+
+250 
+	gSystem
+.
+	gout
+.
+println
+(
+a
+.
+get
+(
+i
+).
+x
++ " "+ a.get(i).
+y
+);
+
+254 @
+Override
+
+
+255 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+)
+
+257 if (
+	gae
+.
+getSource
+() == 
+b1
+)
+
+259 
+diff
+++;
+
+260 
+	gz1
+ = 1;
+
+261 
+repaint
+();
+
+263 else if (
+	gae
+.
+getSource
+() == 
+b3
+)
+
+265 
+diff
+--;
+
+266 
+	gz2
+ = 1;
+
+267 
+repaint
+();
+
+269 else if (
+	gae
+.
+getSource
+() == 
+b2
+)
+
+271 
+x
+.
+clear
+();
+
+272 
+	gy
+.
+clear
+();
+
+273 
+	gz1
+ = 0; 
+	gz2
+ = 0;
+
+274 
+	gdiff
+ = 2;
+
+275 
+	gcol
+ = 0;
+
+276 
+repaint
+();
+
+278 else if (
+	gae
+.
+getSource
+() == 
+b
+)
+
+280 
+col
+ = 1;
+
+281 
+repaint
+();
+
+286 void 
+drawPoint
+(
+Graphics
+ 
+g
+, int 
+xpos
+, int 
+ypos
+) {
+
+295 if(
+	gf
+ != 1)
+
+296 
+g
+.
+fillRect
+(((int) (
+xpos
+ - 
+offsetx
+) / 
+diff
+) * diff + offsetx, ((int) (
+ypos
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+299 @
+Override
+
+
+300 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+301 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+302 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+303 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+304 
+repaint
+();
+
+307 @
+Override
+
+
+308 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+313 @
+Override
+
+
+314 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+318 @
+Override
+
+
+319 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+324 @
+Override
+
+
+325 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+329 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+333 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/circle/circle.java
+
+1 
+package
+ 
+	gcircle
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+9 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+11 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+17 
+public
+ 
+class
+ 
+circle
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+ {
+
+19 
+private
+ int 
+	gdiff
+ = 5;
+
+20 
+public
+ static int 
+	gresX
+ = 800;
+
+21 
+public
+ static int 
+	gresY
+ = 600;
+
+22 
+public
+ static int 
+	goffsetx
+ = 0;
+
+23 
+public
+ static int 
+	goffsety
+ = 40;
+
+24 int 
+	gcol
+ = 0;
+
+25 
+Button
+ 
+	gb1
+;
+
+26 
+Button
+ 
+	gb2
+;
+
+27 
+Button
+ 
+	gb3
+;
+
+28 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+29 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+30 
+Label
+ 
+	gl1
+ = 
+new
+ Label("x1 = ");
+
+31 
+Label
+ 
+	gl2
+ = 
+new
+ Label("x2 = ");
+
+32 
+Label
+ 
+	gl3
+ = 
+new
+ Label("Radius = ");
+
+35 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+36 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+37 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+39 
+Button
+ 
+	gb
+ = 
+new
+ Button("DRAW");
+
+41 @
+Override
+
+
+42 
+public
+ void 
+init
+() {
+
+43 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+44 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+45 
+	gb1
+ = 
+new
+ 
+Button
+();
+
+46 
+	gb1
+.
+setLabel
+("Zoom In");
+
+47 
+	gb2
+ = 
+new
+ 
+Button
+();
+
+48 
+	gb2
+.
+setLabel
+("Reset");
+
+49 
+	gb3
+ = 
+new
+ 
+Button
+();
+
+50 
+	gb3
+.
+setLabel
+("Zoom out");
+
+51 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+52 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+53 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+54 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+55 
+add
+(
+b1
+);
+
+56 
+add
+(
+b2
+);
+
+57 
+add
+(
+b3
+);
+
+58 
+add
+(
+l1
+);
+
+59 
+add
+(
+t1
+);
+
+60 
+add
+(
+l2
+);
+
+61 
+add
+(
+t2
+);
+
+62 
+add
+(
+l3
+);
+
+63 
+add
+(
+t3
+);
+
+65 
+add
+(
+b
+);
+
+66 
+	gb
+.
+addActionListener
+(
+this
+);
+
+69 int 
+	gz1
+ = 0, 
+	gz2
+ = 0, 
+	gtemp
+;
+
+70 
+public
+ void 
+draw_circle
+(
+Graphics
+ 
+g
+)
+
+72 int 
+	gX
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+73 int 
+	gY
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+74 int 
+	gr
+ = 
+Integer
+.
+parseInt
+(
+t3
+.
+getText
+());
+
+75 if(
+	gz1
+ == 1)
+
+76 
+r
+ = 
+temp
+ + 10;
+
+77 if(
+	gz2
+ == 1)
+
+78 
+r
+ = 
+temp
+ - 10;
+
+80 int 
+	gx1
+ = 0;
+
+81 int 
+	gp
+ = 5 / 4 - 
+r
+, 
+	gy1
+ = r;
+
+82 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+84 while (
+	gx1
+ < 
+	gy1
+)
+
+88 
+drawPoint
+(
+g
+, 
+y1
+ + 
+X
+, 
+x1
+ + 
+Y
+);
+
+89 
+drawPoint
+(
+g
+, 
+x1
+ + 
+X
+, 
+y1
+ + 
+Y
+);
+
+90 
+drawPoint
+(
+g
+, 
+x1
+ + 
+X
+, -
+y1
+ + 
+Y
+);
+
+91 
+drawPoint
+(
+g
+, 
+y1
+ + 
+X
+, -
+x1
+ + 
+Y
+);
+
+92 
+drawPoint
+(
+g
+, -
+y1
+ + 
+X
+, -
+x1
+ + 
+Y
+);
+
+93 
+drawPoint
+(
+g
+, -
+x1
+ + 
+X
+, -
+y1
+ + 
+Y
+);
+
+94 
+drawPoint
+(
+g
+, -
+x1
+ + 
+X
+, 
+y1
+ + 
+Y
+);
+
+95 
+drawPoint
+(
+g
+, -
+y1
+ + 
+X
+, 
+x1
+ + 
+Y
+);
+
+99 if (
+	gp
+ < 0)
+
+100 
+	gp
+ = 
+p
+ + 2 * 
+x1
+ + 3;
+
+102 
+	gp
+ = 
+p
+ + 2 * 
+x1
+ + 1 - 2 * (
+y1
+ - 1);
+
+103 
+	gy1
+--;
+
+105 
+	gx1
+++;
+
+107 
+	gtemp
+ = 
+r
+;
+
+110 @
+Override
+
+
+111 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+112 
+	gresX
+ = 
+getWidth
+();
+
+113 
+	gresY
+ = 
+getHeight
+();
+
+115 for (int 
+	gi
+ = 0; i < 
+	gx
+.
+size
+(); i++) {
+
+116 
+drawPoint
+(
+g
+, 
+x
+.
+get
+(
+i
+), 
+y
+.get(i));
+
+119 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+122 for (int 
+	gi
+ = 
+offsetx
+; i < 
+	gresX
+ - 
+	goffsetx
+; i = 
+i
+ + 
+diff
+) {
+
+123 
+g
+.
+drawLine
+(
+i
+, 
+offsety
+, i, 
+resY
+ - offsety);
+
+126 for (int 
+	gi
+ = 
+offsety
+; i < 
+	gresY
+ - 
+	goffsety
+; i += 
+diff
+) {
+
+127 
+g
+.
+drawLine
+(
+offsetx
+, 
+i
+, 
+resX
+ - offsetx, i);
+
+130 
+	gg
+.
+drawLine
+(
+resX
+ - 
+offsetx
+, 
+resY
+ - 
+offsety
+, resX - offsetx, offsety);
+
+131 
+	gg
+.
+drawLine
+(
+resX
+ - 1 - 
+offsetx
+, 
+resY
+ - 
+offsety
+, offsetx, resY - offsety);
+
+132 if (
+	gcol
+ == 1)
+
+133 
+draw_circle
+(
+g
+);
+
+136 @
+Override
+
+
+137 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+)
+
+139 if (
+	gae
+.
+getSource
+() == 
+b1
+)
+
+141 
+diff
+++;
+
+142 
+	gz1
+ = 1;
+
+143 
+repaint
+();
+
+145 else if (
+	gae
+.
+getSource
+() == 
+b3
+)
+
+147 
+diff
+--;
+
+148 
+	gz2
+ = 1;
+
+149 
+repaint
+();
+
+151 else if (
+	gae
+.
+getSource
+() == 
+b2
+)
+
+153 
+x
+.
+clear
+();
+
+154 
+	gy
+.
+clear
+();
+
+155 
+	gz1
+ = 0; 
+	gz2
+ = 0;
+
+156 
+	gdiff
+ = 5;
+
+157 
+	gcol
+ = 0;
+
+158 
+repaint
+();
+
+160 else if (
+	gae
+.
+getSource
+() == 
+b
+)
+
+162 
+col
+ = 1;
+
+163 
+repaint
+();
+
+168 void 
+drawPoint
+(
+Graphics
+ 
+g
+, int 
+xpos
+, int 
+ypos
+) {
+
+170 
+	gg
+.
+fillRect
+(((int) (
+xpos
+ - 
+offsetx
+) / 
+diff
+) * diff + offsetx, ((int) (
+ypos
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+173 @
+Override
+
+
+174 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+175 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+176 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+177 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+178 
+repaint
+();
+
+181 @
+Override
+
+
+182 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+187 @
+Override
+
+
+188 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+192 @
+Override
+
+
+193 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+198 @
+Override
+
+
+199 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+203 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+207 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/clipping/cohen.java
+
+6 
+package
+ 
+	gclipping
+;
+
+8 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+10 
+import
+ 
+	gjava
+.
+	gutil
+.*;
+
+11 
+public
+ class 
+	ccohen
+ 
+extends
+ 
+	mApplet
+
+
+13 int 
+	mxmax
+=400,
+	mymax
+=300,
+	mxmin
+=100,
+	mymin
+=100;
+
+14 
+public
+ int[] 
+	$set
+(int 
+x
+, int 
+y
+)
+
+16 int 
+a
+[]=
+new
+ int[4];
+
+17 if(
+x
+<
+xmin
+)
+
+18 
+a
+[3]=1;
+
+20 
+a
+[3]=0;
+
+21 if(
+x
+>
+xmax
+)
+
+22 
+a
+[2]=1;
+
+24 
+a
+[2]=0;
+
+25 if(
+y
+<
+ymin
+)
+
+26 
+a
+[0]=1;
+
+28 
+a
+[0]=0;
+
+29 if(
+y
+>
+ymax
+)
+
+30 
+a
+[1]=1;
+
+32 
+a
+[1]=0;
+
+33 return 
+a
+;
+
+35 
+boolean
+ 
+	$check
+(int 
+a
+[])
+
+37 for(int 
+i
+=0;i<
+a
+.
+length
+;i++)
+
+38 if(
+a
+[
+i
+]==1)
+
+39 return 
+false
+;
+
+40 return 
+true
+;
+
+41 
+	}
+}
+
+42 int[] 
+	$produceXY
+(int 
+i
+,int 
+x1
+,int 
+y1
+,float 
+m
+)
+
+44 int 
+a
+[]=
+new
+ int [2];
+
+45 float 
+x
+=0,
+y
+=0;
+
+46 switch(
+i
+)
+
+49 
+x
+=
+xmin
+;
+
+50 
+y
+=
+y1
++
+m
+*(
+x
+-
+x1
+);
+
+54 
+x
+=
+xmax
+;
+
+55 
+y
+=
+y1
++
+m
+*(
+x
+-
+x1
+);
+
+58 
+y
+=
+ymin
+;
+
+59 
+x
+=
+x1
++(
+y
+-
+y1
+)/
+m
+;
+
+62 
+y
+=
+ymax
+;
+
+63 
+x
+=
+x1
++(
+y
+-
+y1
+)/
+m
+;
+
+66 
+a
+[0]=(int)
+x
+;
+
+67 
+a
+[1]=(int)
+y
+;
+
+68 return 
+a
+;
+
+69 
+	}
+}
+
+70 
+boolean
+ 
+	$doAnd
+(int 
+a
+[],int 
+b
+[])
+
+72 for(int 
+i
+=0;i<
+a
+.
+length
+;i++)
+
+74 int 
+k
+=
+a
+[
+i
+]&
+b
+[i];
+
+75 if(
+k
+==1)
+
+76 return 
+false
+;
+
+78 return 
+true
+;
+
+79 
+	}
+}
+
+80 
+public
+ void 
+	$paint
+(
+Graphics
+ 
+g
+)
+
+82 
+g
+.
+	`drawRect
+(
+xmin
+,
+ymin
+,
+xmax
+-xmin,
+ymax
+-ymin);
+
+83 
+g
+.
+	`drawRect
+(
+xmin
++100,
+ymin
+,
+xmax
+-xmin,
+ymax
+-ymin);
+
+84 int 
+a
+[][]=
+new
+ int[2][4];
+
+85 int 
+b
+[][]=
+new
+ int[2][4];
+
+86 int 
+c
+[]=
+new
+ int[2];
+
+87 int 
+c1
+=20;
+
+88 int 
+x1
+= 40,
+y1
+= 100,
+x2
+= 200,
+y2
+= 600;
+
+89 float 
+m
+=(
+y2
+-
+y1
+)*1.0f/(
+x2
+-
+x1
+);
+
+90 
+g
+.
+	`drawString
+(
+m
++" ",100,100);
+
+91 
+g
+.
+	`drawLine
+(
+x1
+,
+y1
+,
+x2
+,
+y2
+);
+
+92 
+a
+[0]=
+	`set
+(
+x1
+,
+y1
+);
+
+93 
+a
+[1]=
+	`set
+(
+x2
+,
+y2
+);
+
+94 
+g
+.
+	`drawString
+(
+Arrays
+.
+	`toString
+(
+a
+[0]),300,300);
+
+95 
+g
+.
+	`drawString
+(
+Arrays
+.
+	`toString
+(
+a
+[1]),400,400);
+
+96 if(
+	`check
+(
+a
+[0])&&check(a[1]))
+
+98 
+g
+.
+	`drawLine
+(
+x1
+,
+y1
+,
+x2
+,
+y2
+);
+
+102 if(
+	`doAnd
+(
+a
+[0], a[1]))
+
+104 for(int 
+i
+=
+a
+[0].
+length
+-1;i>=0;i--)
+
+106 if(
+a
+[0][
+i
+]==1)
+
+108 
+c
+=
+	`produceXY
+(
+a
+[0].
+length
+-1-
+i
+,
+x1
+,
+y1
+,
+m
+);
+
+109 
+b
+[0]=
+	`set
+(
+c
+[0],c[1]);
+
+110 
+g
+.
+	`drawString
+("first "+
+Arrays
+.
+	`toString
+(
+b
+[0]),200,300+
+c1
+);
+
+111 if(
+	`check
+(
+b
+[0]))
+
+113 
+x1
+=
+c
+[0];
+
+114 
+y1
+=
+c
+[1];
+
+117 
+c1
++=20;
+
+120 for(int 
+i
+=
+a
+[0].
+length
+-1;i>=0;i--)
+
+122 if(
+a
+[1][
+i
+]==1)
+
+124 
+c
+=
+	`produceXY
+(
+a
+[0].
+length
+-1-
+i
+,
+x1
+,
+y1
+,
+m
+);
+
+125 
+b
+[1]=
+	`set
+(
+c
+[0],c[1]);
+
+126 
+g
+.
+	`drawString
+("second "+
+Arrays
+.
+	`toString
+(
+b
+[1]),200,300+
+c1
+);
+
+127 if(
+	`check
+(
+b
+[1]))
+
+129 
+x2
+=
+c
+[0];
+
+130 
+y2
+=
+c
+[1];
+
+136 
+g
+.
+	`drawLine
+(
+x1
++100,
+y1
+,
+x2
++100,
+y2
+);
+
+139 
+	}
+}
+
+	@src/clipping/lineclip.java
+
+6 
+package
+ 
+	gclipping
+;
+
+7 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+8 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+10 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+15 
+public
+ class 
+	clineclip
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	mActionListener
+
+
+17 
+final
+ int 
+	mresX
+ = 400, 
+	mresY
+ = 300;
+
+18 static int 
+	mxLeft
+=100, 
+	mxRight
+=500, 
+	myBottom
+=100, 
+	myTop
+=400;
+
+19 
+Point
+ 
+	mP0
+, 
+	mP1
+;
+
+20 
+Button
+ 
+	mb1
+ = 
+new
+ Button("Clip");
+
+21 
+Button
+ 
+	mb2
+ = 
+new
+ Button("Reset");
+
+22 
+Label
+ 
+	ml1
+ = 
+new
+ Label("x1 = ");
+
+23 
+Label
+ 
+	ml2
+ = 
+new
+ Label("y1 = ");
+
+24 
+Label
+ 
+	ml3
+ = 
+new
+ Label("x2 = ");
+
+25 
+Label
+ 
+	ml4
+ = 
+new
+ Label("y2 = ");
+
+26 
+TextField
+ 
+	mt1
+ = 
+new
+ TextField(3);
+
+27 
+TextField
+ 
+	mt2
+ = 
+new
+ TextField(3);
+
+28 
+TextField
+ 
+	mt3
+ = 
+new
+ TextField(3);
+
+29 
+TextField
+ 
+	mt4
+ = 
+new
+ TextField(3);
+
+30 int 
+	mc
+ = 0;
+
+31 int 
+	mpoints
+ = 0;
+
+32 
+public
+ static 
+	mArrayList
+<
+	mInteger
+> 
+	mlistx
+ = 
+new
+ 
+ArrayList
+<>();
+
+33 
+public
+ static 
+	mArrayList
+<
+	mInteger
+> 
+	mlisty
+ = 
+new
+ 
+ArrayList
+<>();
+
+34 @
+Override
+
+
+35 
+public
+ void 
+	$init
+()
+
+37 
+this
+.
+	`setSize
+(
+resX
+, 
+resY
+);
+
+38 
+this
+.
+	`setBackground
+(
+Color
+.
+WHITE
+);
+
+39 
+	`add
+(
+b1
+);
+
+40 
+b1
+.
+	`addActionListener
+(
+this
+);
+
+41 
+	`add
+(
+b2
+);
+
+42 
+b2
+.
+	`addActionListener
+(
+this
+);
+
+43 
+P0
+ = 
+new
+ 
+	`Point
+(200, 500);
+
+44 
+P1
+ = 
+new
+ 
+	`Point
+(100, 200);
+
+52 @
+Override
+
+
+53 
+public
+ void 
+	$paint
+(
+Graphics
+ 
+g
+)
+
+56 
+g
+.
+	`drawRect
+(
+xLeft
+, 
+yBottom
+, (
+xRight
+-xLeft), (
+yTop
+-yBottom));
+
+57 if(
+c
+ == 0)
+
+58 
+g
+.
+	`drawLine
+(
+P0
+.
+x
+, P0.
+y
+, 
+P1
+.x, P1.y);
+
+59 if(
+c
+ == 1)
+
+60 
+	`CohenSutherlandClipper
+(
+g
+, 
+P0
+, 
+P1
+);
+
+62 
+	}
+}
+
+63 
+private
+ static int 
+	$Codes
+(
+Point
+ 
+P
+)
+
+65 int 
+Code
+ = 0;
+
+66 if(
+P
+.
+y
+ > 
+yTop
+)
+
+67 
+Code
+ += 1;
+
+68 else if(
+P
+.
+y
+ < 
+yBottom
+)
+
+69 
+Code
+ += 2;
+
+70 if(
+P
+.
+x
+ > 
+xRight
+)
+
+71 
+Code
+ += 4;
+
+72 else if(
+P
+.
+x
+ < 
+xLeft
+)
+
+73 
+Code
+ += 8;
+
+75 return 
+Code
+;
+
+76 
+	}
+}
+
+78 
+private
+ static 
+boolean
+ 
+	$rejectCheck
+(int 
+outCode1
+, int 
+outCode2
+)
+
+80 if((
+outCode1
+ & 
+outCode2
+) != 0)
+
+81 return 
+true
+;
+
+82 return 
+false
+;
+
+83 
+	}
+}
+
+85 
+private
+ static 
+boolean
+ 
+	$acceptCheck
+(int 
+outCode1
+, int 
+outCode2
+)
+
+87 if((
+outCode1
+ == 0) && (
+outCode2
+ == 0))
+
+88 return 
+true
+;
+
+89 return 
+false
+;
+
+90 
+	}
+}
+
+92 static void 
+	$CohenSutherlandClipper
+(
+Graphics
+ 
+g
+, 
+Point
+ 
+P0
+, Point 
+P1
+)
+
+94 int 
+outCode0
+,
+outCode1
+;
+
+95 
+Point
+ 
+t0
+ = 
+new
+ 
+	`Point
+(
+P0
+), 
+t1
+ = new Point(
+P1
+);
+
+96 while(
+true
+)
+
+98 
+outCode0
+ = 
+	`Codes
+(
+t0
+);
+
+99 
+outCode1
+ = 
+	`Codes
+(
+t1
+);
+
+100 if(
+	`rejectCheck
+(
+outCode0
+, 
+outCode1
+))
+
+102 if(
+	`acceptCheck
+(
+outCode0
+, 
+outCode1
+))
+
+104 if(
+outCode0
+ == 0)
+
+106 int 
+tempCoord
+; int 
+tempCode
+;
+
+107 
+tempCoord
+ = 
+t0
+.
+x
+; t0.x= 
+t1
+.x; t1.x = tempCoord;
+
+108 
+tempCoord
+ = 
+t0
+.
+y
+; t0.y= 
+t1
+.y; t1.y = tempCoord;
+
+109 
+tempCode
+ = 
+outCode0
+; outCode0 = 
+outCode1
+; outCode1 = tempCode;
+
+111 if((
+outCode0
+ & 1) != 0 )
+
+114 
+t0
+.
+x
+ += (
+t1
+.x - t0.x)*(
+yTop
+ - t0.
+y
+)/(t1.y - t0.y);
+
+115 
+t0
+.
+y
+ = 
+yTop
+;
+
+117 else if((
+outCode0
+ & 2) != 0 )
+
+119 
+t0
+.
+x
+ += (
+t1
+.x - t0.x)*(
+yBottom
+ - t0.
+y
+)/(t1.y - t0.y);
+
+120 
+t0
+.
+y
+ = 
+yBottom
+;
+
+122 else if((
+outCode0
+ & 4) != 0 )
+
+124 
+t0
+.
+y
+ += (
+t1
+.y - t0.y)*(
+xRight
+ - t0.
+x
+)/(t1.x - t0.x);
+
+125 
+t0
+.
+x
+ = 
+xRight
+;
+
+127 else if((
+outCode0
+ & 8) != 0 )
+
+129 
+t0
+.
+y
+ += (
+t1
+.y - t0.y)*(
+xLeft
+ - t0.
+x
+)/(t1.x - t0.x);
+
+130 
+t0
+.
+x
+ = 
+xLeft
+;
+
+133 
+g
+.
+	`drawLine
+(
+t0
+.
+x
+, t0.
+y
+, 
+t1
+.x, t1.y);
+
+134 
+listx
+.
+	`add
+(
+t0
+.
+x
+);
+
+135 
+listy
+.
+	`add
+(
+t0
+.
+y
+);
+
+138 
+	}
+}
+
+139 @
+Override
+
+
+140 
+public
+ void 
+	$actionPerformed
+(
+ActionEvent
+ 
+e
+)
+
+142 if(
+e
+.
+	`getSource
+() == 
+b2
+)
+
+144 
+c
+ = 0;
+
+145 
+	`repaint
+();
+
+147 if(
+e
+.
+	`getSource
+() == 
+b1
+)
+
+149 
+c
+ = 1;
+
+150 
+	`repaint
+();
+
+153 
+	}
+}
+
+	@src/clipping/polyclip.java
+
+6 
+package
+ 
+	gclipping
+;
+
+7 
+import
+ static 
+	gclipping
+.
+	glineclip
+.
+	gCohenSutherlandClipper
+;
+
+8 
+import
+ static 
+	gclipping
+.
+	glineclip
+.
+	glistx
+;
+
+9 
+import
+ static 
+	gclipping
+.
+	glineclip
+.
+	glisty
+;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+11 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+12 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionEvent
+;
+
+13 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionListener
+;
+
+14 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseEvent
+;
+
+15 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gMouseListener
+;
+
+16 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+21 
+public
+ 
+class
+ 
+polyclip
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+
+
+23 
+final
+ int 
+	gresX
+ = 400, 
+	gresY
+ = 300;
+
+24 static int 
+	gxLeft
+=100, 
+	gxRight
+=500, 
+	gyBottom
+=100, 
+	gyTop
+=400;
+
+25 int 
+	gclick
+ = 0;
+
+26 
+	gArrayList
+<
+	gInteger
+> 
+	gxp
+ = 
+new
+ 
+ArrayList
+<>();
+
+27 
+	gArrayList
+<
+	gInteger
+> 
+	gyp
+ = 
+new
+ 
+ArrayList
+<>();
+
+29 
+Button
+ 
+	gb1
+ = 
+new
+ Button("Clip");
+
+30 
+Button
+ 
+	gb2
+ = 
+new
+ Button("Reset");
+
+31 int 
+	gc
+ = 0;
+
+32 
+public
+ void 
+init
+()
+
+34 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+35 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+41 
+add
+(
+b1
+);
+
+42 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+43 
+add
+(
+b2
+);
+
+44 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+45 
+addMouseListener
+(
+this
+);
+
+48 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+50 
+	gg
+.
+drawRect
+(
+xLeft
+, 
+yBottom
+, (
+xRight
+-xLeft), (
+yTop
+-yBottom));
+
+51 if(
+	gclick
+ == 5){
+
+52 int 
+px
+[] = 
+new
+ int[
+xp
+.
+size
+()];
+
+53 int 
+	gpy
+[] = 
+new
+ int[
+xp
+.
+size
+()];
+
+54 for(int 
+	gi
+ = 0; i < 
+	gxp
+.
+size
+(); i++)
+
+56 
+	gpx
+[
+i
+] = 
+xp
+.
+get
+(i);
+
+57 
+	gpy
+[
+i
+] = 
+yp
+.
+get
+(i);
+
+59 if(
+	gc
+ == 0)
+
+60 
+g
+.
+drawPolygon
+(
+px
+, 
+py
+, 
+xp
+.
+size
+());
+
+61 if(
+	gc
+ == 1)
+
+63 for(int 
+i
+ = 0; 
+	gi
+ < 
+	gxp
+.
+size
+(); i++)
+
+65 
+Point
+ 
+	gP0
+ = 
+new
+ Point(
+px
+[
+i
+], 
+py
+[i]);
+
+66 
+Point
+ 
+	gP1
+ = 
+new
+ Point(
+px
+[(
+i
++1)%
+xp
+.
+size
+()], 
+py
+[(i+1)%xp.size()]);
+
+67 
+CohenSutherlandClipper
+(
+g
+, 
+P0
+, 
+P1
+);
+
+73 int 
+	gx
+[] = 
+new
+ int[
+listx
+.
+size
+()];
+
+74 int 
+	gy
+[] = 
+new
+ int[
+listx
+.
+size
+()];
+
+75 
+	gSystem
+.
+	gout
+.
+println
+(
+listx
+.
+size
+());
+
+76 for(int 
+	gi
+ = 0; i < 
+	glistx
+.
+size
+(); i++)
+
+78 
+	gx
+[
+i
+] = 
+listx
+.
+get
+(i);
+
+79 
+	gy
+[
+i
+] = 
+listy
+.
+get
+(i);
+
+80 
+	gSystem
+.
+	gout
+.
+println
+(
+x
+[
+i
+]+" "+
+y
+[i]);
+
+83 
+	gg
+.
+fillPolygon
+(
+x
+, 
+y
+, 
+listx
+.
+size
+());
+
+87 @
+Override
+
+
+88 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+e
+)
+
+90 if(
+	ge
+.
+getSource
+() == 
+b2
+)
+
+92 
+c
+ = 0;
+
+93 
+	gclick
+ = 0;
+
+94 
+repaint
+();
+
+95 
+	glistx
+.
+clear
+();
+
+96 
+	glisty
+.
+clear
+();
+
+97 
+	gxp
+.
+clear
+();
+
+98 
+	gyp
+.
+clear
+();
+
+100 if(
+	ge
+.
+getSource
+() == 
+b1
+)
+
+102 
+c
+ = 1;
+
+103 
+repaint
+();
+
+108 @
+Override
+
+
+109 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+e
+) {
+
+110 
+	gxp
+.
+add
+(
+e
+.
+getX
+());
+
+111 
+	gyp
+.
+add
+(
+e
+.
+getY
+());
+
+112 
+	gclick
+++;
+
+113 
+	gSystem
+.
+	gout
+.
+println
+(
+click
+);
+
+114 
+repaint
+();
+
+118 @
+Override
+
+
+119 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+e
+) {
+
+123 @
+Override
+
+
+124 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+e
+) {
+
+128 @
+Override
+
+
+129 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+e
+) {
+
+133 @
+Override
+
+
+134 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+e
+) {
+
+	@src/clipping/polyfill.java
+
+6 
+package
+ 
+	gclipping
+;
+
+7 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+8 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+13 
+public
+ class 
+	cpolyfill
+ 
+extends
+ 
+	mApplet
+
+
+15 
+final
+ int 
+	mresX
+ = 400, 
+	mresY
+ = 300;
+
+16 @
+Override
+
+
+17 
+public
+ void 
+	$init
+()
+
+19 
+this
+.
+	`setSize
+(
+resX
+, 
+resY
+);
+
+20 
+this
+.
+	`setBackground
+(
+Color
+.
+WHITE
+);
+
+22 @
+Override
+
+
+23 
+public
+ void 
+	$paint
+(
+Graphics
+ 
+g
+)
+
+25 
+Color
+ 
+a
+ = Color.
+RED
+;
+
+26 
+Color
+ 
+b
+ = Color.
+WHITE
+;
+
+27 
+	`boundaryFill4
+(
+g
+, 50, 100, 
+a
+, 
+b
+);
+
+28 
+	}
+}
+
+29 
+public
+ void 
+	$boundaryFill4
+(
+Graphics
+ 
+g
+, int 
+x
+, int 
+y
+, 
+Color
+ 
+fill
+, Color 
+boundary
+)
+
+31 
+Color
+ 
+current
+;
+
+32 
+current
+ = 
+g
+.
+	`getColor
+();
+
+33 if((
+current
+.
+	`equals
+(
+boundary
+)) && (current.equals(
+fill
+)))
+
+35 
+g
+.
+	`setColor
+(
+fill
+) ;
+
+36 
+g
+.
+	`drawLine
+(
+x
+, 
+y
+, x, y);
+
+37 
+	`boundaryFill4
+ (
+g
+, 
+x
++1, 
+y
+, 
+fill
+, 
+boundary
+);
+
+38 
+	`boundaryFill4
+ (
+g
+, 
+x
+-1, 
+y
+, 
+fill
+, 
+boundary
+);
+
+39 
+	`boundaryFill4
+ (
+g
+, 
+x
+, 
+y
++1, 
+fill
+, 
+boundary
+);
+
+40 
+	`boundaryFill4
+ (
+g
+, 
+x
+ , 
+y
+-1, 
+fill
+, 
+boundary
+);
+
+42 
+	}
+}
+
+	@src/dda_grid.java
+
+6 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+7 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+9 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+15 
+public
+ 
+class
+ 
+dda_grid
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+ {
+
+17 
+private
+ int 
+	gdiff
+ = 10;
+
+18 
+public
+ static int 
+	gresX
+ = 800;
+
+19 
+public
+ static int 
+	gresY
+ = 600;
+
+20 
+public
+ static int 
+	goffsetx
+ = 0;
+
+21 
+public
+ static int 
+	goffsety
+ = 40;
+
+22 int 
+	gcol
+ = 0;
+
+23 
+Button
+ 
+	gb1
+;
+
+24 
+Button
+ 
+	gb2
+;
+
+25 
+Button
+ 
+	gb3
+;
+
+26 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+27 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+28 
+Label
+ 
+	gl1
+ = 
+new
+ Label("x1 = ");
+
+29 
+Label
+ 
+	gl2
+ = 
+new
+ Label("x2 = ");
+
+30 
+Label
+ 
+	gl3
+ = 
+new
+ Label("y1 = ");
+
+31 
+Label
+ 
+	gl4
+ = 
+new
+ Label("y2 = ");
+
+33 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+34 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+35 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+36 
+TextField
+ 
+	gt4
+ = 
+new
+ TextField(3);
+
+37 
+Button
+ 
+	gb
+ = 
+new
+ Button("DRAW");
+
+39 @
+Override
+
+
+40 
+public
+ void 
+init
+() {
+
+41 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+42 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+43 
+	gb1
+ = 
+new
+ 
+Button
+();
+
+44 
+	gb1
+.
+setLabel
+("Zoom In");
+
+45 
+	gb2
+ = 
+new
+ 
+Button
+();
+
+46 
+	gb2
+.
+setLabel
+("Reset");
+
+47 
+	gb3
+ = 
+new
+ 
+Button
+();
+
+48 
+	gb3
+.
+setLabel
+("Zoom out");
+
+49 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+50 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+51 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+52 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+53 
+add
+(
+b1
+);
+
+54 
+add
+(
+b2
+);
+
+55 
+add
+(
+b3
+);
+
+56 
+add
+(
+l1
+);
+
+57 
+add
+(
+t1
+);
+
+58 
+add
+(
+l2
+);
+
+59 
+add
+(
+t2
+);
+
+60 
+add
+(
+l3
+);
+
+61 
+add
+(
+t3
+);
+
+62 
+add
+(
+l4
+);
+
+63 
+add
+(
+t4
+);
+
+64 
+add
+(
+b
+);
+
+65 
+	gb
+.
+addActionListener
+(
+this
+);
+
+69 
+public
+ void 
+draw_Line
+(
+Graphics
+ 
+g
+) {
+
+70 int 
+	gX0
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+71 int 
+	gX1
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+72 int 
+	gY0
+ = 
+Integer
+.
+parseInt
+(
+t3
+.
+getText
+());
+
+73 int 
+	gY1
+ = 
+Integer
+.
+parseInt
+(
+t4
+.
+getText
+());
+
+74 int 
+	gdx
+ = 
+X1
+ - 
+X0
+;
+
+75 int 
+	gdy
+ = 
+Y1
+ - 
+Y0
+;
+
+76 double 
+	gsteps
+;
+
+78 if (
+	gdx
+ > 
+	gdy
+) {
+
+79 
+	gsteps
+ = 
+Math
+.
+abs
+(
+dx
+);
+
+81 
+	gsteps
+ = 
+Math
+.
+abs
+(
+dy
+);
+
+83 double 
+	gxinc
+ = 
+dx
+ / 
+steps
+;
+
+84 double 
+	gyinc
+ = 
+dy
+ / 
+steps
+;
+
+85 double 
+	gx1
+ = 
+X0
+, 
+	gy1
+ = 
+Y0
+;
+
+86 int 
+	gxmod
+, 
+	gymod
+, 
+	gx_mod
+, 
+	gy_mod
+;
+
+87 
+	gxmod
+ = 
+ymod
+ = 0;
+
+88 for (int 
+	gk
+ = 0; k < 
+	gsteps
+; k++) {
+
+91 
+	gx1
+ = 
+x1
+ + 
+xinc
+;
+
+92 
+	gy1
+ = 
+y1
+ + 
+yinc
+;
+
+93 
+	gx_mod
+=((int)
+Math
+.
+ceil
+(
+x1
+)/
+diff
+)*diff;
+
+94 
+	gy_mod
+=((int)(
+Math
+.
+ceil
+(
+y1
+)-
+offsety
+)/
+diff
+)*diff+offsety;
+
+95 if(
+	gx_mod
+==
+xmod
+)
+
+96 
+x_mod
+++;
+
+97 if(
+	gx_mod
+!=
+xmod
+)
+
+98 
+xmod
+=
+x_mod
+;
+
+99 if(
+	gy_mod
+==
+ymod
+)
+
+100 
+y_mod
+++;
+
+101 if(
+	gy_mod
+!=
+ymod
+)
+
+102 
+ymod
+=
+y_mod
+;
+
+104 
+	gg
+.
+fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+109 @
+Override
+
+
+110 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+111 
+	gresX
+ = 
+getWidth
+();
+
+112 
+	gresY
+ = 
+getHeight
+();
+
+114 for (int 
+	gi
+ = 0; i < 
+	gx
+.
+size
+(); i++) {
+
+115 
+drawPoint
+(
+g
+, 
+x
+.
+get
+(
+i
+), 
+y
+.get(i));
+
+118 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+121 for (int 
+	gi
+ = 
+offsetx
+; i < 
+	gresX
+ - 
+	goffsetx
+; i = 
+i
+ + 
+diff
+) {
+
+122 
+g
+.
+drawLine
+(
+i
+, 
+offsety
+, i, 
+resY
+ - offsety);
+
+125 for (int 
+	gi
+ = 
+offsety
+; i < 
+	gresY
+ - 
+	goffsety
+; i += 
+diff
+) {
+
+126 
+g
+.
+drawLine
+(
+offsetx
+, 
+i
+, 
+resX
+ - offsetx, i);
+
+129 
+	gg
+.
+drawLine
+(
+resX
+ - 
+offsetx
+, 
+resY
+ - 
+offsety
+, resX - offsetx, offsety);
+
+130 
+	gg
+.
+drawLine
+(
+resX
+ - 1 - 
+offsetx
+, 
+resY
+ - 
+offsety
+, offsetx, resY - offsety);
+
+131 if(
+	gcol
+ == 1){
+
+132 
+g
+.
+setColor
+(
+Color
+.
+RED
+);
+
+134 
+draw_Line
+(
+g
+);
+
+138 @
+Override
+
+
+139 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+141 if (
+	gae
+.
+getSource
+() == 
+b1
+) {
+
+142 
+diff
+++;
+
+143 
+repaint
+();
+
+144 } else if (
+	gae
+.
+getSource
+() == 
+b3
+) {
+
+145 
+diff
+--;
+
+146 
+repaint
+();
+
+147 } else if (
+	gae
+.
+getSource
+() == 
+b2
+) {
+
+148 
+x
+.
+clear
+();
+
+149 
+	gy
+.
+clear
+();
+
+150 
+	gdiff
+ = 10;
+
+151 
+	gcol
+ = 0;
+
+152 
+repaint
+();
+
+153 } else if (
+	gae
+.
+getSource
+() == 
+b
+) {
+
+154 
+col
+ = 1;
+
+155 
+repaint
+();
+
+160 void 
+drawPoint
+(
+Graphics
+ 
+g
+, int 
+xpos
+, int 
+ypos
+) {
+
+162 
+	gg
+.
+fillRect
+(((int) (
+xpos
+ - 
+offsetx
+) / 
+diff
+) * diff + offsetx, ((int) (
+ypos
+-
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+165 @
+Override
+
+
+166 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+167 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+168 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+169 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+170 
+repaint
+();
+
+173 @
+Override
+
+
+174 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+179 @
+Override
+
+
+180 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+184 @
+Override
+
+
+185 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+190 @
+Override
+
+
+191 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+195 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+199 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/ellipse/ellipse.java
+
+6 
+package
+ 
+	gellipse
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+9 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+11 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+17 
+public
+ 
+class
+ 
+ellipse
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+ {
+
+19 
+private
+ int 
+	gdiff
+ = 5;
+
+20 
+public
+ static int 
+	gresX
+ = 800;
+
+21 
+public
+ static int 
+	gresY
+ = 600;
+
+22 
+public
+ static int 
+	goffsetx
+ = 0;
+
+23 
+public
+ static int 
+	goffsety
+ = 40;
+
+24 int 
+	gcol
+ = 0;
+
+25 int 
+	grx
+, 
+	gry
+;
+
+26 
+Button
+ 
+	gb1
+;
+
+27 
+Button
+ 
+	gb2
+;
+
+28 
+Button
+ 
+	gb3
+;
+
+29 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+30 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+31 
+Label
+ 
+	gl1
+ = 
+new
+ Label("xc = ");
+
+32 
+Label
+ 
+	gl2
+ = 
+new
+ Label("yc = ");
+
+33 
+Label
+ 
+	gl3
+ = 
+new
+ Label("Radius rx = ");
+
+34 
+Label
+ 
+	gl4
+ = 
+new
+ Label("Radius ry = ");
+
+35 int 
+	gz1
+, 
+	gz2
+;
+
+36 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+37 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+38 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+39 
+TextField
+ 
+	gt4
+ = 
+new
+ TextField(3);
+
+40 
+Button
+ 
+	gb
+ = 
+new
+ Button("DRAW");
+
+42 @
+Override
+
+
+43 
+public
+ void 
+init
+() {
+
+44 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+45 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+46 
+	gb1
+ = 
+new
+ 
+Button
+();
+
+47 
+	gb1
+.
+setLabel
+("Zoom In");
+
+48 
+	gb2
+ = 
+new
+ 
+Button
+();
+
+49 
+	gb2
+.
+setLabel
+("Reset");
+
+50 
+	gb3
+ = 
+new
+ 
+Button
+();
+
+51 
+	gb3
+.
+setLabel
+("Zoom out");
+
+52 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+53 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+54 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+55 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+56 
+	gz1
+ = 
+z2
+ = 0;
+
+57 
+add
+(
+b1
+);
+
+58 
+add
+(
+b2
+);
+
+59 
+add
+(
+b3
+);
+
+60 
+add
+(
+l1
+);
+
+61 
+add
+(
+t1
+);
+
+62 
+add
+(
+l2
+);
+
+63 
+add
+(
+t2
+);
+
+64 
+add
+(
+l3
+);
+
+65 
+add
+(
+t3
+);
+
+66 
+add
+(
+l4
+);
+
+67 
+add
+(
+t4
+);
+
+68 
+add
+(
+b
+);
+
+69 
+	gb
+.
+addActionListener
+(
+this
+);
+
+72 int 
+	gtempx
+, 
+	gtempy
+;
+
+73 
+public
+ void 
+draw_ellipse
+(
+Graphics
+ 
+g
+) {
+
+74 int 
+	gX
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+75 int 
+	gY
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+76 
+	grx
+ = 
+Integer
+.
+parseInt
+(
+t3
+.
+getText
+());
+
+77 
+	gry
+ = 
+Integer
+.
+parseInt
+(
+t4
+.
+getText
+());
+
+78 if(
+	gz1
+ == 1)
+
+80 
+rx
+=
+tempx
+ + 10;
+
+81 
+	gry
+=
+tempy
+ + 10;
+
+83 if(
+	gz2
+ == 1)
+
+85 
+rx
+=
+tempx
+ - 10;
+
+86 
+	gry
+=
+tempy
+ - 10;
+
+88 int 
+	gx1
+ = 0;
+
+89 double 
+	gp
+ = 
+ry
+ * ry - 
+rx
+ * rx * ry + 0.25 * ry * ry;
+
+90 int 
+	gy1
+ = 
+ry
+;
+
+91 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+93 while (2*
+ry
+*ry*
+	gx1
+ < 2*
+rx
+*rx*
+	gy1
+)
+
+97 
+drawPoint
+(
+g
+, -
+x1
+ + 
+X
+, 
+y1
+ + 
+Y
+);
+
+98 
+drawPoint
+(
+g
+, -
+x1
+ + 
+X
+, -
+y1
+ + 
+Y
+);
+
+99 
+drawPoint
+(
+g
+, 
+x1
+ + 
+X
+, 
+y1
+ + 
+Y
+);
+
+100 
+drawPoint
+(
+g
+, 
+x1
+ + 
+X
+, -
+y1
+ + 
+Y
+);
+
+103 
+	gx1
+++;
+
+104 if (
+	gp
+ < 0)
+
+105 
+	gp
+ = 
+p
+ + 2*
+ry
+*ry*
+x1
+ + ry*ry;
+
+108 
+	gy1
+--;
+
+109 
+	gp
+ = 
+p
+ + 2*
+ry
+*ry*
+x1
+ - 2*
+rx
+*rx*
+y1
+ + ry*ry;
+
+113 double 
+	gp2
+ = 
+ry
+*ry*(
+x1
++1/2)*(x1+1/2) + 
+rx
+*rx*(
+y1
+-1)*(y1-1) - ry*ry*rx*rx;
+
+114 while (
+	gy1
+ > 0)
+
+116 
+drawPoint
+(
+g
+, 
+X
+-
+x1
+, 
+Y
++
+y1
+);
+
+117 
+drawPoint
+(
+g
+, 
+X
+-
+x1
+, 
+Y
+-
+y1
+);
+
+118 
+drawPoint
+(
+g
+, 
+X
++
+x1
+, 
+Y
++
+y1
+);
+
+119 
+drawPoint
+(
+g
+, 
+X
++
+x1
+, 
+Y
+-
+y1
+);
+
+120 
+	gy1
+--;
+
+121 if (
+	gp2
+ > 0)
+
+122 
+	gp2
+ = 
+p2
+ - (2*
+rx
+*rx*
+y1
+) + (
+ry
+*ry);
+
+125 
+	gx1
+++;
+
+126 
+	gp2
+ = 
+p2
+ + 2*
+ry
+*ry*
+x1
+ + 2*
+rx
+*rx*
+y1
+ + ry*ry;
+
+129 
+	gtempx
+ = 
+rx
+; 
+	gtempy
+ = 
+ry
+;
+
+132 @
+Override
+
+
+133 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+)
+
+135 
+	gresX
+ = 
+getWidth
+();
+
+136 
+	gresY
+ = 
+getHeight
+();
+
+138 for (int 
+	gi
+ = 0; i < 
+	gx
+.
+size
+(); i++) {
+
+139 
+drawPoint
+(
+g
+, 
+x
+.
+get
+(
+i
+), 
+y
+.get(i));
+
+142 
+	gg
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+145 for (int 
+	gi
+ = 
+offsetx
+; i < 
+	gresX
+ - 
+	goffsetx
+; i = 
+i
+ + 
+diff
+) {
+
+146 
+g
+.
+drawLine
+(
+i
+, 
+offsety
+, i, 
+resY
+ - offsety);
+
+149 for (int 
+	gi
+ = 
+offsety
+; i < 
+	gresY
+ - 
+	goffsety
+; i += 
+diff
+) {
+
+150 
+g
+.
+drawLine
+(
+offsetx
+, 
+i
+, 
+resX
+ - offsetx, i);
+
+153 
+	gg
+.
+drawLine
+(
+resX
+ - 
+offsetx
+, 
+resY
+ - 
+offsety
+, resX - offsetx, offsety);
+
+154 
+	gg
+.
+drawLine
+(
+resX
+ - 1 - 
+offsetx
+, 
+resY
+ - 
+offsety
+, offsetx, resY - offsety);
+
+156 if (
+	gcol
+ == 1)
+
+157 
+draw_ellipse
+(
+g
+);
+
+161 @
+Override
+
+
+162 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+164 if (
+	gae
+.
+getSource
+() == 
+b1
+)
+
+166 
+diff
+++;
+
+167 
+	gz1
+ = 1;
+
+168 
+	gz2
+ = 0;
+
+169 
+repaint
+();
+
+171 else if (
+	gae
+.
+getSource
+() == 
+b3
+)
+
+173 
+diff
+--;
+
+174 
+	gz2
+ = 1;
+
+175 
+	gz1
+ = 0;
+
+176 
+repaint
+();
+
+178 else if (
+	gae
+.
+getSource
+() == 
+b2
+)
+
+180 
+x
+.
+clear
+();
+
+181 
+	gy
+.
+clear
+();
+
+182 
+	gdiff
+ = 5;
+
+183 
+	gz1
+ = 0; 
+	gz2
+ = 0;
+
+184 
+	gcol
+ = 0;
+
+185 
+repaint
+();
+
+187 else if (
+	gae
+.
+getSource
+() == 
+b
+)
+
+189 
+col
+ = 1;
+
+190 
+repaint
+();
+
+195 void 
+drawPoint
+(
+Graphics
+ 
+g
+, int 
+xpos
+, int 
+ypos
+)
+
+198 
+	gg
+.
+fillRect
+(((int) (
+xpos
+ - 
+offsetx
+) / 
+diff
+) * diff + offsetx, ((int) (
+ypos
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+201 @
+Override
+
+
+202 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+203 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+204 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+205 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+206 
+repaint
+();
+
+209 @
+Override
+
+
+210 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+e
+) {
+
+214 @
+Override
+
+
+215 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+e
+) {
+
+219 @
+Override
+
+
+220 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+e
+) {
+
+224 @
+Override
+
+
+225 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+e
+) {
+
+	@src/labtest/Labtest.java
+
+6 
+package
+ 
+	glabtest
+;
+
+13 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+14 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+15 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+16 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+18 
+public
+ 
+class
+ 
+Labtest
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+ {
+
+20 
+private
+ int 
+	gdiff
+ = 2;
+
+21 
+public
+ static int 
+	gresX
+ = 800;
+
+22 
+public
+ static int 
+	gresY
+ = 600;
+
+23 
+public
+ static int 
+	goffsetx
+ = 0;
+
+24 
+public
+ static int 
+	goffsety
+ = 40;
+
+25 int 
+	gcol
+ = 0;
+
+26 int 
+	grx
+ , 
+	gry
+ ;
+
+27 int 
+	gX
+, 
+	gY
+;
+
+29 double 
+	gangle
+;
+
+30 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+31 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+32 
+Label
+ 
+	gl1
+ = 
+new
+ Label("Radius rx = ");
+
+33 
+Label
+ 
+	gl2
+ = 
+new
+ Label("Radius ry = ");
+
+34 
+Label
+ 
+	gl3
+ = 
+new
+ Label("Xc = ");
+
+35 
+Label
+ 
+	gl4
+ = 
+new
+ Label("Yc = ");
+
+36 
+Label
+ 
+	gl5
+ = 
+new
+ Label("angle = ");
+
+37 int 
+	gz1
+, 
+	gz2
+, 
+	gz3
+, 
+	gz4
+, 
+	gz5
+, 
+	gz6
+;
+
+38 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+39 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+40 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+41 
+TextField
+ 
+	gt4
+ = 
+new
+ TextField(3);
+
+42 
+TextField
+ 
+	gt5
+ = 
+new
+ TextField(3);
+
+47 
+Button
+ 
+	gb3
+ = 
+new
+ Button("Clockwise");
+
+48 
+Button
+ 
+	gb4
+ = 
+new
+ Button("Anticlockwise");
+
+50 
+Button
+ 
+	gb6
+ = 
+new
+ Button("Reset");
+
+52 @
+Override
+
+
+53 
+public
+ void 
+init
+() {
+
+54 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+55 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+58 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+59 
+	gb4
+.
+addActionListener
+(
+this
+);
+
+61 
+	gb6
+.
+addActionListener
+(
+this
+);
+
+62 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+63 
+	gz1
+ = 
+z2
+ = 
+z3
+ = 
+z4
+ = 
+z5
+ = 
+z6
+ = 0;
+
+66 
+add
+(
+b3
+);
+
+67 
+add
+(
+b4
+);
+
+69 
+add
+(
+b6
+);
+
+70 
+add
+(
+l1
+);
+
+71 
+add
+(
+t1
+);
+
+72 
+add
+(
+l2
+);
+
+73 
+add
+(
+t2
+);
+
+74 
+add
+(
+l3
+);
+
+75 
+add
+(
+t3
+);
+
+76 
+add
+(
+l4
+);
+
+77 
+add
+(
+t4
+);
+
+78 
+add
+(
+l5
+);
+
+79 
+add
+(
+t5
+);
+
+81 int 
+	gtempx
+, 
+	gtempy
+;
+
+82 int 
+	gcounter
+ = 1;
+
+83 
+public
+ void 
+draw_ellipse
+(
+Graphics2D
+ 
+g
+) {
+
+84 
+	grx
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+85 
+	gry
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+86 
+	gX
+ = 
+Integer
+.
+parseInt
+(
+t3
+.
+getText
+());
+
+87 
+	gY
+ = 
+Integer
+.
+parseInt
+(
+t4
+.
+getText
+());
+
+88 
+	gangle
+ = 
+Double
+.
+parseDouble
+(
+t5
+.
+getText
+());
+
+89 
+drawBresenhaum
+(
+g
+, 
+X
+ - 
+rx
+, 
+Y
+, X + rx, Y);
+
+91 
+	gtry
+{
+	gThread
+.
+sleep
+(400);}
+catch
+(
+Exception
+ 
+e
+){};
+
+92 
+drawBresenhaum
+(
+g
+, 
+X
+, 
+Y
+ - 
+ry
+, X, Y + ry);
+
+94 
+	gtry
+{
+	gThread
+.
+sleep
+(400);}
+catch
+(
+Exception
+ 
+e
+){};
+
+95 
+	gcounter
+++;
+
+96 
+	gg
+.
+drawRect
+(
+X
++
+rx
+, 
+Y
+-3, 6, 6);
+
+97 
+	gg
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+98 
+	gg
+.
+fillRect
+(
+X
++
+rx
+, 
+Y
+-3, 6, 6);
+
+99 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+101 int 
+	gx1
+ = 0;
+
+102 double 
+	gp
+ = 
+ry
+ * ry - 
+rx
+ * rx * ry + 0.25 * ry * ry;
+
+103 int 
+	gy1
+ = 
+ry
+;
+
+104 while (2 * 
+ry
+ * ry * 
+	gx1
+ < 2 * 
+rx
+ * rx * 
+	gy1
+) {
+
+107 
+drawPoint
+(
+g
+, (-
+x1
+ + 
+X
+), (
+y1
+ + 
+Y
+));
+
+108 
+drawPoint
+(
+g
+, (-
+x1
+ + 
+X
+), (-
+y1
+ + 
+Y
+));
+
+109 
+drawPoint
+(
+g
+, (
+x1
+ + 
+X
+), (
+y1
+ + 
+Y
+));
+
+110 
+drawPoint
+(
+g
+, (
+x1
+ + 
+X
+), (-
+y1
+ + 
+Y
+));
+
+113 
+	gx1
+++;
+
+114 if (
+	gp
+ < 0) {
+
+115 
+	gp
+ = 
+p
+ + 2 * 
+ry
+ * ry * 
+x1
+ + ry * ry;
+
+117 
+	gy1
+--;
+
+118 
+	gp
+ = 
+p
+ + 2 * 
+ry
+ * ry * 
+x1
+ - 2 * 
+rx
+ * rx * 
+y1
+ + ry * ry;
+
+121 double 
+	gp2
+ = 
+ry
+ * ry * (
+x1
+ + 1 / 2) * (x1 + 1 / 2) + 
+rx
+ * rx * (
+y1
+ - 1) * (y1 - 1) - ry * ry * rx * rx;
+
+122 while (
+	gy1
+ > 0) {
+
+123 
+drawPoint
+(
+g
+, 
+X
+ - 
+x1
+, 
+Y
+ + 
+y1
+);
+
+124 
+drawPoint
+(
+g
+, 
+X
+ - 
+x1
+, 
+Y
+ - 
+y1
+);
+
+125 
+drawPoint
+(
+g
+, 
+X
+ + 
+x1
+, 
+Y
+ + 
+y1
+);
+
+126 
+drawPoint
+(
+g
+, 
+X
+ + 
+x1
+, 
+Y
+ - 
+y1
+);
+
+127 
+	gy1
+--;
+
+128 if (
+	gp2
+ > 0) {
+
+129 
+	gp2
+ = 
+p2
+ - (2 * 
+rx
+ * rx * 
+y1
+) + (
+ry
+ * ry);
+
+131 
+	gx1
+++;
+
+132 
+	gp2
+ = 
+p2
+ + 2 * 
+ry
+ * ry * 
+x1
+ + 2 * 
+rx
+ * rx * 
+y1
+ + ry * ry;
+
+135 
+	gtempx
+ = 
+rx
+;
+
+136 
+	gtempy
+ = 
+ry
+;
+
+139 
+public
+ void 
+drawBresenhaum
+(
+Graphics2D
+ 
+g
+, int 
+X0
+, int 
+Y0
+, int 
+X1
+, int 
+Y1
+) {
+
+140 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+141 int 
+	gdx
+ = 
+X1
+ - 
+X0
+;
+
+142 int 
+	gdy
+ = 
+Y1
+ - 
+Y0
+;
+
+143 int 
+	gp
+ = 2 * 
+dy
+ - 
+dx
+;
+
+144 int 
+	gsteps
+;
+
+145 if (
+	gdx
+ > 
+	gdy
+) {
+
+146 
+	gsteps
+ = 
+dx
+;
+
+148 
+	gsteps
+ = 
+dy
+;
+
+150 int 
+	gx1
+, 
+	gy1
+;
+
+151 
+	gx1
+ = 
+X0
+;
+
+152 
+	gy1
+ = 
+Y0
+;
+
+154 for (int 
+	gk
+ = 0; k <= 
+steps
+; k++) {
+
+155 if (
+	gp
+ < 0) {
+
+156 
+	gp
+ = 
+p
+ + 2 * 
+dy
+;
+
+158 
+	gy1
+++;
+
+159 
+	gp
+ = 
+p
+ + 2 * 
+dy
+ - 2 * 
+dx
+;
+
+161 if (
+	gdx
+ < 0) {
+
+162 
+	gx1
+--;
+
+163 } else if (
+	gdx
+ > 0) {
+
+164 
+	gx1
+++;
+
+167 
+	gg
+.
+fillRect
+(
+x1
+ / 
+diff
+ * diff, ((
+y1
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+172 double 
+	gfrom
+ = 0;
+
+173 double 
+	gto
+ = 0;
+
+174 double 
+	ga
+ = 
+angle
+;
+
+176 int 
+	gc
+ = 0;
+
+177 double 
+	gx3
+ = 
+rx
+;
+
+178 double 
+	gy3
+ = 0;
+
+179 double 
+	gx4
+, 
+	gy4
+;
+
+181 int 
+	gpoc_iter
+ = 0;
+
+182 
+public
+ void 
+drawCirclebypoints
+(
+Graphics2D
+ 
+g
+)
+
+185 double 
+	go
+ = 
+angle
+;
+
+188 double 
+	galfa
+ = 
+Math
+.
+toRadians
+(
+o
+);
+
+189 double 
+	gx1
+ = 
+rx
+;
+
+190 double 
+	gy1
+ = 0;
+
+191 double 
+	gx2
+, 
+	gy2
+;
+
+193 for (int 
+	gi
+ = 0; i < 
+	gpoc_iter
+-1; i++)
+
+195 
+	gx2
+ = 
+x1
+ * 
+Math
+.
+cos
+(
+alfa
+) + 
+y1
+ * Math.
+sin
+(alfa);
+
+196 
+	gy2
+ = -
+x1
+ * 
+Math
+.
+sin
+(
+alfa
+) + 
+y1
+ * Math.
+cos
+(alfa);
+
+197 
+	gSystem
+.
+	gout
+.
+println
+((
+X
+ + 
+x2
+) + " " + (
+Y
+ + 
+y2
+));
+
+200 
+	gg
+.
+setColor
+(
+Color
+.
+red
+);
+
+201 
+	gg
+.
+drawLine
+((int)(
+X
+ + 
+x1
+),(int)(
+Y
+ + 
+y1
+), (int)(X + 
+x2
+), (int)(Y + 
+y2
+));
+
+204 
+	gx1
+ = 
+x2
+;
+
+205 
+	gy1
+ = 
+y2
+;
+
+208 
+public
+ void 
+drawCirclebypoints_anti
+(
+Graphics2D
+ 
+g
+) {
+
+210 double 
+	go
+ = 
+angle
+;
+
+211 
+	go
+ = -
+o
+;
+
+213 double 
+	galfa
+ = 
+Math
+.
+toRadians
+(
+o
+);
+
+214 double 
+	gx1
+ = 
+rx
+;
+
+215 double 
+	gy1
+ = 0;
+
+216 double 
+	gx2
+, 
+	gy2
+;
+
+218 for (int 
+	gi
+ = 0; i < 
+	gpoc_iter
+-1; i++)
+
+220 
+	gx2
+ = 
+x1
+ * 
+Math
+.
+cos
+(
+alfa
+) + 
+y1
+ * Math.
+sin
+(alfa);
+
+221 
+	gy2
+ = -
+x1
+ * 
+Math
+.
+sin
+(
+alfa
+) + 
+y1
+ * Math.
+cos
+(alfa);
+
+222 
+	gSystem
+.
+	gout
+.
+println
+((
+X
+ + 
+x2
+) + " " + (
+Y
+ + 
+y2
+));
+
+224 
+	gg
+.
+setColor
+(
+Color
+.
+red
+);
+
+225 
+	gg
+.
+drawLine
+((int)(
+X
+ + 
+x1
+),(int)(
+Y
+ + 
+y1
+), (int)(X + 
+x2
+), (int)(Y + 
+y2
+));
+
+228 
+	gx1
+ = 
+x2
+;
+
+229 
+	gy1
+ = 
+y2
+;
+
+232 double 
+	gp
+, 
+	gq
+, 
+	gr
+, 
+	gs
+;
+
+233 
+public
+ void 
+clockwise
+(
+Graphics2D
+ 
+g
+)
+
+235 
+drawCirclebypoints
+(
+g
+);
+
+238 
+public
+ void 
+anticlockwise
+(
+Graphics2D
+ 
+g
+)
+
+240 
+drawCirclebypoints_anti
+(
+g
+);
+
+243 @
+Override
+
+
+244 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+245 
+Graphics2D
+ 
+	gg2
+ = (Graphics2D) 
+g
+;
+
+246 
+	gg2
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+247 for (int 
+	gi
+ = 
+offsetx
+; i < 
+	gresX
+ - 
+	goffsetx
+; i = 
+i
+ + 
+diff
+) {
+
+248 
+g2
+.
+drawLine
+(
+i
+, 
+offsety
+, i, 
+resY
+ - offsety);
+
+251 for (int 
+	gi
+ = 
+offsety
+; i < 
+	gresY
+ - 
+	goffsety
+; i += 
+diff
+) {
+
+252 
+g2
+.
+drawLine
+(
+offsetx
+, 
+i
+, 
+resX
+ - offsetx, i);
+
+255 
+	gg2
+.
+drawLine
+(
+resX
+ - 
+offsetx
+, 
+resY
+ - 
+offsety
+, resX - offsetx, offsety);
+
+256 
+	gg2
+.
+drawLine
+(
+resX
+ - 1 - 
+offsetx
+, 
+resY
+ - 
+offsety
+, offsetx, resY - offsety);
+
+257 
+	gresX
+ = 
+getWidth
+();
+
+258 
+	gresY
+ = 
+getHeight
+();
+
+260 if (
+	gz1
+ == 1) {
+
+261 
+drawBresenhaum
+(
+g2
+, 
+X
+ - 
+rx
+, 
+Y
+, X + rx, Y);
+
+263 if (
+	gz2
+ == 1) {
+
+264 
+drawBresenhaum
+(
+g2
+, 
+X
+, 
+Y
+ - 
+ry
+, X, Y + ry);
+
+267 while (
+	gz3
+ == 1) {
+
+268 
+z3
+ = 0;
+
+269 
+	gg2
+.
+rotate
+(
+Math
+.
+toRadians
+(
+a
+), 300, 300);
+
+270 
+draw_ellipse
+(
+g2
+);
+
+271 
+	ga
+ += 
+angle
+;
+
+272 
+	gpoc_iter
+++;
+
+273 
+clockwise
+(
+g2
+);
+
+275 while (
+	gz4
+ == 1){
+
+276 
+z4
+ = 0;
+
+277 
+	gg2
+.
+rotate
+(
+Math
+.
+toRadians
+(
+a
+), 300, 300);
+
+278 
+	ga
+ -= 
+angle
+;
+
+279 
+draw_ellipse
+(
+g2
+);
+
+280 
+	gpoc_iter
+++;
+
+281 
+anticlockwise
+(
+g2
+);
+
+300 @
+Override
+
+
+301 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+312 if (
+	gae
+.
+getSource
+() == 
+b3
+) {
+
+314 
+z3
+ = 1;
+
+315 
+	gz4
+ = 0;
+
+316 
+repaint
+();
+
+318 else if (
+	gae
+.
+getSource
+() == 
+b4
+) {
+
+320 
+z4
+ = 1;
+
+321 
+	gz3
+ = 0;
+
+322 
+repaint
+();
+
+324 else if (
+	gae
+.
+getSource
+() == 
+b6
+) {
+
+325 
+x
+.
+clear
+();
+
+326 
+	gy
+.
+clear
+();
+
+327 
+	gdiff
+ = 2;
+
+328 
+	gz1
+ = 
+z2
+ = 
+z3
+ = 
+z4
+ = 
+z5
+ = 0;
+
+329 
+	gpoc_iter
+ = 0;
+
+330 
+repaint
+();
+
+340 void 
+drawPoint
+(
+Graphics2D
+ 
+g
+, int 
+xpos
+, int 
+ypos
+) {
+
+342 
+	gg
+.
+fillRect
+(((int) (
+xpos
+ - 
+offsetx
+) / 
+diff
+) * diff + offsetx, ((int) (
+ypos
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+345 @
+Override
+
+
+346 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+347 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+348 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+349 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+350 
+repaint
+();
+
+353 @
+Override
+
+
+354 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+e
+) {
+
+358 @
+Override
+
+
+359 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+e
+) {
+
+363 @
+Override
+
+
+364 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+e
+) {
+
+368 @
+Override
+
+
+369 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+e
+) {
+
+	@src/labtest/a.java
+
+6 
+package
+ 
+	glabtest
+;
+
+12 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+13 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+14 class 
+	cnewshape
+
+
+16 
+private
+ int 
+	mr
+;
+
+17 
+Graphics
+ 
+	mg1
+;
+
+18 
+	$newshape
+(
+Graphics
+ 
+g
+, int 
+ra
+){
+r
+ = ra;
+g1
+=g;}
+
+19 
+public
+ void 
+	$setVisible
+(){
+g1
+.
+	`drawOval
+(
+r
+, r, 50, 50);
+	}
+}
+
+20 
+public
+ void 
+	$setInvisible
+(){
+	}
+};
+
+23 
+public
+ class 
+	ca
+ 
+extends
+ 
+	mApplet
+
+
+25 
+private
+ int 
+	mdiff
+ = 2;
+
+26 
+public
+ static int 
+	mresX
+ = 800;
+
+27 
+public
+ static int 
+	mresY
+ = 600;
+
+28 
+public
+ static int 
+	moffsetx
+ = 0;
+
+29 
+public
+ static int 
+	moffsety
+ = 40;
+
+30 @
+Override
+
+
+31 
+public
+ void 
+	$init
+()
+
+33 
+this
+.
+	`setSize
+(
+resX
+, 
+resY
+);
+
+34 
+this
+.
+	`setBackground
+(
+Color
+.
+WHITE
+);
+
+36 @
+Override
+
+
+37 
+public
+ void 
+	$paint
+(
+Graphics
+ 
+g
+)
+
+40 
+try
+{
+
+43 
+Thread
+.
+	`sleep
+(10);
+
+44 
+newshape
+ 
+n
+ = 
+new
+ 
+	`newshape
+(
+g
+,300);
+
+45 
+n
+.
+	`setVisible
+();
+
+47 
+	`repaint
+();
+
+50 
+	`catch
+(
+Exception
+ 
+e
+){};
+
+51 
+	}
+}
+
+	@src/labtest/labtest2.java
+
+6 
+package
+ 
+	glabtest
+;
+
+13 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+14 
+import
+ 
+	gjava
+.
+	gapplet
+.*;
+
+15 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+16 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+18 
+public
+ 
+class
+ 
+labtest2
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+ {
+
+20 
+private
+ int 
+	gdiff
+ = 2;
+
+21 
+public
+ static int 
+	gresX
+ = 800;
+
+22 
+public
+ static int 
+	gresY
+ = 600;
+
+23 
+public
+ static int 
+	goffsetx
+ = 0;
+
+24 
+public
+ static int 
+	goffsety
+ = 40;
+
+25 int 
+	gcol
+ = 0;
+
+26 int 
+	grx
+ , 
+	gry
+ ;
+
+27 int 
+	gX
+ = 300;
+
+28 int 
+	gY
+ = 300;
+
+29 double 
+	gangle
+;
+
+30 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+31 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+32 
+Label
+ 
+	gl1
+ = 
+new
+ Label("Radius rx = ");
+
+33 
+Label
+ 
+	gl2
+ = 
+new
+ Label("Radius ry = ");
+
+34 
+Label
+ 
+	gl3
+ = 
+new
+ Label("Rotation angle = ");
+
+35 int 
+	gz1
+, 
+	gz2
+, 
+	gz3
+, 
+	gz4
+, 
+	gz5
+, 
+	gz6
+;
+
+36 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+37 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+38 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+42 
+Button
+ 
+	gb3
+ = 
+new
+ Button("Clockwise");
+
+43 
+Button
+ 
+	gb4
+ = 
+new
+ Button("Anticlockwise");
+
+45 
+Button
+ 
+	gb6
+ = 
+new
+ Button("Reset");
+
+47 @
+Override
+
+
+48 
+public
+ void 
+init
+() {
+
+49 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+50 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+53 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+54 
+	gb4
+.
+addActionListener
+(
+this
+);
+
+56 
+	gb6
+.
+addActionListener
+(
+this
+);
+
+57 
+	gthis
+.
+addMouseListener
+(
+this
+);
+
+58 
+	gz1
+ = 
+z2
+ = 
+z3
+ = 
+z4
+ = 
+z5
+ = 
+z6
+ = 0;
+
+61 
+add
+(
+b3
+);
+
+62 
+add
+(
+b4
+);
+
+64 
+add
+(
+b6
+);
+
+65 
+add
+(
+l1
+);
+
+66 
+add
+(
+t1
+);
+
+67 
+add
+(
+l2
+);
+
+68 
+add
+(
+t2
+);
+
+69 
+add
+(
+l3
+);
+
+70 
+add
+(
+t3
+);
+
+72 int 
+	gtempx
+, 
+	gtempy
+;
+
+74 
+public
+ void 
+draw_ellipse
+(
+Graphics2D
+ 
+g
+) {
+
+75 
+	grx
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+76 
+	gry
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+77 
+	gangle
+ = 
+Double
+.
+parseDouble
+(
+t3
+.
+getText
+());
+
+78 
+drawBresenhaum
+(
+g
+, 
+X
+ - 
+rx
+, 
+Y
+, X + rx, Y);
+
+79 
+drawBresenhaum
+(
+g
+, 
+X
+, 
+Y
+ - 
+ry
+, X, Y + ry);
+
+80 
+	gg
+.
+drawRect
+(
+X
++
+rx
+, 
+Y
+-3, 6, 6);
+
+81 
+	gg
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+82 
+	gg
+.
+fillRect
+(
+X
++
+rx
+, 
+Y
+-3, 6, 6);
+
+83 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+84 int 
+	gx1
+ = 0;
+
+85 double 
+	gp
+ = 
+ry
+ * ry - 
+rx
+ * rx * ry + 0.25 * ry * ry;
+
+86 int 
+	gy1
+ = 
+ry
+;
+
+87 while (2 * 
+ry
+ * ry * 
+	gx1
+ < 2 * 
+rx
+ * rx * 
+	gy1
+) {
+
+90 
+drawPoint
+(
+g
+, (-
+x1
+ + 
+X
+), (
+y1
+ + 
+Y
+));
+
+91 
+drawPoint
+(
+g
+, (-
+x1
+ + 
+X
+), (-
+y1
+ + 
+Y
+));
+
+92 
+drawPoint
+(
+g
+, (
+x1
+ + 
+X
+), (
+y1
+ + 
+Y
+));
+
+93 
+drawPoint
+(
+g
+, (
+x1
+ + 
+X
+), (-
+y1
+ + 
+Y
+));
+
+96 
+	gx1
+++;
+
+97 if (
+	gp
+ < 0) {
+
+98 
+	gp
+ = 
+p
+ + 2 * 
+ry
+ * ry * 
+x1
+ + ry * ry;
+
+100 
+	gy1
+--;
+
+101 
+	gp
+ = 
+p
+ + 2 * 
+ry
+ * ry * 
+x1
+ - 2 * 
+rx
+ * rx * 
+y1
+ + ry * ry;
+
+104 double 
+	gp2
+ = 
+ry
+ * ry * (
+x1
+ + 1 / 2) * (x1 + 1 / 2) + 
+rx
+ * rx * (
+y1
+ - 1) * (y1 - 1) - ry * ry * rx * rx;
+
+105 while (
+	gy1
+ > 0) {
+
+106 
+drawPoint
+(
+g
+, 
+X
+ - 
+x1
+, 
+Y
+ + 
+y1
+);
+
+107 
+drawPoint
+(
+g
+, 
+X
+ - 
+x1
+, 
+Y
+ - 
+y1
+);
+
+108 
+drawPoint
+(
+g
+, 
+X
+ + 
+x1
+, 
+Y
+ + 
+y1
+);
+
+109 
+drawPoint
+(
+g
+, 
+X
+ + 
+x1
+, 
+Y
+ - 
+y1
+);
+
+110 
+	gy1
+--;
+
+111 if (
+	gp2
+ > 0) {
+
+112 
+	gp2
+ = 
+p2
+ - (2 * 
+rx
+ * rx * 
+y1
+) + (
+ry
+ * ry);
+
+114 
+	gx1
+++;
+
+115 
+	gp2
+ = 
+p2
+ + 2 * 
+ry
+ * ry * 
+x1
+ + 2 * 
+rx
+ * rx * 
+y1
+ + ry * ry;
+
+118 
+	gtempx
+ = 
+rx
+;
+
+119 
+	gtempy
+ = 
+ry
+;
+
+122 
+public
+ void 
+drawBresenhaum
+(
+Graphics2D
+ 
+g
+, int 
+X0
+, int 
+Y0
+, int 
+X1
+, int 
+Y1
+) {
+
+123 
+	gg
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+124 int 
+	gdx
+ = 
+X1
+ - 
+X0
+;
+
+125 int 
+	gdy
+ = 
+Y1
+ - 
+Y0
+;
+
+126 int 
+	gp
+ = 2 * 
+dy
+ - 
+dx
+;
+
+127 int 
+	gsteps
+;
+
+128 if (
+	gdx
+ > 
+	gdy
+) {
+
+129 
+	gsteps
+ = 
+dx
+;
+
+131 
+	gsteps
+ = 
+dy
+;
+
+133 int 
+	gx1
+, 
+	gy1
+;
+
+134 
+	gx1
+ = 
+X0
+;
+
+135 
+	gy1
+ = 
+Y0
+;
+
+137 for (int 
+	gk
+ = 0; k <= 
+steps
+; k++) {
+
+138 if (
+	gp
+ < 0) {
+
+139 
+	gp
+ = 
+p
+ + 2 * 
+dy
+;
+
+141 
+	gy1
+++;
+
+142 
+	gp
+ = 
+p
+ + 2 * 
+dy
+ - 2 * 
+dx
+;
+
+144 if (
+	gdx
+ < 0) {
+
+145 
+	gx1
+--;
+
+146 } else if (
+	gdx
+ > 0) {
+
+147 
+	gx1
+++;
+
+150 
+	gg
+.
+fillRect
+(
+x1
+ / 
+diff
+ * diff, ((
+y1
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+155 double 
+	gfrom
+ = 0;
+
+156 double 
+	gto
+ = 0;
+
+157 double 
+	ga
+ = 
+angle
+;
+
+159 
+public
+ void 
+getpoint
+(
+Graphics2D
+ 
+g
+) {
+
+160 
+	gg
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+161 double 
+	gx1
+, 
+	gy1
+, 
+	gx2
+, 
+	gy2
+;
+
+162 
+	gx1
+ = 
+rx
+;
+
+163 
+	gy1
+ = 0;
+
+164 
+	gx2
+ = 
+x1
+*
+Math
+.
+cos
+(
+angle
+)+
+y1
+*Math.
+sin
+(angle);
+
+165 
+	gy2
+ = -
+x1
+*
+Math
+.
+sin
+(
+angle
+)+
+y1
+*Math.
+cos
+(angle);
+
+166 
+	gx1
+ = 
+x2
+;
+
+167 
+	gy1
+ = 
+y2
+;
+
+169 
+	gg
+.
+drawLine
+((int)
+x1
+, (int)
+y1
+, (int)
+x2
+, (int)
+y2
+);
+
+173 int 
+	gpoc_iter
+ = 0;
+
+174 
+public
+ void 
+drawCirclebypoints
+(
+Graphics2D
+ 
+g
+) {
+
+176 double 
+	go
+ = 
+angle
+;
+
+178 if(
+	gpoc_iter
+ < 0)
+
+179 
+	gpoc_iter
+ = -
+poc_iter
+;
+
+180 double 
+	galfa
+ = 
+Math
+.
+toRadians
+(
+o
+);
+
+181 double 
+	gx1
+ = 
+rx
+;
+
+182 double 
+	gy1
+ = 0;
+
+183 double 
+	gx2
+, 
+	gy2
+;
+
+185 for (int 
+	gi
+ = 0; i < 
+	gpoc_iter
+-1; i++)
+
+187 
+	gx2
+ = 
+x1
+ * 
+Math
+.
+cos
+(
+alfa
+) + 
+y1
+ * Math.
+sin
+(alfa);
+
+188 
+	gy2
+ = -
+x1
+ * 
+Math
+.
+sin
+(
+alfa
+) + 
+y1
+ * Math.
+cos
+(alfa);
+
+189 
+	gSystem
+.
+	gout
+.
+println
+((
+X
+ + 
+x2
+) + " " + (
+Y
+ + 
+y2
+));
+
+191 
+	gx
+.
+add
+((int)(
+X
+ + 
+x2
+));
+
+192 
+	gy
+.
+add
+((int)(
+Y
+ + 
+y2
+));
+
+193 
+	gg
+.
+setColor
+(
+Color
+.
+red
+);
+
+195 
+	gx1
+ = 
+x2
+;
+
+196 
+	gy1
+ = 
+y2
+;
+
+199 
+public
+ void 
+drawCirclebypoints_anti
+(
+Graphics2D
+ 
+g
+) {
+
+201 double 
+	go
+ = 
+angle
+;
+
+202 
+	go
+ = -
+o
+;
+
+203 double 
+	galfa
+ = 
+Math
+.
+toRadians
+(
+o
+);
+
+204 double 
+	gx1
+ = 
+rx
+;
+
+205 double 
+	gy1
+ = 0;
+
+206 double 
+	gx2
+, 
+	gy2
+;
+
+207 if(
+	gpoc_iter
+ < 0)
+
+208 
+	gpoc_iter
+ = -
+poc_iter
+;
+
+209 for (int 
+	gi
+ = 0; i < 
+	gpoc_iter
+-1; i++)
+
+211 
+	gx2
+ = 
+x1
+ * 
+Math
+.
+cos
+(
+alfa
+) + 
+y1
+ * Math.
+sin
+(alfa);
+
+212 
+	gy2
+ = -
+x1
+ * 
+Math
+.
+sin
+(
+alfa
+) + 
+y1
+ * Math.
+cos
+(alfa);
+
+213 
+	gSystem
+.
+	gout
+.
+println
+((
+X
+ + 
+x2
+) + " " + (
+Y
+ + 
+y2
+));
+
+215 
+	gg
+.
+setColor
+(
+Color
+.
+red
+);
+
+218 
+	gx
+.
+add
+((int)(
+X
+ + 
+x2
+));
+
+219 
+	gy
+.
+add
+((int)(
+Y
+ + 
+y2
+));
+
+220 
+	gx1
+ = 
+x2
+;
+
+221 
+	gy1
+ = 
+y2
+;
+
+224 int 
+	gcount
+ = 0;
+
+225 
+public
+ void 
+clockwise
+(
+Graphics2D
+ 
+g
+)
+
+227 
+drawCirclebypoints
+(
+g
+);
+
+230 
+public
+ void 
+anticlockwise
+(
+Graphics2D
+ 
+g
+)
+
+232 
+drawCirclebypoints_anti
+(
+g
+);
+
+235 @
+Override
+
+
+236 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+237 
+Graphics2D
+ 
+	gg2
+ = (Graphics2D) 
+g
+;
+
+238 
+	gg2
+.
+setColor
+(
+Color
+.
+BLACK
+);
+
+239 for (int 
+	gi
+ = 
+offsetx
+; i < 
+	gresX
+ - 
+	goffsetx
+; i = 
+i
+ + 
+diff
+) {
+
+240 
+g2
+.
+drawLine
+(
+i
+, 
+offsety
+, i, 
+resY
+ - offsety);
+
+243 for (int 
+	gi
+ = 
+offsety
+; i < 
+	gresY
+ - 
+	goffsety
+; i += 
+diff
+) {
+
+244 
+g2
+.
+drawLine
+(
+offsetx
+, 
+i
+, 
+resX
+ - offsetx, i);
+
+247 
+	gg2
+.
+drawLine
+(
+resX
+ - 
+offsetx
+, 
+resY
+ - 
+offsety
+, resX - offsetx, offsety);
+
+248 
+	gg2
+.
+drawLine
+(
+resX
+ - 1 - 
+offsetx
+, 
+resY
+ - 
+offsety
+, offsetx, resY - offsety);
+
+249 
+	gresX
+ = 
+getWidth
+();
+
+250 
+	gresY
+ = 
+getHeight
+();
+
+252 if (
+	gz1
+ == 1) {
+
+253 
+drawBresenhaum
+(
+g2
+, 
+X
+ - 
+rx
+, 
+Y
+, X + rx, Y);
+
+255 if (
+	gz2
+ == 1) {
+
+256 
+drawBresenhaum
+(
+g2
+, 
+X
+, 
+Y
+ - 
+ry
+, X, Y + ry);
+
+259 while (
+	gz3
+ == 1) {
+
+260 
+z3
+ = 0;
+
+261 
+	gg2
+.
+rotate
+(
+Math
+.
+toRadians
+(
+a
+), 300, 300);
+
+262 
+draw_ellipse
+(
+g2
+);
+
+263 
+	ga
+ += 
+angle
+;
+
+264 
+	gpoc_iter
+++;
+
+265 
+clockwise
+(
+g2
+);
+
+267 while (
+	gz4
+ == 1){
+
+268 
+z4
+ = 0;
+
+269 
+	gg2
+.
+rotate
+(
+Math
+.
+toRadians
+(
+a
+), 300, 300);
+
+270 
+	ga
+ -= 
+angle
+;
+
+271 
+draw_ellipse
+(
+g2
+);
+
+272 
+	gpoc_iter
+--;
+
+273 
+anticlockwise
+(
+g2
+);
+
+275 
+	gSystem
+.
+	gout
+.
+println
+(
+poc_iter
+);
+
+276 for(int 
+	gi
+ = 0; i < 
+	gx
+.
+size
+(); i++)
+
+277 
+	gg
+.
+drawLine
+(
+x
+.
+get
+(
+i
+), 
+y
+.get(i), x.get(i+1), y.get(i+1));
+
+295 @
+Override
+
+
+296 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+307 if (
+	gae
+.
+getSource
+() == 
+b3
+) {
+
+309 
+z3
+ = 1;
+
+310 
+	gz4
+ = 0;
+
+311 
+repaint
+();
+
+313 else if (
+	gae
+.
+getSource
+() == 
+b4
+) {
+
+315 
+z4
+ = 1;
+
+316 
+	gz3
+ = 0;
+
+317 
+repaint
+();
+
+319 else if (
+	gae
+.
+getSource
+() == 
+b6
+) {
+
+320 
+x
+.
+clear
+();
+
+321 
+	gy
+.
+clear
+();
+
+322 
+	gdiff
+ = 2;
+
+323 
+	gz1
+ = 
+z2
+ = 
+z3
+ = 
+z4
+ = 
+z5
+ = 0;
+
+324 
+	gpoc_iter
+ = 0;
+
+325 
+repaint
+();
+
+335 void 
+drawPoint
+(
+Graphics2D
+ 
+g
+, int 
+xpos
+, int 
+ypos
+) {
+
+337 
+	gg
+.
+fillRect
+(((int) (
+xpos
+ - 
+offsetx
+) / 
+diff
+) * diff + offsetx, ((int) (
+ypos
+ - 
+offsety
+) / diff) * diff + offsety, diff, diff);
+
+340 @
+Override
+
+
+341 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+342 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+343 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+344 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+345 
+repaint
+();
+
+348 @
+Override
+
+
+349 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+e
+) {
+
+353 @
+Override
+
+
+354 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+e
+) {
+
+358 @
+Override
+
+
+359 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+e
+) {
+
+363 @
+Override
+
+
+364 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+e
+) {
+
+	@src/test/NewClass.java
+
+6 
+package
+ 
+	gtest
+;
+
+7 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+8 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gButton
+;
+
+9 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gColor
+;
+
+10 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gGraphics
+;
+
+11 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionEvent
+;
+
+12 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.
+	gActionListener
+;
+
+13 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+18 
+public
+ class 
+	cNewClass
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	mActionListener
+{
+
+19 
+private
+ 
+final
+ int 
+	mmajor_x
+=400;
+
+20 
+private
+ 
+final
+ int 
+	mmajor_y
+=300;
+
+21 
+private
+ 
+final
+ int 
+	mmajor_length
+=400;
+
+22 
+private
+ 
+final
+ int 
+	mminor_length
+=100;
+
+23 
+private
+ 
+final
+ int 
+	mcenter_x
+=
+major_x
++(
+major_length
+)/2;
+
+24 
+private
+ 
+final
+ int 
+	mcenter_y
+=
+major_y
+;
+
+25 
+private
+ 
+final
+ int 
+	mdiff
+=2;
+
+26 
+	mArrayList
+<
+	mInteger
+> 
+	mx
+=
+new
+ 
+ArrayList
+<>();
+
+27 
+	mArrayList
+<
+	mInteger
+> 
+	my
+=
+new
+ 
+ArrayList
+<>();
+
+28 
+	mArrayList
+<
+	mInteger
+> 
+	mf_x
+=
+new
+ 
+ArrayList
+<>();
+
+29 
+	mArrayList
+<
+	mInteger
+> 
+	mf_y
+=
+new
+ 
+ArrayList
+<>();
+
+30 
+private
+ int 
+	mangle
+=0;
+
+31 
+private
+ int 
+	mprecision_angle
+=5;
+
+32 
+Button
+ 
+	mb1
+;
+
+33 
+Button
+ 
+	mb2
+;
+
+34 
+private
+ int 
+	mflag
+=0;
+
+35 @
+Override
+
+
+36 
+public
+ void 
+	$init
+(){
+
+37 
+b1
+=
+new
+ 
+	`Button
+("anti clock wise");
+
+38 
+b2
+=
+new
+ 
+	`Button
+("clock wise");
+
+39 
+b1
+.
+	`addActionListener
+(
+this
+);
+
+40 
+b2
+.
+	`addActionListener
+(
+this
+);
+
+41 
+	`add
+(
+b1
+);
+
+42 
+	`add
+(
+b2
+);
+
+44 @
+Override
+
+
+45 
+public
+ void 
+	$paint
+(
+Graphics
+ 
+g
+){
+
+48 
+	`draw_circle
+(
+g
+,
+center_x
+,
+center_y
+,
+major_length
+/2);
+
+49 
+g
+.
+	`setColor
+(
+Color
+.
+GREEN
+);
+
+50 
+g
+.
+	`fillRect
+(
+center_x
+,
+center_y
+,8,8);
+
+51 
+g
+.
+	`setColor
+(
+Color
+.
+BLUE
+);
+
+52 
+	`draw_ellipse
+(
+g
+,
+center_x
+,
+center_y
+,
+major_length
+/2,
+minor_length
+);
+
+53 if(
+flag
+==0)
+
+54 
+	`translate
+(
+x
+,
+y
+,
+angle
+);
+
+55 else if(
+flag
+==1)
+
+56 
+	`translate
+(
+x
+,
+y
+,-
+angle
+);
+
+57 
+	`shot
+(
+g
+,
+f_x
+,
+f_y
+);
+
+58 
+angle
+=(angle+
+precision_angle
+)%360;
+
+59 
+x
+.
+	`clear
+();
+
+60 
+y
+.
+	`clear
+();
+
+61 
+f_x
+.
+	`clear
+();
+
+62 
+f_y
+.
+	`clear
+();
+
+63 
+try
+ {
+
+64 
+Thread
+.
+	`sleep
+(100);
+
+65 } 
+	`catch
+ (
+Exception
+ 
+e
+) {
+
+67 
+System
+.
+out
+.
+	`println
+("I cannot sleep please give me some work :(( ");
+
+70 
+	}
+}
+
+72 
+private
+ void 
+	$draw_ellipse
+(
+Graphics
+ 
+g
+, 
+Integer
+ 
+x_c
+, Integer 
+y_c
+, int 
+r_x
+, int 
+r_y
+) {
+
+73 int 
+rx_sq
+=
+r_x
+*r_x;
+
+74 int 
+ry_sq
+=
+r_y
+*r_y;
+
+75 int 
+X
+=0;
+
+76 int 
+Y
+=
+r_y
+;
+
+77 int 
+p_x
+=0;
+
+78 int 
+p_y
+=2*
+rx_sq
+*
+Y
+;
+
+79 
+	`draw
+(
+g
+,
+x_c
+,
+y_c
+,
+X
+,
+Y
+);
+
+80 double 
+p
+=
+ry_sq
+-(
+rx_sq
+*
+r_y
+)+(0.25*rx_sq);
+
+81 while(
+p_x
+<
+p_y
+){
+
+82 
+X
+++;
+
+83 
+p_x
++=2*
+ry_sq
+;
+
+84 if(
+p
+<0){
+
+85 
+p
++=
+ry_sq
++
+p_x
+;
+
+88 
+Y
+--;
+
+89 
+p_y
+-=2*
+rx_sq
+;
+
+90 
+p
++=
+ry_sq
++
+p_x
+-
+p_y
+;
+
+92 
+	`draw
+(
+g
+,
+x_c
+,
+y_c
+,
+X
+,
+Y
+);
+
+94 
+p
+=
+ry_sq
+*(
+X
++0.5)*(X+0.5)+
+rx_sq
+*(
+Y
+-1)*(Y-1)-rx_sq*ry_sq;
+
+95 while(
+Y
+>0){
+
+96 
+Y
+--;
+
+97 
+p_y
+-=2*
+rx_sq
+;
+
+98 if(
+p
+>0){
+
+99 
+p
++=
+rx_sq
+-
+p_y
+;
+
+102 
+X
+++;
+
+103 
+p_x
++=2*
+ry_sq
+;
+
+104 
+p
++=
+rx_sq
+-(
+p_y
+-
+p_x
+);
+
+106 
+	`draw
+(
+g
+,
+x_c
+,
+y_c
+,
+X
+,
+Y
+);
+
+108 
+	}
+}
+
+110 
+private
+ void 
+	$draw
+(
+Graphics
+ 
+g
+,
+Integer
+ 
+x_c
+, Integer 
+y_c
+, int 
+X
+, int 
+Y
+) {
+
+111 int 
+x_mod
+,
+y_mod
+;
+
+112 
+x_mod
+=
+x_c
++
+X
+;
+
+113 
+y_mod
+=
+y_c
++
+Y
+;
+
+114 
+x
+.
+	`add
+(
+x_mod
+);
+
+115 
+y
+.
+	`add
+(
+y_mod
+);
+
+116 
+x_mod
+=
+x_c
+-
+X
+;
+
+117 
+y_mod
+=
+y_c
++
+Y
+;
+
+118 
+x
+.
+	`add
+(
+x_mod
+);
+
+119 
+y
+.
+	`add
+(
+y_mod
+);
+
+120 
+x_mod
+=
+x_c
++
+X
+;
+
+121 
+y_mod
+=
+y_c
+-
+Y
+;
+
+122 
+x
+.
+	`add
+(
+x_mod
+);
+
+123 
+y
+.
+	`add
+(
+y_mod
+);
+
+124 
+x_mod
+=
+x_c
+-
+X
+;
+
+125 
+y_mod
+=
+y_c
+-
+Y
+;
+
+126 
+x
+.
+	`add
+(
+x_mod
+);
+
+127 
+y
+.
+	`add
+(
+y_mod
+);
+
+128 
+	}
+}
+
+130 
+private
+ void 
+translate
+(
+ArrayList
+<
+Integer
+> 
+x
+, ArrayList<Integer> 
+y
+,int 
+ang
+) {
+
+131 int 
+	gX
+,
+	gY
+;
+
+132 for(int 
+	gi
+=0;i<
+	gx
+.
+size
+();i++){
+
+134 
+	gX
+=(int)(
+center_x
++(
+x
+.
+get
+(
+i
+)-center_x)*(
+Math
+.
+cos
+(Math.
+toRadians
+(
+ang
+)))+(
+y
+.get(i)-
+center_y
+)*(Math.
+sin
+(Math.toRadians(ang))));
+
+135 
+	gY
+=(int)(
+center_y
++(
+y
+.
+get
+(
+i
+)-center_y)*(
+Math
+.
+cos
+(Math.
+toRadians
+(
+ang
+)))-(
+x
+.get(i)-
+center_x
+)*(Math.
+sin
+(Math.toRadians(ang))));
+
+136 
+	gf_x
+.
+add
+(
+X
+);
+
+137 
+	gf_y
+.
+add
+(
+Y
+);
+
+142 
+private
+ void 
+shot
+(
+Graphics
+ 
+g
+,
+ArrayList
+<
+Integer
+> 
+f_x
+, ArrayList<Integer> 
+f_y
+) {
+
+143 for(int 
+	gi
+=0;i<
+	gf_x
+.
+size
+();i++){
+
+144 
+	gg
+.
+fillRect
+(
+f_x
+.
+get
+(
+i
+),
+f_y
+.get(i),
+diff
+,diff);
+
+148 
+private
+ void 
+	$draw_circle
+(
+Graphics
+ 
+g
+, int 
+x0
+, int 
+y0
+,int 
+r
+) {
+
+149 int 
+x
+ = 0;
+
+150 int 
+y
+ = 
+r
+;
+
+151 int 
+d
+ = 1 - 
+r
+;
+
+152 int 
+x_mod
+, 
+y_mod
+;
+
+153 
+g
+.
+	`setColor
+(
+Color
+.
+red
+);
+
+154 while (
+x
+ <= 
+y
+) {
+
+155 
+x_mod
+ = 
+x0
+ + 
+x
+;
+
+156 
+y_mod
+ = 
+y0
+ + 
+y
+;
+
+157 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+158 
+x_mod
+ = 
+x0
+ + 
+x
+;
+
+159 
+y_mod
+ = 
+y0
+ - 
+y
+;
+
+160 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+161 
+x_mod
+ = 
+x0
+ - 
+x
+;
+
+162 
+y_mod
+ = 
+y0
+ + 
+y
+;
+
+163 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+164 
+x_mod
+ = 
+x0
+ - 
+x
+;
+
+165 
+y_mod
+ = 
+y0
+ - 
+y
+;
+
+166 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+169 
+x_mod
+ = 
+x0
+ + 
+y
+;
+
+170 
+y_mod
+ = 
+y0
+ + 
+x
+;
+
+171 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+172 
+x_mod
+ = 
+x0
+ + 
+y
+;
+
+173 
+y_mod
+ = 
+y0
+ - 
+x
+;
+
+174 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+175 
+x_mod
+ = 
+x0
+ - 
+y
+;
+
+176 
+y_mod
+ = 
+y0
+ + 
+x
+;
+
+177 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+178 
+x_mod
+ = 
+x0
+ - 
+y
+;
+
+179 
+y_mod
+ = 
+y0
+ - 
+x
+;
+
+180 
+g
+.
+	`fillRect
+(
+x_mod
+, 
+y_mod
+, 
+diff
+, diff);
+
+181 if (
+d
+ > 0) {
+
+182 
+d
+ += 2 * 
+x
+ + 3 - (2 * 
+y
+ - 2);
+
+183 
+y
+ = y - 1;
+
+186 
+d
+ += 2 * 
+x
+ + 3;
+
+189 
+x
+++;
+
+191 
+	}
+}
+
+193 @
+Override
+
+
+194 
+public
+ void 
+	$actionPerformed
+(
+ActionEvent
+ 
+e
+) {
+
+195 if(
+e
+.
+	`getSource
+()==
+b1
+){
+
+196 
+flag
+=0;
+
+197 
+	`repaint
+();
+
+199 if(
+e
+.
+	`getSource
+()==
+b2
+){
+
+200 
+flag
+=1;
+
+201 
+	`repaint
+();
+
+203 
+	}
+}
+
+	@src/transformation/Recttransform.java
+
+1 
+package
+ 
+	gtransformation
+;
+
+17 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+18 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+19 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+20 
+import
+ static 
+	gjava
+.
+	glang
+.
+	gSystem
+.
+	gexit
+;
+
+21 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+24 
+public
+ 
+class
+ 
+Recttransform
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+, 
+	gMouseMotionListener
+ {
+
+26 
+private
+ int 
+	gdiff
+ = 5;
+
+27 
+public
+ static int 
+	gresX
+ = 800;
+
+28 
+public
+ static int 
+	gresY
+ = 600;
+
+29 
+public
+ static int 
+	goffset
+ = 35;
+
+30 
+private
+ int 
+	gclick
+ = 0;
+
+32 
+Label
+ 
+	gl1
+ = 
+new
+ Label("Arb x = ");
+
+33 
+Label
+ 
+	gl2
+ = 
+new
+ Label("Arb y = ");
+
+34 
+Label
+ 
+	gl3
+ = 
+new
+ Label("x = ");
+
+35 
+Label
+ 
+	gl4
+ = 
+new
+ Label("y = ");
+
+36 
+Label
+ 
+	gl5
+ = 
+new
+ Label("sx = ");
+
+37 
+Label
+ 
+	gl6
+ = 
+new
+ Label("sy = ");
+
+38 
+Label
+ 
+	gl7
+ = 
+new
+ Label("angle = ");
+
+39 int 
+	gcol
+ = 0;
+
+40 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+41 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+42 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+43 
+TextField
+ 
+	gt4
+ = 
+new
+ TextField(3);
+
+44 
+TextField
+ 
+	gt5
+ = 
+new
+ TextField(3);
+
+45 
+TextField
+ 
+	gt6
+ = 
+new
+ TextField(3);
+
+46 
+TextField
+ 
+	gt7
+ = 
+new
+ TextField(3);
+
+47 
+Button
+ 
+	gb1
+ = 
+new
+ Button("Translate");
+
+48 
+Button
+ 
+	gb2
+ = 
+new
+ Button("Scale");
+
+49 
+Button
+ 
+	gb3
+ = 
+new
+ Button("Rotate-origin");
+
+50 
+Button
+ 
+	gb5
+ = 
+new
+ Button("Rotate-arbitrary");
+
+51 
+Button
+ 
+	gb4
+ = 
+new
+ Button("Reset");
+
+53 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+54 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+55 int 
+	gt
+ = 0, 
+	gr
+ = 0, 
+	gs
+ = 0, 
+	gr1
+ = 0;
+
+56 int 
+	gX
+ = 400;
+
+57 int 
+	gY
+ = 300;
+
+58 int 
+	gl
+ = 50;
+
+59 int 
+	gw
+ = 40;
+
+60 @
+Override
+
+
+61 
+public
+ void 
+init
+() {
+
+62 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+63 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+64 
+add
+(
+b1
+);
+
+65 
+add
+(
+b2
+);
+
+66 
+add
+(
+b3
+);
+
+67 
+add
+(
+b5
+);
+
+68 
+add
+(
+b4
+);
+
+69 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+70 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+71 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+72 
+	gb4
+.
+addActionListener
+(
+this
+);
+
+73 
+	gb5
+.
+addActionListener
+(
+this
+);
+
+74 
+add
+(
+l3
+); add(
+t3
+);
+
+75 
+add
+(
+l4
+); add(
+t4
+);
+
+76 
+add
+(
+l5
+); add(
+t5
+);
+
+77 
+add
+(
+l6
+); add(
+t6
+);
+
+78 
+add
+(
+l7
+); add(
+t7
+);
+
+79 
+add
+(
+l1
+); add(
+t1
+);
+
+80 
+add
+(
+l2
+); add(
+t2
+);
+
+82 
+Graphics
+ 
+	gg1
+;
+
+83 int 
+	gx0
+ = 300; int 
+	gy0
+ = 300;
+
+84 @
+Override
+
+
+85 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+86 
+	gresX
+ = 
+getWidth
+();
+
+87 
+	gresY
+ = 
+getHeight
+();
+
+90 
+	gg1
+ = 
+g
+;
+
+91 
+	gg
+.
+fillRect
+(
+X
+, 
+Y
+, 10, 10);
+
+92 
+	gg
+.
+setColor
+(
+Color
+.
+red
+);
+
+93 
+	gg
+.
+fillRect
+(
+x0
+, 
+y0
+, 
+l
+, 
+w
+);
+
+95 if(
+	gt
+ == 1)
+
+96 
+transform
+();
+
+97 if(
+	gs
+ == 1)
+
+98 
+scale
+();
+
+99 if(
+	gr
+ == 1)
+
+100 
+rotate
+();
+
+101 if(
+	gr1
+ == 1)
+
+102 
+rotate1
+();
+
+106 void 
+draw
+(int 
+t0
+, int 
+t1
+, int 
+length
+, int 
+width
+)
+
+108 
+	gg1
+.
+drawRect
+(
+t0
+, 
+t1
+, 
+length
+, 
+width
+);
+
+109 
+	gg1
+.
+fillRect
+(
+t0
+, 
+t1
+, 
+length
+, 
+width
+);
+
+111 @
+Override
+
+
+112 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+)
+
+114 if (
+	gae
+.
+getSource
+() == 
+b4
+)
+
+116 
+t
+ = 
+s
+ = 
+r
+ = 
+r1
+ = 0;
+
+117 
+repaint
+();
+
+119 if(
+	gae
+.
+getSource
+() == 
+b1
+)
+
+121 
+t
+ = 1;
+
+122 
+repaint
+();
+
+124 else if(
+	gae
+.
+getSource
+() == 
+b2
+)
+
+126 
+s
+ = 1;
+
+127 
+repaint
+();
+
+129 else if(
+	gae
+.
+getSource
+() == 
+b3
+)
+
+131 
+r
+ = 1;
+
+132 
+repaint
+();
+
+134 else if(
+	gae
+.
+getSource
+() == 
+b5
+)
+
+136 
+r1
+ = 1;
+
+137 
+repaint
+();
+
+141 
+public
+ void 
+transform
+()
+
+143 int 
+	gtx
+ = 
+Integer
+.
+parseInt
+(
+t3
+.
+getText
+());
+
+144 int 
+	gty
+ = 
+Integer
+.
+parseInt
+(
+t4
+.
+getText
+());
+
+145 int 
+	gt0
+, 
+	gt1
+;
+
+146 
+	gt0
+ = 
+x0
+ + 
+tx
+;
+
+147 
+	gt1
+ = 
+y0
+ + 
+ty
+;
+
+148 
+	gg1
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+149 
+draw
+(
+t0
+, 
+t1
+, 
+l
+, 
+w
+);
+
+152 
+public
+ void 
+scale
+()
+
+154 double 
+	gsx
+ = 
+Double
+.
+parseDouble
+(
+t5
+.
+getText
+());
+
+155 double 
+	gsy
+ = 
+Double
+.
+parseDouble
+(
+t6
+.
+getText
+());
+
+156 int 
+	gt0
+, 
+	gt1
+;
+
+157 
+	gt0
+ = 
+x0
+;
+
+158 
+	gt1
+ = 
+y0
+;
+
+159 
+	gt0
+ = (int)(
+sx
+*
+t0
+);
+
+160 
+	gt1
+ = (int)(
+sy
+*
+t1
+);
+
+161 int 
+	gl1
+ = (int)(
+sx
+*
+l
+);
+
+162 int 
+	gw1
+ = (int)(
+sy
+*
+w
+);
+
+163 
+	gg1
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+164 
+draw
+(
+t0
+, 
+t1
+, 
+l1
+, 
+w1
+);
+
+167 
+public
+ void 
+rotate
+()
+
+169 int 
+	gangle
+ = 
+Integer
+.
+parseInt
+(
+t7
+.
+getText
+());
+
+170 int 
+	gmx
+ = 
+x0
+ - 
+X
+;
+
+171 int 
+	gmy
+ = 
+y0
+ - 
+Y
+;
+
+173 double 
+	gr1
+ = 
+Math
+.
+toRadians
+(
+angle
+);
+
+174 int 
+	gt0
+, 
+	gt1
+;
+
+175 
+	gt0
+ =(int)(
+mx
+*
+Math
+.
+cos
+(
+r1
+)+
+my
+*Math.
+sin
+(r1))+
+X
+;
+
+176 
+	gt1
+ = (int)(-
+mx
+*
+Math
+.
+sin
+(
+r1
+)+
+my
+*Math.
+cos
+(r1))+
+Y
+;
+
+177 
+	gg1
+.
+setColor
+(
+Color
+.
+orange
+);
+
+178 
+	gg1
+.
+drawLine
+(
+x0
+, 
+y0
+, 
+t0
+, 
+t1
+);
+
+179 
+draw
+(
+t0
+, 
+t1
+,
+l
+,
+w
+);
+
+182 
+public
+ void 
+rotate1
+()
+
+184 int 
+	gcx
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+185 int 
+	gcy
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+186 int 
+	gangle
+ = 
+Integer
+.
+parseInt
+(
+t7
+.
+getText
+());
+
+187 int 
+	gmx
+ = 
+x0
+ - 
+cx
+;
+
+188 int 
+	gmy
+ = 
+y0
+ - 
+cy
+;
+
+189 double 
+	gr1
+ = 
+Math
+.
+toRadians
+(
+angle
+);
+
+190 int 
+	gt0
+, 
+	gt1
+;
+
+191 
+	gt0
+ =(int)(
+mx
+*
+Math
+.
+cos
+(
+r1
+)+
+my
+*Math.
+sin
+(r1))+
+cx
+;
+
+192 
+	gt1
+ = (int)(-
+mx
+*
+Math
+.
+sin
+(
+r1
+)+
+my
+*Math.
+cos
+(r1))+
+cy
+;
+
+193 
+	gg1
+.
+setColor
+(
+Color
+.
+CYAN
+);
+
+194 
+	gg1
+.
+drawLine
+(
+x0
+, 
+y0
+, 
+t0
+, 
+t1
+);
+
+195 
+draw
+(
+t0
+, 
+t1
+, 
+l
+, 
+w
+);
+
+197 @
+Override
+
+
+198 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+202 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+203 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+204 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+205 
+	gclick
+++;
+
+206 
+repaint
+();
+
+209 @
+Override
+
+
+210 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+215 @
+Override
+
+
+216 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+220 @
+Override
+
+
+221 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+226 @
+Override
+
+
+227 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+231 @
+Override
+
+
+232 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+236 @
+Override
+
+
+237 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/transformation/pointtransform.java
+
+1 
+package
+ 
+	gtransformation
+;
+
+17 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+18 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+19 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+20 
+import
+ static 
+	gjava
+.
+	glang
+.
+	gSystem
+.
+	gexit
+;
+
+21 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+23 
+public
+ 
+class
+ 
+pointtransform
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+, 
+	gMouseMotionListener
+ {
+
+25 
+private
+ int 
+	gdiff
+ = 5;
+
+26 
+public
+ static int 
+	gresX
+ = 800;
+
+27 
+public
+ static int 
+	gresY
+ = 600;
+
+28 
+public
+ static int 
+	goffset
+ = 35;
+
+29 
+private
+ int 
+	gclick
+ = 0;
+
+31 
+Label
+ 
+	gl1
+ = 
+new
+ Label("Arb x = ");
+
+32 
+Label
+ 
+	gl2
+ = 
+new
+ Label("Arb y = ");
+
+33 
+Label
+ 
+	gl3
+ = 
+new
+ Label("x = ");
+
+34 
+Label
+ 
+	gl4
+ = 
+new
+ Label("y = ");
+
+35 
+Label
+ 
+	gl5
+ = 
+new
+ Label("sx = ");
+
+36 
+Label
+ 
+	gl6
+ = 
+new
+ Label("sy = ");
+
+37 
+Label
+ 
+	gl7
+ = 
+new
+ Label("angle = ");
+
+38 int 
+	gcol
+ = 0;
+
+39 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+40 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+41 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+42 
+TextField
+ 
+	gt4
+ = 
+new
+ TextField(3);
+
+43 
+TextField
+ 
+	gt5
+ = 
+new
+ TextField(3);
+
+44 
+TextField
+ 
+	gt6
+ = 
+new
+ TextField(3);
+
+45 
+TextField
+ 
+	gt7
+ = 
+new
+ TextField(3);
+
+46 
+Button
+ 
+	gb1
+ = 
+new
+ Button("Translate");
+
+47 
+Button
+ 
+	gb2
+ = 
+new
+ Button("Scale");
+
+48 
+Button
+ 
+	gb3
+ = 
+new
+ Button("Rotate-origin");
+
+49 
+Button
+ 
+	gb5
+ = 
+new
+ Button("Rotate-arbitrary");
+
+50 
+Button
+ 
+	gb4
+ = 
+new
+ Button("Reset");
+
+52 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+53 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+54 int 
+	gt
+ = 0, 
+	gr
+ = 0, 
+	gs
+ = 0, 
+	gr1
+ = 0;
+
+55 int 
+	gX
+ = 400;
+
+56 int 
+	gY
+ = 300;
+
+57 @
+Override
+
+
+58 
+public
+ void 
+init
+() {
+
+59 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+60 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+76 
+add
+(
+b1
+);
+
+77 
+add
+(
+b2
+);
+
+78 
+add
+(
+b3
+);
+
+79 
+add
+(
+b5
+);
+
+80 
+add
+(
+b4
+);
+
+81 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+82 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+83 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+84 
+	gb4
+.
+addActionListener
+(
+this
+);
+
+85 
+	gb5
+.
+addActionListener
+(
+this
+);
+
+86 
+add
+(
+l3
+); add(
+t3
+);
+
+87 
+add
+(
+l4
+); add(
+t4
+);
+
+88 
+add
+(
+l5
+); add(
+t5
+);
+
+89 
+add
+(
+l6
+); add(
+t6
+);
+
+90 
+add
+(
+l7
+); add(
+t7
+);
+
+91 
+add
+(
+l1
+); add(
+t1
+);
+
+92 
+add
+(
+l2
+); add(
+t2
+);
+
+94 
+Graphics
+ 
+	gg1
+;
+
+95 int 
+	gx0
+ = 300; int 
+	gy0
+ = 300;
+
+96 @
+Override
+
+
+97 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+98 
+	gresX
+ = 
+getWidth
+();
+
+99 
+	gresY
+ = 
+getHeight
+();
+
+102 
+	gg1
+ = 
+g
+;
+
+103 
+	gg
+.
+fillRect
+(
+X
+, 
+Y
+, 10, 10);
+
+104 
+	gg
+.
+setColor
+(
+Color
+.
+red
+);
+
+105 
+	gg
+.
+fillRect
+(
+x0
+, 
+y0
+, 10, 10);
+
+107 if(
+	gt
+ == 1)
+
+108 
+transform
+();
+
+109 if(
+	gs
+ == 1)
+
+110 
+scale
+();
+
+111 if(
+	gr
+ == 1)
+
+112 
+rotate
+();
+
+113 if(
+	gr1
+ == 1)
+
+114 
+rotate1
+();
+
+118 void 
+draw
+(int 
+t0
+, int 
+t1
+)
+
+120 
+	gg1
+.
+drawRect
+(
+t0
+, 
+t1
+, 10, 10);
+
+121 
+	gg1
+.
+fillRect
+(
+t0
+, 
+t1
+, 10, 10);
+
+123 @
+Override
+
+
+124 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+)
+
+126 if (
+	gae
+.
+getSource
+() == 
+b4
+)
+
+128 
+t
+ = 
+s
+ = 
+r
+ = 
+r1
+ = 0;
+
+129 
+repaint
+();
+
+131 if(
+	gae
+.
+getSource
+() == 
+b1
+)
+
+133 
+t
+ = 1;
+
+134 
+repaint
+();
+
+136 else if(
+	gae
+.
+getSource
+() == 
+b2
+)
+
+138 
+s
+ = 1;
+
+139 
+repaint
+();
+
+141 else if(
+	gae
+.
+getSource
+() == 
+b3
+)
+
+143 
+r
+ = 1;
+
+144 
+repaint
+();
+
+146 else if(
+	gae
+.
+getSource
+() == 
+b5
+)
+
+148 
+r1
+ = 1;
+
+149 
+repaint
+();
+
+153 
+public
+ void 
+transform
+()
+
+155 int 
+	gtx
+ = 
+Integer
+.
+parseInt
+(
+t3
+.
+getText
+());
+
+156 int 
+	gty
+ = 
+Integer
+.
+parseInt
+(
+t4
+.
+getText
+());
+
+157 int 
+	gt0
+, 
+	gt1
+;
+
+158 
+	gt0
+ = 
+x0
+ + 
+tx
+;
+
+159 
+	gt1
+ = 
+y0
+ + 
+ty
+;
+
+160 
+	gg1
+.
+setColor
+(
+Color
+.
+BLUE
+);
+
+161 
+draw
+(
+t0
+, 
+t1
+);
+
+164 
+public
+ void 
+scale
+()
+
+166 double 
+	gsx
+ = 
+Double
+.
+parseDouble
+(
+t5
+.
+getText
+());
+
+167 double 
+	gsy
+ = 
+Double
+.
+parseDouble
+(
+t6
+.
+getText
+());
+
+168 int 
+	gt0
+, 
+	gt1
+;
+
+169 
+	gt0
+ = 
+x0
+;
+
+170 
+	gt1
+ = 
+y0
+;
+
+171 
+	gt0
+ = (int)(
+sx
+*
+t0
+);
+
+172 
+	gt1
+ = (int)(
+sy
+*
+t1
+);
+
+173 
+	gg1
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+174 
+draw
+(
+t0
+, 
+t1
+);
+
+177 
+public
+ void 
+rotate
+()
+
+179 int 
+	gangle
+ = 
+Integer
+.
+parseInt
+(
+t7
+.
+getText
+());
+
+180 int 
+	gmx
+ = 
+x0
+ - 
+X
+;
+
+181 int 
+	gmy
+ = 
+y0
+ - 
+Y
+;
+
+183 double 
+	gr1
+ = 
+Math
+.
+toRadians
+(
+angle
+);
+
+184 int 
+	gt0
+, 
+	gt1
+;
+
+185 
+	gt0
+ =(int)(
+mx
+*
+Math
+.
+cos
+(
+r1
+)+
+my
+*Math.
+sin
+(r1))+
+X
+;
+
+186 
+	gt1
+ = (int)(-
+mx
+*
+Math
+.
+sin
+(
+r1
+)+
+my
+*Math.
+cos
+(r1))+
+Y
+;
+
+187 
+	gg1
+.
+setColor
+(
+Color
+.
+orange
+);
+
+188 
+	gg1
+.
+drawLine
+(
+x0
+, 
+y0
+, 
+t0
+, 
+t1
+);
+
+189 
+draw
+(
+t0
+, 
+t1
+);
+
+192 
+public
+ void 
+rotate1
+()
+
+194 int 
+	gcx
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+195 int 
+	gcy
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+196 int 
+	gangle
+ = 
+Integer
+.
+parseInt
+(
+t7
+.
+getText
+());
+
+197 int 
+	gmx
+ = 
+x0
+ - 
+cx
+;
+
+198 int 
+	gmy
+ = 
+y0
+ - 
+cy
+;
+
+199 double 
+	gr1
+ = 
+Math
+.
+toRadians
+(
+angle
+);
+
+200 int 
+	gt0
+, 
+	gt1
+;
+
+201 
+	gt0
+ =(int)(
+mx
+*
+Math
+.
+cos
+(
+r1
+)+
+my
+*Math.
+sin
+(r1))+
+cx
+;
+
+202 
+	gt1
+ = (int)(-
+mx
+*
+Math
+.
+sin
+(
+r1
+)+
+my
+*Math.
+cos
+(r1))+
+cy
+;
+
+203 
+	gg1
+.
+setColor
+(
+Color
+.
+CYAN
+);
+
+204 
+	gg1
+.
+drawLine
+(
+x0
+, 
+y0
+, 
+t0
+, 
+t1
+);
+
+205 
+draw
+(
+t0
+, 
+t1
+);
+
+207 @
+Override
+
+
+208 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+212 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+213 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+214 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+215 
+	gclick
+++;
+
+216 
+repaint
+();
+
+219 @
+Override
+
+
+220 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+225 @
+Override
+
+
+226 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+230 @
+Override
+
+
+231 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+236 @
+Override
+
+
+237 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+241 @
+Override
+
+
+242 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+246 @
+Override
+
+
+247 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@src/transformation/rect.java
+
+1 
+package
+ 
+	gtransformation
+;
+
+17 
+import
+ 
+	gjava
+.
+	gapplet
+.
+	gApplet
+;
+
+18 
+import
+ 
+	gjava
+.
+	gawt
+.*;
+
+19 
+import
+ 
+	gjava
+.
+	gawt
+.
+	gevent
+.*;
+
+20 
+import
+ static 
+	gjava
+.
+	glang
+.
+	gSystem
+.
+	gexit
+;
+
+21 
+import
+ 
+	gjava
+.
+	gutil
+.
+	gArrayList
+;
+
+23 class 
+	cRectangle
+ {
+
+25 
+private
+ int 
+	mx
+, 
+	my
+, 
+	ml
+, 
+	mw
+;
+
+26 
+Graphics
+ 
+	mg1
+;
+
+27 
+private
+ int 
+	mp
+[][] = 
+new
+ int[4][2];
+
+28 
+public
+ 
+	$Rectangle
+(
+Graphics
+ 
+g
+, int 
+a
+, int 
+b
+, int 
+le
+, int 
+wi
+) {
+
+29 
+x
+ = 
+a
+;
+
+30 
+y
+ = 
+b
+;
+
+31 
+l
+ = 
+le
+;
+
+32 
+w
+ = 
+wi
+;
+
+33 
+g1
+ = 
+g
+;
+
+34 
+p
+[0][0] = 
+x
+; p[0][1] = 
+y
+;
+
+35 
+p
+[1][0] = 
+x
++
+w
+; p[1][1] = 
+y
+;
+
+36 
+p
+[2][0] = 
+x
++
+w
+; p[2][1] = 
+y
++
+l
+;
+
+37 
+p
+[3][0] = 
+x
+; p[3][1] = 
+y
++
+l
+;
+
+40 
+public
+ void 
+	$setVisible
+()
+
+42 for(int 
+i
+ = 0; i < 3; i++)
+
+43 
+g1
+.
+	`drawLine
+(
+p
+[
+i
+][0], p[i][1], p[i+1][0], p[i+1][1]);
+
+44 
+g1
+.
+	`drawLine
+(
+p
+[0][0], p[0][1], p[3][0], p[3][1]);
+
+45 
+	}
+}
+
+47 
+public
+ void 
+	$translate
+(int 
+x1
+, int 
+y1
+)
+
+49 
+g1
+.
+	`setColor
+(
+Color
+.
+BLUE
+);
+
+50 int 
+q
+[][] = 
+new
+ int[4][2];
+
+51 for(int 
+i
+ = 0; i < 4; i++)
+
+53 
+q
+[
+i
+][0] = 
+p
+[i][0] + 
+x1
+;
+
+54 
+q
+[
+i
+][1] = 
+p
+[i][1] + 
+y1
+;
+
+56 for(int 
+i
+ = 0; i < 3; i++)
+
+57 
+g1
+.
+	`drawLine
+(
+q
+[
+i
+][0], q[i][1], q[i+1][0], q[i+1][1]);
+
+58 
+g1
+.
+	`drawLine
+(
+q
+[0][0], q[0][1], q[3][0], q[3][1]);
+
+60 
+	}
+}
+
+62 
+public
+ void 
+	$scale
+(double 
+sx
+, double 
+sy
+)
+
+64 
+g1
+.
+	`setColor
+(
+Color
+.
+MAGENTA
+);
+
+65 int 
+q
+[][] = 
+new
+ int[4][2];
+
+66 for(int 
+i
+ = 0; i < 4; i++)
+
+68 
+q
+[
+i
+][0] = (int)(
+sx
+*
+p
+[i][0]);
+
+69 
+q
+[
+i
+][1] = (int)(
+sy
+*
+p
+[i][1]);
+
+71 for(int 
+i
+ = 0; i < 3; i++)
+
+72 
+g1
+.
+	`drawLine
+(
+q
+[
+i
+][0], q[i][1], q[i+1][0], q[i+1][1]);
+
+73 
+g1
+.
+	`drawLine
+(
+q
+[0][0], q[0][1], q[3][0], q[3][1]);
+
+74 
+	}
+}
+
+76 
+public
+ void 
+	$rotate
+(int 
+x1
+, int 
+y1
+, int 
+angle
+)
+
+78 int 
+q
+[][] = 
+new
+ int[4][2];
+
+79 
+g1
+.
+	`drawRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+80 
+g1
+.
+	`fillRect
+(
+x1
+, 
+y1
+, 5, 5);
+
+81 for(int 
+i
+ = 0; i < 4; i++)
+
+83 int 
+a
+ = 
+p
+[
+i
+][0]-
+x1
+, 
+b
+ = p[i][1]-
+y1
+;
+
+84 double 
+r
+ = 
+Math
+.
+	`toRadians
+(
+angle
+);
+
+85 
+q
+[
+i
+][0] = (int) (
+a
+ * 
+Math
+.
+	`cos
+(
+r
+) + 
+b
+ * Math.
+	`sin
+(r)) + 
+x1
+;
+
+86 
+q
+[
+i
+][1] = (int) (-
+a
+ * 
+Math
+.
+	`sin
+(
+r
+) + 
+b
+ * Math.
+	`cos
+(r)) + 
+y1
+;
+
+88 for(int 
+i
+ = 0; i < 3; i++)
+
+89 
+g1
+.
+	`drawLine
+(
+q
+[
+i
+][0], q[i][1], q[i+1][0], q[i+1][1]);
+
+90 
+g1
+.
+	`drawLine
+(
+q
+[0][0], q[0][1], q[3][0], q[3][1]);
+
+91 
+	}
+}
+
+94 
+public
+ 
+class
+ 
+rect
+ 
+extends
+ 
+Applet
+ 
+implements
+ 
+	gActionListener
+, 
+	gMouseListener
+, 
+	gMouseMotionListener
+ {
+
+96 
+private
+ int 
+	gdiff
+ = 5;
+
+97 
+public
+ static int 
+	gresX
+ = 800;
+
+98 
+public
+ static int 
+	gresY
+ = 600;
+
+99 
+public
+ static int 
+	goffset
+ = 35;
+
+100 
+private
+ int 
+	gclick
+ = 0;
+
+102 
+Label
+ 
+	gl1
+ = 
+new
+ Label("Arb x = ");
+
+103 
+Label
+ 
+	gl2
+ = 
+new
+ Label("Arb y = ");
+
+104 
+Label
+ 
+	gl3
+ = 
+new
+ Label("x = ");
+
+105 
+Label
+ 
+	gl4
+ = 
+new
+ Label("y = ");
+
+106 
+Label
+ 
+	gl5
+ = 
+new
+ Label("sx = ");
+
+107 
+Label
+ 
+	gl6
+ = 
+new
+ Label("sy = ");
+
+108 
+Label
+ 
+	gl7
+ = 
+new
+ Label("angle = ");
+
+109 int 
+	gcol
+ = 0;
+
+110 
+TextField
+ 
+	gt1
+ = 
+new
+ TextField(3);
+
+111 
+TextField
+ 
+	gt2
+ = 
+new
+ TextField(3);
+
+112 
+TextField
+ 
+	gt3
+ = 
+new
+ TextField(3);
+
+113 
+TextField
+ 
+	gt4
+ = 
+new
+ TextField(3);
+
+114 
+TextField
+ 
+	gt5
+ = 
+new
+ TextField(3);
+
+115 
+TextField
+ 
+	gt6
+ = 
+new
+ TextField(3);
+
+116 
+TextField
+ 
+	gt7
+ = 
+new
+ TextField(3);
+
+117 
+Button
+ 
+	gb1
+ = 
+new
+ Button("Translate");
+
+118 
+Button
+ 
+	gb2
+ = 
+new
+ Button("Scale");
+
+119 
+Button
+ 
+	gb3
+ = 
+new
+ Button("Rotate-origin");
+
+120 
+Button
+ 
+	gb5
+ = 
+new
+ Button("Rotate-arbitrary");
+
+121 
+Button
+ 
+	gb4
+ = 
+new
+ Button("Reset");
+
+123 
+	gArrayList
+<
+	gInteger
+> 
+	gx
+ = 
+new
+ 
+ArrayList
+<>();
+
+124 
+	gArrayList
+<
+	gInteger
+> 
+	gy
+ = 
+new
+ 
+ArrayList
+<>();
+
+125 int 
+	gt
+ = 0, 
+	gr
+ = 0, 
+	gs
+ = 0, 
+	gr1
+ = 0;
+
+126 int 
+	gX
+ = 400;
+
+127 int 
+	gY
+ = 300;
+
+128 int 
+	gl
+ = 50;
+
+129 int 
+	gw
+ = 40;
+
+131 @
+Override
+
+
+132 
+public
+ void 
+init
+() {
+
+133 
+	gthis
+.
+setSize
+(
+resX
+, 
+resY
+);
+
+134 
+	gthis
+.
+setBackground
+(
+Color
+.
+WHITE
+);
+
+135 
+add
+(
+b1
+);
+
+136 
+add
+(
+b2
+);
+
+137 
+add
+(
+b3
+);
+
+138 
+add
+(
+b5
+);
+
+139 
+add
+(
+b4
+);
+
+140 
+	gb1
+.
+addActionListener
+(
+this
+);
+
+141 
+	gb2
+.
+addActionListener
+(
+this
+);
+
+142 
+	gb3
+.
+addActionListener
+(
+this
+);
+
+143 
+	gb4
+.
+addActionListener
+(
+this
+);
+
+144 
+	gb5
+.
+addActionListener
+(
+this
+);
+
+145 
+add
+(
+l3
+);
+
+146 
+add
+(
+t3
+);
+
+147 
+add
+(
+l4
+);
+
+148 
+add
+(
+t4
+);
+
+149 
+add
+(
+l5
+);
+
+150 
+add
+(
+t5
+);
+
+151 
+add
+(
+l6
+);
+
+152 
+add
+(
+t6
+);
+
+153 
+add
+(
+l7
+);
+
+154 
+add
+(
+t7
+);
+
+155 
+add
+(
+l1
+);
+
+156 
+add
+(
+t1
+);
+
+157 
+add
+(
+l2
+);
+
+158 
+add
+(
+t2
+);
+
+160 
+Graphics
+ 
+	gg1
+;
+
+161 int 
+	gx0
+ = 300;
+
+162 int 
+	gy0
+ = 300;
+
+163 
+Rectangle
+ 
+	gre
+;
+
+164 @
+Override
+
+
+165 
+public
+ void 
+paint
+(
+Graphics
+ 
+g
+) {
+
+166 
+	gresX
+ = 
+getWidth
+();
+
+167 
+	gresY
+ = 
+getHeight
+();
+
+168 
+	gg1
+ = 
+g
+;
+
+169 
+	gre
+ = 
+new
+ 
+Rectangle
+(
+g
+, 
+x0
+, 
+y0
+, 20, 20);
+
+170 
+	gre
+.
+setVisible
+();
+
+173 int 
+	gangle
+;
+
+174 if (
+	gt
+ == 1)
+
+176 int 
+tx
+ = 
+Integer
+.
+parseInt
+(
+t3
+.
+getText
+());
+
+177 int 
+	gty
+ = 
+Integer
+.
+parseInt
+(
+t4
+.
+getText
+());
+
+178 
+	gre
+.
+translate
+(
+tx
+, 
+ty
+);
+
+180 if (
+	gs
+ == 1)
+
+182 double 
+sx
+ = 
+Double
+.
+parseDouble
+(
+t5
+.
+getText
+());
+
+183 double 
+	gsy
+ = 
+Double
+.
+parseDouble
+(
+t6
+.
+getText
+());
+
+184 
+	gre
+.
+scale
+(
+sx
+, 
+sy
+);
+
+186 if (
+	gr
+ == 1)
+
+188 
+angle
+ = 
+Integer
+.
+parseInt
+(
+t7
+.
+getText
+());
+
+189 
+	gg
+.
+setColor
+(
+Color
+.
+RED
+);
+
+190 
+	gg
+.
+drawString
+("Origin", 
+X
+, 
+Y
+);
+
+191 
+	gre
+.
+rotate
+(
+X
+, 
+Y
+, 
+angle
+);
+
+193 if (
+	gr1
+ == 1)
+
+195 int 
+cx
+ = 
+Integer
+.
+parseInt
+(
+t1
+.
+getText
+());
+
+196 int 
+	gcy
+ = 
+Integer
+.
+parseInt
+(
+t2
+.
+getText
+());
+
+197 
+	gangle
+ = 
+Integer
+.
+parseInt
+(
+t7
+.
+getText
+());
+
+198 
+	gg
+.
+setColor
+(
+Color
+.
+MAGENTA
+);
+
+199 
+	gg
+.
+drawString
+("Arb point", 
+cx
+, 
+cy
+);
+
+200 
+	gre
+.
+rotate
+(
+cx
+, 
+cy
+, 
+angle
+);
+
+204 @
+Override
+
+
+205 
+public
+ void 
+actionPerformed
+(
+ActionEvent
+ 
+ae
+) {
+
+206 if (
+	gae
+.
+getSource
+() == 
+b4
+) {
+
+207 
+t
+ = 
+s
+ = 
+r
+ = 
+r1
+ = 0;
+
+208 
+repaint
+();
+
+210 if (
+	gae
+.
+getSource
+() == 
+b1
+) {
+
+211 
+t
+ = 1;
+
+212 
+repaint
+();
+
+213 } else if (
+	gae
+.
+getSource
+() == 
+b2
+) {
+
+214 
+s
+ = 1;
+
+215 
+repaint
+();
+
+216 } else if (
+	gae
+.
+getSource
+() == 
+b3
+) {
+
+217 
+r
+ = 1;
+
+219 
+repaint
+();
+
+220 } else if (
+	gae
+.
+getSource
+() == 
+b5
+) {
+
+221 
+r1
+ = 1;
+
+222 
+repaint
+();
+
+226 @
+Override
+
+
+227 
+public
+ void 
+mouseClicked
+(
+MouseEvent
+ 
+me
+) {
+
+231 
+	gSystem
+.
+	gout
+.
+println
+("Clicked");
+
+232 
+	gx
+.
+add
+(
+me
+.
+getX
+());
+
+233 
+	gy
+.
+add
+(
+me
+.
+getY
+());
+
+234 
+	gclick
+++;
+
+235 
+repaint
+();
+
+238 @
+Override
+
+
+239 
+public
+ void 
+mousePressed
+(
+MouseEvent
+ 
+me
+) {
+
+244 @
+Override
+
+
+245 
+public
+ void 
+mouseReleased
+(
+MouseEvent
+ 
+me
+) {
+
+249 @
+Override
+
+
+250 
+public
+ void 
+mouseEntered
+(
+MouseEvent
+ 
+me
+) {
+
+255 @
+Override
+
+
+256 
+public
+ void 
+mouseExited
+(
+MouseEvent
+ 
+me
+) {
+
+260 @
+Override
+
+
+261 
+public
+ void 
+mouseDragged
+(
+MouseEvent
+ 
+me
+) {
+
+265 @
+Override
+
+
+266 
+public
+ void 
+mouseMoved
+(
+MouseEvent
+ 
+me
+) {
+
+	@
+1
+.
+1
+/usr/include
+31
+754
+src/Assignment1/grid.java
+src/Assignment1/grid1.java
+src/Assignment2/dda.java
+src/DrawLineExample.java
+src/JavaApplication5.java
+src/Line_draw.java
+src/Robot/Rectangle.java
+src/Robot/Robot.java
+src/Robot/face.java
+src/Robot/lbody.java
+src/Robot/palm.java
+src/Robot/shoe.java
+src/SimplePaint3/SimplePaint03.java
+src/TestGrid01.java
+src/TestGrid02.java
+src/a.java
+src/bonus/circle.java
+src/circle/circle.java
+src/clipping/cohen.java
+src/clipping/lineclip.java
+src/clipping/polyclip.java
+src/clipping/polyfill.java
+src/dda_grid.java
+src/ellipse/ellipse.java
+src/labtest/Labtest.java
+src/labtest/a.java
+src/labtest/labtest2.java
+src/test/NewClass.java
+src/transformation/Recttransform.java
+src/transformation/pointtransform.java
+src/transformation/rect.java
