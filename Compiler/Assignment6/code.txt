@@ -1,0 +1,45 @@
+float fun2();
+ 
+int foo(int a, int b)
+{
+	int sasa;
+}
+
+int main()
+{
+	int i = 20, c = -3444, abb;
+	int b;
+	{
+		int i;
+		float ass;
+		{
+			int d;
+		}
+		abb = i + c;
+	}
+	for(i = 0; i <= abb && c >= 0; i++){
+		float dd;
+		if(c == i)
+			c += 122.0;
+		else
+			c --;
+	}
+	while(1);
+	/***
+	****/	
+	float s = foo(abb, b);
+	switch(b)
+	{
+		case 1: sk;
+		case 2:
+		case 4:
+		default:
+		
+	}
+}
+
+float fun2()
+{
+	int a;
+	float ff;
+}

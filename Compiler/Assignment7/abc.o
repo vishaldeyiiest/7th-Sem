@@ -1,0 +1,26 @@
+
+DEC: a
+DEC: b
+DEC: c
+DEC: d
+DEC: x
+DEC: y
+DEC: z
+_t1 = c - d
+_t2 = _t1 + b
+_t3 = 10
+_t4 = _t2 + _t3
+a = _t4
+_t5 = 200
+_t6 = a < _t5
+IF _t6 GOTO _L0
+GOTO _L1
+_L0: _t7 = 145
+_t8 = x + _t7
+_t9 = c - _t8
+a = _t9
+GOTO _L2
+_L1: _t10 = c + 1
+c = _t10
+a = _t10
+_L2: end

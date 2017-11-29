@@ -1,0 +1,1976 @@
+Terminals unused in grammar
+
+   COT_TOK
+   MAIN_TOK
+
+
+Grammar
+
+    0 $accept: start $end
+
+    1 start: start declare
+    2      | %empty
+
+    3 declare: func_def
+    4        | list
+
+    5 const: NUM_TOK
+    6      | FLOAT_CONST
+    7      | CHAR_CONST
+
+    8 vd: ID_TOK
+    9   | ID_TOK EQ_TOK expr
+
+   10 list: type var_list
+
+   11 var_list: vd
+   12         | var_list COMMA_TOK vd
+
+   13 func_def: type ID_TOK LPAREN_TOK list_parameters RPAREN_TOK cmp_stmt
+
+   14 func_call: ID_TOK LPAREN_TOK list_arguments RPAREN_TOK
+
+   15 list_arguments: list_arg
+   16               | %empty
+
+   17 list_arg: ID_TOK
+   18         | list_arg COMMA_TOK ID_TOK
+
+   19 list_parameters: list_param
+   20                | %empty
+
+   21 list_param: type ID_TOK
+   22           | type ID_TOK COMMA_TOK list_param
+
+   23 type: INT_TOK
+   24     | VOID_TOK
+   25     | FLOAT_TOK
+   26     | CHAR_TOK
+
+   27 cmp_stmt: LCURLY_TOK stmt_list RCURLY_TOK
+
+   28 stmt_list: stmt_list stmt
+   29          | %empty
+
+   30 stmt: list SEMCOL_TOK
+   31     | SEMCOL_TOK
+   32     | cmp_stmt
+   33     | cond
+   34     | loop
+   35     | expr SEMCOL_TOK
+   36     | SWITCH_TOK LPAREN_TOK expr RPAREN_TOK LCURLY_TOK cases RCURLY_TOK
+
+   37 loop: FOR_TOK LPAREN_TOK expr SEMCOL_TOK expr SEMCOL_TOK expr RPAREN_TOK stmt
+   38     | WHILE_TOK LPAREN_TOK expr RPAREN_TOK stmt
+   39     | DO_TOK stmt WHILE_TOK LPAREN_TOK expr RPAREN_TOK SEMCOL_TOK
+
+   40 cond: IF_TOK LPAREN_TOK expr RPAREN_TOK stmt
+   41     | IF_TOK LPAREN_TOK expr RPAREN_TOK stmt ELSE_TOK stmt
+
+   42 expr: const
+   43     | ID_TOK
+   44     | unary
+   45     | const op expr
+   46     | ID_TOK op expr
+   47     | ID_TOK assignop expr
+   48     | LPAREN_TOK expr RPAREN_TOK
+   49     | func_call
+
+   50 op: relationalop
+   51   | eqop
+   52   | logicalop
+   53   | binop
+
+   54 cases: multcase
+   55      | multcase defcase
+
+   56 multcase: multcase case
+   57         | %empty
+
+   58 case: CASE_TOK FLOAT_CONST COL_TOK caseblk
+   59     | CASE_TOK CHAR_CONST COL_TOK caseblk
+   60     | CASE_TOK NUM_TOK COL_TOK caseblk
+
+   61 caseblk: stmt
+   62        | %empty
+
+   63 defcase: DEFAULT_TOK COL_TOK caseblk
+
+   64 unary: ID_TOK INC_TOK
+   65      | ID_TOK DEC_TOK
+   66      | INC_TOK ID_TOK
+   67      | DEC_TOK ID_TOK
+   68      | MINUS_TOK expr
+
+   69 assignop: EQ_TOK
+   70         | MINEQ_TOK
+   71         | ADDEQ_TOK
+   72         | MODEQ_TOK
+   73         | MULTEQ_TOK
+   74         | DIVEQ_TOK
+   75         | BITANDEQ_TOK
+   76         | BITOREQ_TOK
+   77         | BITXOREQ_TOK
+
+   78 binop: ADDITION_TOK
+   79      | MINUS_TOK
+   80      | MULTI_TOK
+   81      | DIVISION_TOK
+   82      | MOD_TOK
+   83      | LSHIFT_TOK
+   84      | RSHIFT_TOK
+   85      | BITAND_TOK
+   86      | BITOR_TOK
+   87      | XOR_TOK
+
+   88 relationalop: GT_TOK
+   89             | LS_TOK
+   90             | GTEQ_TOK
+   91             | LSEQ_TOK
+
+   92 logicalop: NOT_TOK
+   93          | AND_TOK
+   94          | OR_TOK
+
+   95 eqop: EQ2_TOK
+   96     | NOTEQ_TOK
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+ID_TOK (258) 8 9 13 14 17 18 21 22 43 46 47 64 65 66 67
+INT_TOK (259) 23
+FLOAT_TOK (260) 25
+CHAR_TOK (261) 26
+NUM_TOK (262) 5 60
+FLOAT_CONST (263) 6 58
+CHAR_CONST (264) 7 59
+LPAREN_TOK (265) 13 14 36 37 38 39 40 41 48
+RPAREN_TOK (266) 13 14 36 37 38 39 40 41 48
+COT_TOK (267)
+FOR_TOK (268) 37
+WHILE_TOK (269) 38 39
+DO_TOK (270) 39
+IF_TOK (271) 40 41
+ELSE_TOK (272) 41
+SWITCH_TOK (273) 36
+CASE_TOK (274) 58 59 60
+DEFAULT_TOK (275) 63
+VOID_TOK (276) 24
+MAIN_TOK (277)
+LCURLY_TOK (278) 27 36
+RCURLY_TOK (279) 27 36
+NOT_TOK (280) 92
+COMMA_TOK (281) 12 18 22
+SEMCOL_TOK (282) 30 31 35 37 39
+COL_TOK (283) 58 59 60 63
+IFX (284)
+EQ_TOK (285) 9 69
+MINEQ_TOK (286) 70
+ADDEQ_TOK (287) 71
+MODEQ_TOK (288) 72
+MULTEQ_TOK (289) 73
+DIVEQ_TOK (290) 74
+BITANDEQ_TOK (291) 75
+BITOREQ_TOK (292) 76
+BITXOREQ_TOK (293) 77
+OR_TOK (294) 94
+AND_TOK (295) 93
+BITOR_TOK (296) 86
+XOR_TOK (297) 87
+BITAND_TOK (298) 85
+EQ2_TOK (299) 95
+NOTEQ_TOK (300) 96
+GTEQ_TOK (301) 90
+LSEQ_TOK (302) 91
+GT_TOK (303) 88
+LS_TOK (304) 89
+LSHIFT_TOK (305) 83
+RSHIFT_TOK (306) 84
+ADDITION_TOK (307) 78
+MINUS_TOK (308) 68 79
+MULTI_TOK (309) 80
+DIVISION_TOK (310) 81
+MOD_TOK (311) 82
+INC_TOK (312) 64 66
+DEC_TOK (313) 65 67
+UMINUS (314)
+
+
+Nonterminals, with rules where they appear
+
+$accept (60)
+    on left: 0
+start (61)
+    on left: 1 2, on right: 0 1
+declare (62)
+    on left: 3 4, on right: 1
+const (63)
+    on left: 5 6 7, on right: 42 45
+vd (64)
+    on left: 8 9, on right: 11 12
+list (65)
+    on left: 10, on right: 4 30
+var_list (66)
+    on left: 11 12, on right: 10 12
+func_def (67)
+    on left: 13, on right: 3
+func_call (68)
+    on left: 14, on right: 49
+list_arguments (69)
+    on left: 15 16, on right: 14
+list_arg (70)
+    on left: 17 18, on right: 15 18
+list_parameters (71)
+    on left: 19 20, on right: 13
+list_param (72)
+    on left: 21 22, on right: 19 22
+type (73)
+    on left: 23 24 25 26, on right: 10 13 21 22
+cmp_stmt (74)
+    on left: 27, on right: 13 32
+stmt_list (75)
+    on left: 28 29, on right: 27 28
+stmt (76)
+    on left: 30 31 32 33 34 35 36, on right: 28 37 38 39 40 41 61
+loop (77)
+    on left: 37 38 39, on right: 34
+cond (78)
+    on left: 40 41, on right: 33
+expr (79)
+    on left: 42 43 44 45 46 47 48 49, on right: 9 35 36 37 38 39 40
+    41 45 46 47 48 68
+op (80)
+    on left: 50 51 52 53, on right: 45 46
+cases (81)
+    on left: 54 55, on right: 36
+multcase (82)
+    on left: 56 57, on right: 54 55 56
+case (83)
+    on left: 58 59 60, on right: 56
+caseblk (84)
+    on left: 61 62, on right: 58 59 60 63
+defcase (85)
+    on left: 63, on right: 55
+unary (86)
+    on left: 64 65 66 67 68, on right: 44
+assignop (87)
+    on left: 69 70 71 72 73 74 75 76 77, on right: 47
+binop (88)
+    on left: 78 79 80 81 82 83 84 85 86 87, on right: 53
+relationalop (89)
+    on left: 88 89 90 91, on right: 50
+logicalop (90)
+    on left: 92 93 94, on right: 52
+eqop (91)
+    on left: 95 96, on right: 51
+
+
+State 0
+
+    0 $accept: . start $end
+
+    $default  reduce using rule 2 (start)
+
+    start  go to state 1
+
+
+State 1
+
+    0 $accept: start . $end
+    1 start: start . declare
+
+    $end       shift, and go to state 2
+    INT_TOK    shift, and go to state 3
+    FLOAT_TOK  shift, and go to state 4
+    CHAR_TOK   shift, and go to state 5
+    VOID_TOK   shift, and go to state 6
+
+    declare   go to state 7
+    list      go to state 8
+    func_def  go to state 9
+    type      go to state 10
+
+
+State 2
+
+    0 $accept: start $end .
+
+    $default  accept
+
+
+State 3
+
+   23 type: INT_TOK .
+
+    $default  reduce using rule 23 (type)
+
+
+State 4
+
+   25 type: FLOAT_TOK .
+
+    $default  reduce using rule 25 (type)
+
+
+State 5
+
+   26 type: CHAR_TOK .
+
+    $default  reduce using rule 26 (type)
+
+
+State 6
+
+   24 type: VOID_TOK .
+
+    $default  reduce using rule 24 (type)
+
+
+State 7
+
+    1 start: start declare .
+
+    $default  reduce using rule 1 (start)
+
+
+State 8
+
+    4 declare: list .
+
+    $default  reduce using rule 4 (declare)
+
+
+State 9
+
+    3 declare: func_def .
+
+    $default  reduce using rule 3 (declare)
+
+
+State 10
+
+   10 list: type . var_list
+   13 func_def: type . ID_TOK LPAREN_TOK list_parameters RPAREN_TOK cmp_stmt
+
+    ID_TOK  shift, and go to state 11
+
+    vd        go to state 12
+    var_list  go to state 13
+
+
+State 11
+
+    8 vd: ID_TOK .
+    9   | ID_TOK . EQ_TOK expr
+   13 func_def: type ID_TOK . LPAREN_TOK list_parameters RPAREN_TOK cmp_stmt
+
+    LPAREN_TOK  shift, and go to state 14
+    EQ_TOK      shift, and go to state 15
+
+    $default  reduce using rule 8 (vd)
+
+
+State 12
+
+   11 var_list: vd .
+
+    $default  reduce using rule 11 (var_list)
+
+
+State 13
+
+   10 list: type var_list .
+   12 var_list: var_list . COMMA_TOK vd
+
+    COMMA_TOK  shift, and go to state 16
+
+    $default  reduce using rule 10 (list)
+
+
+State 14
+
+   13 func_def: type ID_TOK LPAREN_TOK . list_parameters RPAREN_TOK cmp_stmt
+
+    INT_TOK    shift, and go to state 3
+    FLOAT_TOK  shift, and go to state 4
+    CHAR_TOK   shift, and go to state 5
+    VOID_TOK   shift, and go to state 6
+
+    $default  reduce using rule 20 (list_parameters)
+
+    list_parameters  go to state 17
+    list_param       go to state 18
+    type             go to state 19
+
+
+State 15
+
+    9 vd: ID_TOK EQ_TOK . expr
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 30
+    unary      go to state 31
+
+
+State 16
+
+   12 var_list: var_list COMMA_TOK . vd
+
+    ID_TOK  shift, and go to state 32
+
+    vd  go to state 33
+
+
+State 17
+
+   13 func_def: type ID_TOK LPAREN_TOK list_parameters . RPAREN_TOK cmp_stmt
+
+    RPAREN_TOK  shift, and go to state 34
+
+
+State 18
+
+   19 list_parameters: list_param .
+
+    $default  reduce using rule 19 (list_parameters)
+
+
+State 19
+
+   21 list_param: type . ID_TOK
+   22           | type . ID_TOK COMMA_TOK list_param
+
+    ID_TOK  shift, and go to state 35
+
+
+State 20
+
+   14 func_call: ID_TOK . LPAREN_TOK list_arguments RPAREN_TOK
+   43 expr: ID_TOK .
+   46     | ID_TOK . op expr
+   47     | ID_TOK . assignop expr
+   64 unary: ID_TOK . INC_TOK
+   65      | ID_TOK . DEC_TOK
+
+    LPAREN_TOK    shift, and go to state 36
+    NOT_TOK       shift, and go to state 37
+    EQ_TOK        shift, and go to state 38
+    MINEQ_TOK     shift, and go to state 39
+    ADDEQ_TOK     shift, and go to state 40
+    MODEQ_TOK     shift, and go to state 41
+    MULTEQ_TOK    shift, and go to state 42
+    DIVEQ_TOK     shift, and go to state 43
+    BITANDEQ_TOK  shift, and go to state 44
+    BITOREQ_TOK   shift, and go to state 45
+    BITXOREQ_TOK  shift, and go to state 46
+    OR_TOK        shift, and go to state 47
+    AND_TOK       shift, and go to state 48
+    BITOR_TOK     shift, and go to state 49
+    XOR_TOK       shift, and go to state 50
+    BITAND_TOK    shift, and go to state 51
+    EQ2_TOK       shift, and go to state 52
+    NOTEQ_TOK     shift, and go to state 53
+    GTEQ_TOK      shift, and go to state 54
+    LSEQ_TOK      shift, and go to state 55
+    GT_TOK        shift, and go to state 56
+    LS_TOK        shift, and go to state 57
+    LSHIFT_TOK    shift, and go to state 58
+    RSHIFT_TOK    shift, and go to state 59
+    ADDITION_TOK  shift, and go to state 60
+    MINUS_TOK     shift, and go to state 61
+    MULTI_TOK     shift, and go to state 62
+    DIVISION_TOK  shift, and go to state 63
+    MOD_TOK       shift, and go to state 64
+    INC_TOK       shift, and go to state 65
+    DEC_TOK       shift, and go to state 66
+
+    $default  reduce using rule 43 (expr)
+
+    op            go to state 67
+    assignop      go to state 68
+    binop         go to state 69
+    relationalop  go to state 70
+    logicalop     go to state 71
+    eqop          go to state 72
+
+
+State 21
+
+    5 const: NUM_TOK .
+
+    $default  reduce using rule 5 (const)
+
+
+State 22
+
+    6 const: FLOAT_CONST .
+
+    $default  reduce using rule 6 (const)
+
+
+State 23
+
+    7 const: CHAR_CONST .
+
+    $default  reduce using rule 7 (const)
+
+
+State 24
+
+   48 expr: LPAREN_TOK . expr RPAREN_TOK
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 73
+    unary      go to state 31
+
+
+State 25
+
+   68 unary: MINUS_TOK . expr
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 74
+    unary      go to state 31
+
+
+State 26
+
+   66 unary: INC_TOK . ID_TOK
+
+    ID_TOK  shift, and go to state 75
+
+
+State 27
+
+   67 unary: DEC_TOK . ID_TOK
+
+    ID_TOK  shift, and go to state 76
+
+
+State 28
+
+   42 expr: const .
+   45     | const . op expr
+
+    NOT_TOK       shift, and go to state 37
+    OR_TOK        shift, and go to state 47
+    AND_TOK       shift, and go to state 48
+    BITOR_TOK     shift, and go to state 49
+    XOR_TOK       shift, and go to state 50
+    BITAND_TOK    shift, and go to state 51
+    EQ2_TOK       shift, and go to state 52
+    NOTEQ_TOK     shift, and go to state 53
+    GTEQ_TOK      shift, and go to state 54
+    LSEQ_TOK      shift, and go to state 55
+    GT_TOK        shift, and go to state 56
+    LS_TOK        shift, and go to state 57
+    LSHIFT_TOK    shift, and go to state 58
+    RSHIFT_TOK    shift, and go to state 59
+    ADDITION_TOK  shift, and go to state 60
+    MINUS_TOK     shift, and go to state 61
+    MULTI_TOK     shift, and go to state 62
+    DIVISION_TOK  shift, and go to state 63
+    MOD_TOK       shift, and go to state 64
+
+    $default  reduce using rule 42 (expr)
+
+    op            go to state 77
+    binop         go to state 69
+    relationalop  go to state 70
+    logicalop     go to state 71
+    eqop          go to state 72
+
+
+State 29
+
+   49 expr: func_call .
+
+    $default  reduce using rule 49 (expr)
+
+
+State 30
+
+    9 vd: ID_TOK EQ_TOK expr .
+
+    $default  reduce using rule 9 (vd)
+
+
+State 31
+
+   44 expr: unary .
+
+    $default  reduce using rule 44 (expr)
+
+
+State 32
+
+    8 vd: ID_TOK .
+    9   | ID_TOK . EQ_TOK expr
+
+    EQ_TOK  shift, and go to state 15
+
+    $default  reduce using rule 8 (vd)
+
+
+State 33
+
+   12 var_list: var_list COMMA_TOK vd .
+
+    $default  reduce using rule 12 (var_list)
+
+
+State 34
+
+   13 func_def: type ID_TOK LPAREN_TOK list_parameters RPAREN_TOK . cmp_stmt
+
+    LCURLY_TOK  shift, and go to state 78
+
+    cmp_stmt  go to state 79
+
+
+State 35
+
+   21 list_param: type ID_TOK .
+   22           | type ID_TOK . COMMA_TOK list_param
+
+    COMMA_TOK  shift, and go to state 80
+
+    $default  reduce using rule 21 (list_param)
+
+
+State 36
+
+   14 func_call: ID_TOK LPAREN_TOK . list_arguments RPAREN_TOK
+
+    ID_TOK  shift, and go to state 81
+
+    $default  reduce using rule 16 (list_arguments)
+
+    list_arguments  go to state 82
+    list_arg        go to state 83
+
+
+State 37
+
+   92 logicalop: NOT_TOK .
+
+    $default  reduce using rule 92 (logicalop)
+
+
+State 38
+
+   69 assignop: EQ_TOK .
+
+    $default  reduce using rule 69 (assignop)
+
+
+State 39
+
+   70 assignop: MINEQ_TOK .
+
+    $default  reduce using rule 70 (assignop)
+
+
+State 40
+
+   71 assignop: ADDEQ_TOK .
+
+    $default  reduce using rule 71 (assignop)
+
+
+State 41
+
+   72 assignop: MODEQ_TOK .
+
+    $default  reduce using rule 72 (assignop)
+
+
+State 42
+
+   73 assignop: MULTEQ_TOK .
+
+    $default  reduce using rule 73 (assignop)
+
+
+State 43
+
+   74 assignop: DIVEQ_TOK .
+
+    $default  reduce using rule 74 (assignop)
+
+
+State 44
+
+   75 assignop: BITANDEQ_TOK .
+
+    $default  reduce using rule 75 (assignop)
+
+
+State 45
+
+   76 assignop: BITOREQ_TOK .
+
+    $default  reduce using rule 76 (assignop)
+
+
+State 46
+
+   77 assignop: BITXOREQ_TOK .
+
+    $default  reduce using rule 77 (assignop)
+
+
+State 47
+
+   94 logicalop: OR_TOK .
+
+    $default  reduce using rule 94 (logicalop)
+
+
+State 48
+
+   93 logicalop: AND_TOK .
+
+    $default  reduce using rule 93 (logicalop)
+
+
+State 49
+
+   86 binop: BITOR_TOK .
+
+    $default  reduce using rule 86 (binop)
+
+
+State 50
+
+   87 binop: XOR_TOK .
+
+    $default  reduce using rule 87 (binop)
+
+
+State 51
+
+   85 binop: BITAND_TOK .
+
+    $default  reduce using rule 85 (binop)
+
+
+State 52
+
+   95 eqop: EQ2_TOK .
+
+    $default  reduce using rule 95 (eqop)
+
+
+State 53
+
+   96 eqop: NOTEQ_TOK .
+
+    $default  reduce using rule 96 (eqop)
+
+
+State 54
+
+   90 relationalop: GTEQ_TOK .
+
+    $default  reduce using rule 90 (relationalop)
+
+
+State 55
+
+   91 relationalop: LSEQ_TOK .
+
+    $default  reduce using rule 91 (relationalop)
+
+
+State 56
+
+   88 relationalop: GT_TOK .
+
+    $default  reduce using rule 88 (relationalop)
+
+
+State 57
+
+   89 relationalop: LS_TOK .
+
+    $default  reduce using rule 89 (relationalop)
+
+
+State 58
+
+   83 binop: LSHIFT_TOK .
+
+    $default  reduce using rule 83 (binop)
+
+
+State 59
+
+   84 binop: RSHIFT_TOK .
+
+    $default  reduce using rule 84 (binop)
+
+
+State 60
+
+   78 binop: ADDITION_TOK .
+
+    $default  reduce using rule 78 (binop)
+
+
+State 61
+
+   79 binop: MINUS_TOK .
+
+    $default  reduce using rule 79 (binop)
+
+
+State 62
+
+   80 binop: MULTI_TOK .
+
+    $default  reduce using rule 80 (binop)
+
+
+State 63
+
+   81 binop: DIVISION_TOK .
+
+    $default  reduce using rule 81 (binop)
+
+
+State 64
+
+   82 binop: MOD_TOK .
+
+    $default  reduce using rule 82 (binop)
+
+
+State 65
+
+   64 unary: ID_TOK INC_TOK .
+
+    $default  reduce using rule 64 (unary)
+
+
+State 66
+
+   65 unary: ID_TOK DEC_TOK .
+
+    $default  reduce using rule 65 (unary)
+
+
+State 67
+
+   46 expr: ID_TOK op . expr
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 84
+    unary      go to state 31
+
+
+State 68
+
+   47 expr: ID_TOK assignop . expr
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 85
+    unary      go to state 31
+
+
+State 69
+
+   53 op: binop .
+
+    $default  reduce using rule 53 (op)
+
+
+State 70
+
+   50 op: relationalop .
+
+    $default  reduce using rule 50 (op)
+
+
+State 71
+
+   52 op: logicalop .
+
+    $default  reduce using rule 52 (op)
+
+
+State 72
+
+   51 op: eqop .
+
+    $default  reduce using rule 51 (op)
+
+
+State 73
+
+   48 expr: LPAREN_TOK expr . RPAREN_TOK
+
+    RPAREN_TOK  shift, and go to state 86
+
+
+State 74
+
+   68 unary: MINUS_TOK expr .
+
+    $default  reduce using rule 68 (unary)
+
+
+State 75
+
+   66 unary: INC_TOK ID_TOK .
+
+    $default  reduce using rule 66 (unary)
+
+
+State 76
+
+   67 unary: DEC_TOK ID_TOK .
+
+    $default  reduce using rule 67 (unary)
+
+
+State 77
+
+   45 expr: const op . expr
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 87
+    unary      go to state 31
+
+
+State 78
+
+   27 cmp_stmt: LCURLY_TOK . stmt_list RCURLY_TOK
+
+    $default  reduce using rule 29 (stmt_list)
+
+    stmt_list  go to state 88
+
+
+State 79
+
+   13 func_def: type ID_TOK LPAREN_TOK list_parameters RPAREN_TOK cmp_stmt .
+
+    $default  reduce using rule 13 (func_def)
+
+
+State 80
+
+   22 list_param: type ID_TOK COMMA_TOK . list_param
+
+    INT_TOK    shift, and go to state 3
+    FLOAT_TOK  shift, and go to state 4
+    CHAR_TOK   shift, and go to state 5
+    VOID_TOK   shift, and go to state 6
+
+    list_param  go to state 89
+    type        go to state 19
+
+
+State 81
+
+   17 list_arg: ID_TOK .
+
+    $default  reduce using rule 17 (list_arg)
+
+
+State 82
+
+   14 func_call: ID_TOK LPAREN_TOK list_arguments . RPAREN_TOK
+
+    RPAREN_TOK  shift, and go to state 90
+
+
+State 83
+
+   15 list_arguments: list_arg .
+   18 list_arg: list_arg . COMMA_TOK ID_TOK
+
+    COMMA_TOK  shift, and go to state 91
+
+    $default  reduce using rule 15 (list_arguments)
+
+
+State 84
+
+   46 expr: ID_TOK op expr .
+
+    $default  reduce using rule 46 (expr)
+
+
+State 85
+
+   47 expr: ID_TOK assignop expr .
+
+    $default  reduce using rule 47 (expr)
+
+
+State 86
+
+   48 expr: LPAREN_TOK expr RPAREN_TOK .
+
+    $default  reduce using rule 48 (expr)
+
+
+State 87
+
+   45 expr: const op expr .
+
+    $default  reduce using rule 45 (expr)
+
+
+State 88
+
+   27 cmp_stmt: LCURLY_TOK stmt_list . RCURLY_TOK
+   28 stmt_list: stmt_list . stmt
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    RCURLY_TOK   shift, and go to state 97
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 102
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    unary      go to state 31
+
+
+State 89
+
+   22 list_param: type ID_TOK COMMA_TOK list_param .
+
+    $default  reduce using rule 22 (list_param)
+
+
+State 90
+
+   14 func_call: ID_TOK LPAREN_TOK list_arguments RPAREN_TOK .
+
+    $default  reduce using rule 14 (func_call)
+
+
+State 91
+
+   18 list_arg: list_arg COMMA_TOK . ID_TOK
+
+    ID_TOK  shift, and go to state 106
+
+
+State 92
+
+   37 loop: FOR_TOK . LPAREN_TOK expr SEMCOL_TOK expr SEMCOL_TOK expr RPAREN_TOK stmt
+
+    LPAREN_TOK  shift, and go to state 107
+
+
+State 93
+
+   38 loop: WHILE_TOK . LPAREN_TOK expr RPAREN_TOK stmt
+
+    LPAREN_TOK  shift, and go to state 108
+
+
+State 94
+
+   39 loop: DO_TOK . stmt WHILE_TOK LPAREN_TOK expr RPAREN_TOK SEMCOL_TOK
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 109
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    unary      go to state 31
+
+
+State 95
+
+   40 cond: IF_TOK . LPAREN_TOK expr RPAREN_TOK stmt
+   41     | IF_TOK . LPAREN_TOK expr RPAREN_TOK stmt ELSE_TOK stmt
+
+    LPAREN_TOK  shift, and go to state 110
+
+
+State 96
+
+   36 stmt: SWITCH_TOK . LPAREN_TOK expr RPAREN_TOK LCURLY_TOK cases RCURLY_TOK
+
+    LPAREN_TOK  shift, and go to state 111
+
+
+State 97
+
+   27 cmp_stmt: LCURLY_TOK stmt_list RCURLY_TOK .
+
+    $default  reduce using rule 27 (cmp_stmt)
+
+
+State 98
+
+   31 stmt: SEMCOL_TOK .
+
+    $default  reduce using rule 31 (stmt)
+
+
+State 99
+
+   30 stmt: list . SEMCOL_TOK
+
+    SEMCOL_TOK  shift, and go to state 112
+
+
+State 100
+
+   10 list: type . var_list
+
+    ID_TOK  shift, and go to state 32
+
+    vd        go to state 12
+    var_list  go to state 13
+
+
+State 101
+
+   32 stmt: cmp_stmt .
+
+    $default  reduce using rule 32 (stmt)
+
+
+State 102
+
+   28 stmt_list: stmt_list stmt .
+
+    $default  reduce using rule 28 (stmt_list)
+
+
+State 103
+
+   34 stmt: loop .
+
+    $default  reduce using rule 34 (stmt)
+
+
+State 104
+
+   33 stmt: cond .
+
+    $default  reduce using rule 33 (stmt)
+
+
+State 105
+
+   35 stmt: expr . SEMCOL_TOK
+
+    SEMCOL_TOK  shift, and go to state 113
+
+
+State 106
+
+   18 list_arg: list_arg COMMA_TOK ID_TOK .
+
+    $default  reduce using rule 18 (list_arg)
+
+
+State 107
+
+   37 loop: FOR_TOK LPAREN_TOK . expr SEMCOL_TOK expr SEMCOL_TOK expr RPAREN_TOK stmt
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 114
+    unary      go to state 31
+
+
+State 108
+
+   38 loop: WHILE_TOK LPAREN_TOK . expr RPAREN_TOK stmt
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 115
+    unary      go to state 31
+
+
+State 109
+
+   39 loop: DO_TOK stmt . WHILE_TOK LPAREN_TOK expr RPAREN_TOK SEMCOL_TOK
+
+    WHILE_TOK  shift, and go to state 116
+
+
+State 110
+
+   40 cond: IF_TOK LPAREN_TOK . expr RPAREN_TOK stmt
+   41     | IF_TOK LPAREN_TOK . expr RPAREN_TOK stmt ELSE_TOK stmt
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 117
+    unary      go to state 31
+
+
+State 111
+
+   36 stmt: SWITCH_TOK LPAREN_TOK . expr RPAREN_TOK LCURLY_TOK cases RCURLY_TOK
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 118
+    unary      go to state 31
+
+
+State 112
+
+   30 stmt: list SEMCOL_TOK .
+
+    $default  reduce using rule 30 (stmt)
+
+
+State 113
+
+   35 stmt: expr SEMCOL_TOK .
+
+    $default  reduce using rule 35 (stmt)
+
+
+State 114
+
+   37 loop: FOR_TOK LPAREN_TOK expr . SEMCOL_TOK expr SEMCOL_TOK expr RPAREN_TOK stmt
+
+    SEMCOL_TOK  shift, and go to state 119
+
+
+State 115
+
+   38 loop: WHILE_TOK LPAREN_TOK expr . RPAREN_TOK stmt
+
+    RPAREN_TOK  shift, and go to state 120
+
+
+State 116
+
+   39 loop: DO_TOK stmt WHILE_TOK . LPAREN_TOK expr RPAREN_TOK SEMCOL_TOK
+
+    LPAREN_TOK  shift, and go to state 121
+
+
+State 117
+
+   40 cond: IF_TOK LPAREN_TOK expr . RPAREN_TOK stmt
+   41     | IF_TOK LPAREN_TOK expr . RPAREN_TOK stmt ELSE_TOK stmt
+
+    RPAREN_TOK  shift, and go to state 122
+
+
+State 118
+
+   36 stmt: SWITCH_TOK LPAREN_TOK expr . RPAREN_TOK LCURLY_TOK cases RCURLY_TOK
+
+    RPAREN_TOK  shift, and go to state 123
+
+
+State 119
+
+   37 loop: FOR_TOK LPAREN_TOK expr SEMCOL_TOK . expr SEMCOL_TOK expr RPAREN_TOK stmt
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 124
+    unary      go to state 31
+
+
+State 120
+
+   38 loop: WHILE_TOK LPAREN_TOK expr RPAREN_TOK . stmt
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 125
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    unary      go to state 31
+
+
+State 121
+
+   39 loop: DO_TOK stmt WHILE_TOK LPAREN_TOK . expr RPAREN_TOK SEMCOL_TOK
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 126
+    unary      go to state 31
+
+
+State 122
+
+   40 cond: IF_TOK LPAREN_TOK expr RPAREN_TOK . stmt
+   41     | IF_TOK LPAREN_TOK expr RPAREN_TOK . stmt ELSE_TOK stmt
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 127
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    unary      go to state 31
+
+
+State 123
+
+   36 stmt: SWITCH_TOK LPAREN_TOK expr RPAREN_TOK . LCURLY_TOK cases RCURLY_TOK
+
+    LCURLY_TOK  shift, and go to state 128
+
+
+State 124
+
+   37 loop: FOR_TOK LPAREN_TOK expr SEMCOL_TOK expr . SEMCOL_TOK expr RPAREN_TOK stmt
+
+    SEMCOL_TOK  shift, and go to state 129
+
+
+State 125
+
+   38 loop: WHILE_TOK LPAREN_TOK expr RPAREN_TOK stmt .
+
+    $default  reduce using rule 38 (loop)
+
+
+State 126
+
+   39 loop: DO_TOK stmt WHILE_TOK LPAREN_TOK expr . RPAREN_TOK SEMCOL_TOK
+
+    RPAREN_TOK  shift, and go to state 130
+
+
+State 127
+
+   40 cond: IF_TOK LPAREN_TOK expr RPAREN_TOK stmt .
+   41     | IF_TOK LPAREN_TOK expr RPAREN_TOK stmt . ELSE_TOK stmt
+
+    ELSE_TOK  shift, and go to state 131
+
+    $default  reduce using rule 40 (cond)
+
+
+State 128
+
+   36 stmt: SWITCH_TOK LPAREN_TOK expr RPAREN_TOK LCURLY_TOK . cases RCURLY_TOK
+
+    $default  reduce using rule 57 (multcase)
+
+    cases     go to state 132
+    multcase  go to state 133
+
+
+State 129
+
+   37 loop: FOR_TOK LPAREN_TOK expr SEMCOL_TOK expr SEMCOL_TOK . expr RPAREN_TOK stmt
+
+    ID_TOK       shift, and go to state 20
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    func_call  go to state 29
+    expr       go to state 134
+    unary      go to state 31
+
+
+State 130
+
+   39 loop: DO_TOK stmt WHILE_TOK LPAREN_TOK expr RPAREN_TOK . SEMCOL_TOK
+
+    SEMCOL_TOK  shift, and go to state 135
+
+
+State 131
+
+   41 cond: IF_TOK LPAREN_TOK expr RPAREN_TOK stmt ELSE_TOK . stmt
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 136
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    unary      go to state 31
+
+
+State 132
+
+   36 stmt: SWITCH_TOK LPAREN_TOK expr RPAREN_TOK LCURLY_TOK cases . RCURLY_TOK
+
+    RCURLY_TOK  shift, and go to state 137
+
+
+State 133
+
+   54 cases: multcase .
+   55      | multcase . defcase
+   56 multcase: multcase . case
+
+    CASE_TOK     shift, and go to state 138
+    DEFAULT_TOK  shift, and go to state 139
+
+    $default  reduce using rule 54 (cases)
+
+    case     go to state 140
+    defcase  go to state 141
+
+
+State 134
+
+   37 loop: FOR_TOK LPAREN_TOK expr SEMCOL_TOK expr SEMCOL_TOK expr . RPAREN_TOK stmt
+
+    RPAREN_TOK  shift, and go to state 142
+
+
+State 135
+
+   39 loop: DO_TOK stmt WHILE_TOK LPAREN_TOK expr RPAREN_TOK SEMCOL_TOK .
+
+    $default  reduce using rule 39 (loop)
+
+
+State 136
+
+   41 cond: IF_TOK LPAREN_TOK expr RPAREN_TOK stmt ELSE_TOK stmt .
+
+    $default  reduce using rule 41 (cond)
+
+
+State 137
+
+   36 stmt: SWITCH_TOK LPAREN_TOK expr RPAREN_TOK LCURLY_TOK cases RCURLY_TOK .
+
+    $default  reduce using rule 36 (stmt)
+
+
+State 138
+
+   58 case: CASE_TOK . FLOAT_CONST COL_TOK caseblk
+   59     | CASE_TOK . CHAR_CONST COL_TOK caseblk
+   60     | CASE_TOK . NUM_TOK COL_TOK caseblk
+
+    NUM_TOK      shift, and go to state 143
+    FLOAT_CONST  shift, and go to state 144
+    CHAR_CONST   shift, and go to state 145
+
+
+State 139
+
+   63 defcase: DEFAULT_TOK . COL_TOK caseblk
+
+    COL_TOK  shift, and go to state 146
+
+
+State 140
+
+   56 multcase: multcase case .
+
+    $default  reduce using rule 56 (multcase)
+
+
+State 141
+
+   55 cases: multcase defcase .
+
+    $default  reduce using rule 55 (cases)
+
+
+State 142
+
+   37 loop: FOR_TOK LPAREN_TOK expr SEMCOL_TOK expr SEMCOL_TOK expr RPAREN_TOK . stmt
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 147
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    unary      go to state 31
+
+
+State 143
+
+   60 case: CASE_TOK NUM_TOK . COL_TOK caseblk
+
+    COL_TOK  shift, and go to state 148
+
+
+State 144
+
+   58 case: CASE_TOK FLOAT_CONST . COL_TOK caseblk
+
+    COL_TOK  shift, and go to state 149
+
+
+State 145
+
+   59 case: CASE_TOK CHAR_CONST . COL_TOK caseblk
+
+    COL_TOK  shift, and go to state 150
+
+
+State 146
+
+   63 defcase: DEFAULT_TOK COL_TOK . caseblk
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    $default  reduce using rule 62 (caseblk)
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 151
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    caseblk    go to state 152
+    unary      go to state 31
+
+
+State 147
+
+   37 loop: FOR_TOK LPAREN_TOK expr SEMCOL_TOK expr SEMCOL_TOK expr RPAREN_TOK stmt .
+
+    $default  reduce using rule 37 (loop)
+
+
+State 148
+
+   60 case: CASE_TOK NUM_TOK COL_TOK . caseblk
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    $default  reduce using rule 62 (caseblk)
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 151
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    caseblk    go to state 153
+    unary      go to state 31
+
+
+State 149
+
+   58 case: CASE_TOK FLOAT_CONST COL_TOK . caseblk
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    $default  reduce using rule 62 (caseblk)
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 151
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    caseblk    go to state 154
+    unary      go to state 31
+
+
+State 150
+
+   59 case: CASE_TOK CHAR_CONST COL_TOK . caseblk
+
+    ID_TOK       shift, and go to state 20
+    INT_TOK      shift, and go to state 3
+    FLOAT_TOK    shift, and go to state 4
+    CHAR_TOK     shift, and go to state 5
+    NUM_TOK      shift, and go to state 21
+    FLOAT_CONST  shift, and go to state 22
+    CHAR_CONST   shift, and go to state 23
+    LPAREN_TOK   shift, and go to state 24
+    FOR_TOK      shift, and go to state 92
+    WHILE_TOK    shift, and go to state 93
+    DO_TOK       shift, and go to state 94
+    IF_TOK       shift, and go to state 95
+    SWITCH_TOK   shift, and go to state 96
+    VOID_TOK     shift, and go to state 6
+    LCURLY_TOK   shift, and go to state 78
+    SEMCOL_TOK   shift, and go to state 98
+    MINUS_TOK    shift, and go to state 25
+    INC_TOK      shift, and go to state 26
+    DEC_TOK      shift, and go to state 27
+
+    $default  reduce using rule 62 (caseblk)
+
+    const      go to state 28
+    list       go to state 99
+    func_call  go to state 29
+    type       go to state 100
+    cmp_stmt   go to state 101
+    stmt       go to state 151
+    loop       go to state 103
+    cond       go to state 104
+    expr       go to state 105
+    caseblk    go to state 155
+    unary      go to state 31
+
+
+State 151
+
+   61 caseblk: stmt .
+
+    $default  reduce using rule 61 (caseblk)
+
+
+State 152
+
+   63 defcase: DEFAULT_TOK COL_TOK caseblk .
+
+    $default  reduce using rule 63 (defcase)
+
+
+State 153
+
+   60 case: CASE_TOK NUM_TOK COL_TOK caseblk .
+
+    $default  reduce using rule 60 (case)
+
+
+State 154
+
+   58 case: CASE_TOK FLOAT_CONST COL_TOK caseblk .
+
+    $default  reduce using rule 58 (case)
+
+
+State 155
+
+   59 case: CASE_TOK CHAR_CONST COL_TOK caseblk .
+
+    $default  reduce using rule 59 (case)

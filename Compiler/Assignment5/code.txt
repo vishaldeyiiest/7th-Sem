@@ -1,0 +1,32 @@
+int main()
+{
+	float i = -20.33;
+	int abb, c = 22, ff = -3444;
+	char a = '0';
+	float assa;
+			
+	abb = i + (b*i);
+	for(i = 0; i <= abb && b >= 0; i++){
+		if(b == i)
+			a += 122;
+		else
+			a --;
+	}
+	while(1);
+	/***klslqwq
+
+	****/	
+	f1(a, b);
+	res = foo2();
+	switch(eee)
+	{
+		case 1: sk;
+		case 2:
+		case 4:
+		default:
+		
+	}
+}
+
+int foo(int a, int b, int c)
+{}

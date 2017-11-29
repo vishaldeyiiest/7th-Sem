@@ -1,0 +1,9 @@
+8
+E TC
+C +TC
+C e
+T FD
+D *FD
+D e
+F (E)
+F id

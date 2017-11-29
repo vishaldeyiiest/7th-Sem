@@ -1,0 +1,25 @@
+
+DEC: a
+DEC: b
+DEC: c
+DEC: d
+DEC: x
+DEC: y
+DEC: z
+_t1 = c < d
+IF _t1 GOTO _L2
+GOTO _L3
+_L2: _t2 = y + z
+x = _t2
+_t3 = 0
+_t4 = x > _t3
+IF _t4 GOTO _L0
+GOTO _L1
+_L0: _t5 = 2
+_t6 = y + _t5
+y = _t6
+_L1: 
+GOTO _L4
+_L3: _t7 = y - z
+x = _t7
+_L4: end
